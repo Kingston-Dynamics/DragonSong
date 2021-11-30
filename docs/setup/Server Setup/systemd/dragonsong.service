@@ -1,0 +1,15 @@
+[Unit]
+Description=Dragonsong Server
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=dragonsong
+WorkingDirectory=/opt/dragonsong
+ExecStart=/usr/bin/java -jar /opt/dragonsong/dragonsong-server.jar
+
+[Install]
+WantedBy=multi-user.target

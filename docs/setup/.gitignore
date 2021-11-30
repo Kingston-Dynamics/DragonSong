@@ -1,0 +1,6 @@
+# Ignore temporary ODT Files
+*.odt#
+
+ Ignore Scribus Autosave Files
+*.sla.autosave
+
