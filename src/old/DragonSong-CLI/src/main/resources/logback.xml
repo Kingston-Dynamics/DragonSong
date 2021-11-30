@@ -1,0 +1,29 @@
+<configuration>
+
+    <!-- Kill the status listener -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
+    <!-- Create a Console Logger -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>[%-6level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %class{0} - %msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.kingstondynamics.dragonsong.cli" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="com.kingstondynamics.dragonsong.client.DragonNet" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <logger name="com.kingstondynamics.dragonsong.client.DragonNet" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+    <root level="ERROR">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
