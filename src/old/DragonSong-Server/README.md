@@ -1,3 +1,0 @@
-# DragonSong Server
-
-DragonSong Server
