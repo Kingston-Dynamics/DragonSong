@@ -2,10 +2,12 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  */
-package com.kingstondynamics.dragonsong.server.subsystem.messenger.protocol;
+package com.kdyncs.dragonsong.server.subsystem.messenger.protocol;
 
-import com.kingstondynamics.dragonsong.protocol.message.data.MessageType;
-import com.kingstondynamics.dragonsong.protocol.utils.Determinator;
+import com.kdyncs.dragonsong.protocol.message.data.MessageType;
+import com.kdyncs.dragonsong.protocol.utils.Determinator;
+import com.kdyncs.dragonsong.server.subsystem.messenger.service.*;
+import com.kingstondynamics.dragonsong.server.subsystem.messenger.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

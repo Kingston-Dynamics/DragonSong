@@ -1,12 +1,14 @@
-package com.kingstondynamics.dragonsong.server.subsystem.messenger.service;
+package com.kdyncs.dragonsong.server.subsystem.messenger.service;
 
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelConnect;
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelTransmit;
-import com.kingstondynamics.dragonsong.protocol.utils.Readinator;
-import com.kingstondynamics.dragonsong.server.core.pools.ConnectionPool;
-import com.kingstondynamics.dragonsong.server.subsystem.deployment.ApplicationPool;
-import com.kingstondynamics.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
-import com.kingstondynamics.dragonsong.server.subsystem.messenger.protocol.Command;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
+import com.kdyncs.dragonsong.protocol.utils.Readinator;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.*;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
+import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
+import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
+import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
+import com.kingstondynamics.dragonsong.server.subsystem.messenger.model.application.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
