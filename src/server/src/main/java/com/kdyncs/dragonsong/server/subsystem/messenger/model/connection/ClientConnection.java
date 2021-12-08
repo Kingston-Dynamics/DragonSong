@@ -10,10 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.net.Socket;
-
-/**
- * @author peter
- */
+import java.time.Instant;
 
 @Component
 @Scope("prototype")
@@ -38,6 +35,9 @@ public class ClientConnection implements NetworkManager {
     
     // Helpful Bits
     private String displayName;
+
+    //
+    private Instant lastHeartBeat;
     
     @Autowired
     public ClientConnection(Processor processor) {
@@ -99,6 +99,14 @@ public class ClientConnection implements NetworkManager {
     
     public void setApplicationKey(String applicationKey) {
         this.applicationKey = applicationKey;
+    }
+
+    public Instant getLastHeartBeat() {
+        return lastHeartBeat;
+    }
+
+    public void setLastHeartBeat(Instant lastHeartBeat) {
+        this.lastHeartBeat = lastHeartBeat;
     }
     
     @Override
