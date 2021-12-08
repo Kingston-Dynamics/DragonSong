@@ -1,8 +1,8 @@
 package com.kingstondynamics.dragonsong.server.subsystem.messenger.service;
 
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelConnect;
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelTransmit;
-import com.kingstondynamics.dragonsong.protocol.utils.Readinator;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
+import com.kdyncs.dragonsong.protocol.utils.Readinator;
 import com.kingstondynamics.dragonsong.server.core.pools.ConnectionPool;
 import com.kingstondynamics.dragonsong.server.subsystem.deployment.ApplicationPool;
 import com.kingstondynamics.dragonsong.server.subsystem.messenger.model.application.*;

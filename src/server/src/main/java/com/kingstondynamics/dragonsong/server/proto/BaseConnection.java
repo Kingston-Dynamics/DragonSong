@@ -1,8 +1,8 @@
 package com.kingstondynamics.dragonsong.server.proto;
 
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkManager;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkReader;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkWriter;
+import com.kdyncs.dragonsong.protocol.networking.NetworkManager;
+import com.kdyncs.dragonsong.protocol.networking.NetworkReader;
+import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
 import com.kingstondynamics.dragonsong.server.subsystem.messenger.protocol.Command;
 import com.kingstondynamics.dragonsong.server.subsystem.messenger.protocol.Processor;
 import org.springframework.beans.factory.annotation.Autowired;

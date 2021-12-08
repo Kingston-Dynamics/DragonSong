@@ -1,11 +1,11 @@
 package com.kingstondynamics.dragonsong.server.subsystem.messenger.service;
 
-import com.kingstondynamics.dragonsong.protocol.message.data.NotificationType;
-import com.kingstondynamics.dragonsong.protocol.message.type.authentication.AuthenticationLogin;
-import com.kingstondynamics.dragonsong.protocol.message.type.notification.Notification;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkReader;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkWriter;
-import com.kingstondynamics.dragonsong.protocol.utils.Keyinator;
+import com.kdyncs.dragonsong.protocol.message.data.NotificationType;
+import com.kdyncs.dragonsong.protocol.message.type.authentication.AuthenticationLogin;
+import com.kdyncs.dragonsong.protocol.message.type.notification.Notification;
+import com.kdyncs.dragonsong.protocol.networking.NetworkReader;
+import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
+import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import com.kingstondynamics.dragonsong.server.core.pools.ConnectionPool;
 import com.kingstondynamics.dragonsong.server.subsystem.deployment.ApplicationPool;
 import com.kingstondynamics.dragonsong.server.subsystem.messenger.model.application.Application;

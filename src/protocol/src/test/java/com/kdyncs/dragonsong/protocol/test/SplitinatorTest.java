@@ -1,8 +1,8 @@
 package com.kdyncs.dragonsong.protocol.test;
 
-import com.kingstondynamics.dragonsong.protocol.utils.Byteinator;
-import com.kingstondynamics.dragonsong.protocol.utils.Concatinator;
-import com.kingstondynamics.dragonsong.protocol.utils.Splitinator;
+import com.kdyncs.dragonsong.protocol.utils.Byteinator;
+import com.kdyncs.dragonsong.protocol.utils.Concatinator;
+import com.kdyncs.dragonsong.protocol.utils.Splitinator;
 import org.junit.Assert;
 import org.junit.Test;
 

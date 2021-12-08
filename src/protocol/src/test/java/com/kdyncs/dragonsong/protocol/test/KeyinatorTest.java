@@ -1,6 +1,6 @@
 package com.kdyncs.dragonsong.protocol.test;
 
-import com.kingstondynamics.dragonsong.protocol.utils.Keyinator;
+import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import org.junit.Assert;
 import org.junit.Test;
 

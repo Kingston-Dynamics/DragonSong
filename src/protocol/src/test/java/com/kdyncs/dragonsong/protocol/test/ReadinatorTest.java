@@ -1,8 +1,8 @@
 package com.kdyncs.dragonsong.protocol.test;
 
-import com.kingstondynamics.dragonsong.protocol.utils.Byteinator;
-import com.kingstondynamics.dragonsong.protocol.utils.Concatinator;
-import com.kingstondynamics.dragonsong.protocol.utils.Readinator;
+import com.kdyncs.dragonsong.protocol.utils.Byteinator;
+import com.kdyncs.dragonsong.protocol.utils.Concatinator;
+import com.kdyncs.dragonsong.protocol.utils.Readinator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

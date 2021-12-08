@@ -1,6 +1,6 @@
 package com.kdyncs.dragonsong.protocol.test;
 
-import com.kingstondynamics.dragonsong.protocol.utils.Encodeinator;
+import com.kdyncs.dragonsong.protocol.utils.Encodeinator;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

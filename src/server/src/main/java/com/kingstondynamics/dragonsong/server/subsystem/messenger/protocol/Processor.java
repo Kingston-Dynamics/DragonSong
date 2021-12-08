@@ -4,8 +4,8 @@
  */
 package com.kingstondynamics.dragonsong.server.subsystem.messenger.protocol;
 
-import com.kingstondynamics.dragonsong.protocol.message.data.MessageType;
-import com.kingstondynamics.dragonsong.protocol.utils.Determinator;
+import com.kdyncs.dragonsong.protocol.message.data.MessageType;
+import com.kdyncs.dragonsong.protocol.utils.Determinator;
 import com.kingstondynamics.dragonsong.server.subsystem.messenger.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
