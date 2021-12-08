@@ -2,7 +2,7 @@ package com.kdyncs.dragonsong.cli;
 
 import com.kdyncs.dragonsong.client.DragonConfig;
 import com.kdyncs.dragonsong.client.DragonSong;
-import com.kingstondynamics.dragonsong.protocol.utils.Keyinator;
+import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

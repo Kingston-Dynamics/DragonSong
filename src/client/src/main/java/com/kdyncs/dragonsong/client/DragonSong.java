@@ -1,11 +1,11 @@
 package com.kdyncs.dragonsong.client;
 
-import com.kingstondynamics.dragonsong.protocol.message.Message;
-import com.kingstondynamics.dragonsong.protocol.message.type.authentication.AuthenticationLogin;
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelConnect;
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelTransmit;
-import com.kingstondynamics.dragonsong.protocol.message.type.heartbeat.HeartbeatPing;
-import com.kingstondynamics.dragonsong.protocol.message.type.user.UserTransmit;
+import com.kdyncs.dragonsong.protocol.message.Message;
+import com.kdyncs.dragonsong.protocol.message.type.authentication.AuthenticationLogin;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
+import com.kdyncs.dragonsong.protocol.message.type.heartbeat.HeartbeatPing;
+import com.kdyncs.dragonsong.protocol.message.type.user.UserTransmit;
 
 import java.util.LinkedList;
 
@@ -36,8 +36,9 @@ public class DragonSong {
     }
     
     public void sendAuthHandshake() {
-        Message handshake = new AuthenticationLogin(config.getAPIKey(), config.getAppID(), config.getAppVer(), config.getConnectionID(), config.getDisplayName());
-        network.write(handshake);
+        //TODO: Fix this
+        //Message handshake = new AuthenticationLogin(config.getAPIKey(), config.getAppID(), config.getAppVer(), config.getConnectionID(), config.getDisplayName());
+        //network.write(handshake);
     }
     
     public void sendPing() {

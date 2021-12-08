@@ -1,13 +1,13 @@
 package com.kdyncs.dragonsong.client;
 
-import com.kingstondynamics.dragonsong.protocol.message.Message;
-import com.kingstondynamics.dragonsong.protocol.message.data.MessageType;
-import com.kingstondynamics.dragonsong.protocol.message.type.authentication.AuthenticationDisconnect;
-import com.kingstondynamics.dragonsong.protocol.message.type.channel.ChannelTransmit;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkManager;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkReader;
-import com.kingstondynamics.dragonsong.protocol.networking.NetworkWriter;
-import com.kingstondynamics.dragonsong.protocol.utils.Determinator;
+import com.kdyncs.dragonsong.protocol.message.Message;
+import com.kdyncs.dragonsong.protocol.message.data.MessageType;
+import com.kdyncs.dragonsong.protocol.message.type.authentication.AuthenticationDisconnect;
+import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
+import com.kdyncs.dragonsong.protocol.networking.NetworkManager;
+import com.kdyncs.dragonsong.protocol.networking.NetworkReader;
+import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
+import com.kdyncs.dragonsong.protocol.utils.Determinator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
