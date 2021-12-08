@@ -7,7 +7,6 @@ package com.kdyncs.dragonsong.server.subsystem.messenger.protocol;
 import com.kdyncs.dragonsong.protocol.message.data.MessageType;
 import com.kdyncs.dragonsong.protocol.utils.Determinator;
 import com.kdyncs.dragonsong.server.subsystem.messenger.service.*;
-import com.kingstondynamics.dragonsong.server.subsystem.messenger.service.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
