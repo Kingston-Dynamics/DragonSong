@@ -1,7 +1,7 @@
 package com.kingstondynamics.dragonsong.server.subsystem.deployment;
 
-import com.kingstondynamics.dragonsong.database.schema.software.dao.ApplicationDAO;
-import com.kingstondynamics.dragonsong.database.schema.software.model.ApplicationModel;
+import com.kdyncs.dragonsong.database.schema.software.dao.ApplicationDAO;
+import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
 import com.kingstondynamics.dragonsong.server.core.configuration.DedicatedConfiguration;
 import com.kingstondynamics.dragonsong.server.subsystem.messenger.model.application.Application;
 import org.apache.logging.log4j.LogManager;
