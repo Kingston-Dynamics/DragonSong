@@ -1,4 +1,4 @@
-package com.kingstondynamics.dragonsong.protocol.test;
+package com.kdyncs.dragonsong.protocol.test;
 
 import com.kingstondynamics.dragonsong.protocol.utils.Keyinator;
 import org.junit.Assert;
