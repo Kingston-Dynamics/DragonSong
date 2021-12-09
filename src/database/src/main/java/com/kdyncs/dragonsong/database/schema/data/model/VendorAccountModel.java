@@ -17,13 +17,19 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.data.repository;
+package com.kdyncs.dragonsong.database.schema.data.model;
 
-import com.kdyncs.dragonsong.database.schema.data.model.CountryModel;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 
-@Repository
-interface CountryRepository extends JpaRepository<CountryModel, Integer> {
-
+public class VendorAccountModel {
+    
+    private UUID id;
+    
+    private String username;
+    private String email;
+    private String password;
+    
+    private OffsetDateTime createTimestamp;
+    
 }
