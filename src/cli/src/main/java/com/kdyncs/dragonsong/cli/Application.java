@@ -2,9 +2,6 @@ package com.kdyncs.dragonsong.cli;
 
 import java.util.Scanner;
 
-/**
- * @author peter
- */
 class Application {
     
     
