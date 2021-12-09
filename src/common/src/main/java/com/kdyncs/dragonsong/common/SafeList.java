@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Kingston Dynamics Inc.
+ * Copyright (C) 2020 Kingston Dynamics Inc.
  *
  * This file is part of DragonSong
  *
@@ -17,13 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.data.repository;
+package com.kdyncs.dragonsong.common;
 
-import com.kdyncs.dragonsong.database.schema.data.model.CountryModel;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Collections;
+import java.util.List;
 
-@Repository
-interface CountryRepository extends JpaRepository<CountryModel, Integer> {
-
+public class SafeList {
+    public static <T> List<T> get(List<T> other) {
+        return other == null ? Collections.emptyList() : other;
+    }
 }
