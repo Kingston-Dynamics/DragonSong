@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-Component
+@Component
 @Scope("prototype")
 public class ChannelPool {
     
