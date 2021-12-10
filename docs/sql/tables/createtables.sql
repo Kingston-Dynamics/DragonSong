@@ -1,50 +1,25 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * Author:  peter
- * Created: Aug 16, 2018
+/*
+ * Copyright (C) 2021 Kingston Dynamics Inc.
+ *
+ * This file is part of DragonSong
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 --------------------------------------------------
 -- Master script to re/generate entire database --
 --------------------------------------------------
-	
------------------
--- Drop Tables --
------------------
-	/*
-start transaction;
-	
-
-	-- Drop Account Tables
-	drop table if exists ds_vendor.account cascade;
-	drop table if exists ds_vendor.details cascade;
-	drop table if exists ds_vendor.contact cascade;
-
-	-- Drop Service Tables
-	drop table if exists ds_service.environment cascade;
-	drop table if exists ds_service.application cascade;
-	drop table if exists ds_service.deployment cascade;
-	
-	-- Drop Vendor Application Tables
-	drop table if exists ds_software.application cascade;
-	drop table if exists ds_software.applicationkey cascade;
-		
-	-- Drop Config Tables
-	drop table if exists ds_config.config cascade;
-	drop table if exists ds_config.rules cascade;
-	
-	-- Drop Deployment Tables
-	drop table if exists ds_deployment.deployment cascade;
-	
-	-- Drop logging tables
-	drop table if exists ds_audit.chatlog cascade;
-	
-commit;
-	*/
 	
 ------------------
 -- Drop Schemas --
