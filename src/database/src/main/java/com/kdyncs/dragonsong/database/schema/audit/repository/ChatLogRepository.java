@@ -25,12 +25,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-/**
- * @author peter
- */
-
 @Repository
-public
-interface ChatLogRepository extends JpaRepository<ChatLogModel, UUID> {
+public interface ChatLogRepository extends JpaRepository<ChatLogModel, UUID> {
 
 }

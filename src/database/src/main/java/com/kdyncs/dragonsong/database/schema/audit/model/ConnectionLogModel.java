@@ -23,7 +23,7 @@ import javax.persistence.*;
 import java.time.OffsetDateTime;
 
 @Entity(name = "ConnectionLogModel")
-@Table(name = "connectionlog", schema = "ds_audit")
+@Table(name = "connection_log", schema = "ds_audit")
 public class ConnectionLogModel {
     
     @Id
@@ -32,12 +32,9 @@ public class ConnectionLogModel {
     
     @Column
     private String address;
-    
+
     @Column
-    private String code;
-    
-    @Column
-    private OffsetDateTime created;
+    private OffsetDateTime createTimestamp;
     
     public Integer getId() {
         return id;
@@ -54,20 +51,12 @@ public class ConnectionLogModel {
     public void setAddress(String address) {
         this.address = address;
     }
-    
-    public String getCode() {
-        return code;
+
+    public OffsetDateTime getCreateTimestamp() {
+        return createTimestamp;
     }
     
-    public void setCode(String code) {
-        this.code = code;
-    }
-    
-    public OffsetDateTime getCreated() {
-        return created;
-    }
-    
-    public void setCreated(OffsetDateTime created) {
-        this.created = created;
+    public void setCreateTimestamp(OffsetDateTime created) {
+        this.createTimestamp = created;
     }
 }

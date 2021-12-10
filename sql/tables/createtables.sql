@@ -253,7 +253,7 @@ start transaction;
    	create table ds_deployment.deployment
    	(
    		-- COLUMNS
-		ID uuid,
+		id uuid,
 		createTimeStamp TIMESTAMP,
 		active boolean,
 		
@@ -265,7 +265,7 @@ start transaction;
 		
 		
 		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
+		PRIMARY KEY (id),
 		
 		FOREIGN KEY (vendorID)
 			REFERENCES ds_vendor.account(ID),
@@ -281,24 +281,30 @@ start transaction;
 			
    	);
    
-	--------------------
-    -- Logging Tables --
-    --------------------
-   	
-	create table ds_audit.chatlog
+	------------------
+    -- Audit Tables --
+    ------------------
+
+    create table ds_audit.chatlog
 	(
 		-- COLUMNS
-		ID uuid,
+		id uuid,
 		content VARCHAR(255),
-		CreateTimeStamp TIMESTAMP,
-		
-        APPKey uuid NOT NULL,
-        
+		create_timestamp TIMESTAMP,
+
 		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-        
-        FOREIGN KEY (APPKey)
-			REFERENCES ds_software.applicationkey(APPKey)
+		PRIMARY KEY (id)
+	);
+
+	create table ds_audit.connection_log
+	(
+		-- COLUMNS
+		id uuid,
+		address VARCHAR(255),
+		create_timestamp TIMESTAMP,
+
+		-- KEY CONSTRAINTS
+		PRIMARY KEY (id)
 	);
 
 --ROLLBACK;

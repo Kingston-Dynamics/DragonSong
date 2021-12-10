@@ -19,5 +19,22 @@
 
 package com.kdyncs.dragonsong.database.schema.audit.dao;
 
+import com.kdyncs.dragonsong.database.schema.audit.model.ConnectionLogModel;
+import com.kdyncs.dragonsong.database.schema.audit.repository.ConnectionLogRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class ConnectionLogDAO {
+
+    private final ConnectionLogRepository repository;
+
+    @Autowired
+    public ConnectionLogDAO(ConnectionLogRepository repository) {
+        this.repository = repository;
+    }
+
+    public void save(ConnectionLogModel log) {
+        repository.save(log);
+    }
 }
