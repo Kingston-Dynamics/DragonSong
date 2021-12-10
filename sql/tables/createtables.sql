@@ -50,9 +50,7 @@ start transaction;
 	create schema ds_deployment;
 	
 commit;
-	
-	
-	
+
 -----------------------
 -- Create All Tables --
 -----------------------

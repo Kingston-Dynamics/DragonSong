@@ -16,9 +16,9 @@ INSERT INTO ds_vendor.account (
     CreateTimeStamp
 ) VALUES
 (
-    ?, 
-    ?,
-    ?,
-    ?,
+    ?1,
+    ?2,
+    ?3,
+    ?4,
     CURRENT_TIMESTAMP
 );
