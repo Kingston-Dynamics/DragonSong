@@ -63,12 +63,12 @@ start transaction;
     create table ds_vendor.account
     ( 
 		-- Columns
-        ID uuid,
-        USERNAME VARCHAR(255) UNIQUE NOT NULL, 
-        Email VARCHAR (255) NOT NULL,
-        Pass VARCHAR (60) NOT NULL,
+        id uuid,
+        username VARCHAR(255) UNIQUE NOT NULL,
+        email VARCHAR (255) NOT NULL,
+        password VARCHAR (60) NOT NULL,
         
-        CreateTimeStamp TIMESTAMP NOT NULL,
+        create_timestamp TIMESTAMP NOT NULL,
         
         -- KEY CONSTRAINTS
         PRIMARY KEY (ID)

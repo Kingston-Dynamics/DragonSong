@@ -17,47 +17,69 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.audit.model;
+package com.kdyncs.dragonsong.database.schema.vendor.model;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-@Entity(name = "ConnectionLogModel")
-@Table(name = "connection_log", schema = "ds_audit")
-public class ConnectionLogModel {
-    
+@Entity(name = "AccountModel")
+@Table(name = "account", schema = "ds_vendor")
+public class AccountModel {
+
     @Id
     @GeneratedValue
     private UUID id;
-    
-    @Column
-    private String address;
 
     @Column
-    private OffsetDateTime createTimestamp;
-    
+    private String username;
+
+    @Column
+    private String email;
+
+    @Column
+    private String password;
+
+    @Column
+    private OffsetDateTime createtimestamp;
+
     public UUID getId() {
         return id;
     }
-    
+
     public void setId(UUID id) {
         this.id = id;
     }
-    
-    public String getAddress() {
-        return address;
-    }
-    
-    public void setAddress(String address) {
-        this.address = address;
+
+    public String getUsername() {
+        return username;
     }
 
-    public OffsetDateTime getCreateTimestamp() {
-        return createTimestamp;
+    public void setUsername(String username) {
+        this.username = username;
     }
-    
-    public void setCreateTimestamp(OffsetDateTime created) {
-        this.createTimestamp = created;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public OffsetDateTime getCreatetimestamp() {
+        return createtimestamp;
+    }
+
+    public void setCreatetimestamp(OffsetDateTime createtimestamp) {
+        this.createtimestamp = createtimestamp;
     }
 }
