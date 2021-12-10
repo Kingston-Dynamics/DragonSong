@@ -31,7 +31,6 @@ start transaction;
 	drop schema if exists ds_vendor cascade;
 	drop schema if exists ds_service cascade;
 	drop schema if exists ds_software cascade;
-	drop schema if exists ds_deployment cascade;
 	
 commit;
 	
@@ -45,7 +44,6 @@ start transaction;
 	create schema ds_vendor;
 	create schema ds_service;
 	create schema ds_software;
-	create schema ds_deployment;
 	
 commit;
 
@@ -63,7 +61,6 @@ start transaction;
 		-- Columns
         id uuid,
         username VARCHAR(255) UNIQUE NOT NULL,
-        email VARCHAR (255) NOT NULL,
         password VARCHAR (60) NOT NULL,
         
         create_timestamp TIMESTAMP NOT NULL,
@@ -71,54 +68,13 @@ start transaction;
         -- KEY CONSTRAINTS
         PRIMARY KEY (ID)
     );
-    
-    CREATE TABLE ds_vendor.details
-    (
-		-- COLUMNS
-		ID uuid,
-        
-        VendorName VARCHAR(255) NOT NULL,
-        
-        CreateTimeStamp TIMESTAMP NOT NULL,
-        
-        VendorID uuid NOT NULL,
-        
-        -- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-        
-		FOREIGN KEY (VendorID)
-			REFERENCES ds_vendor.account(ID)
-    );
-    
-    CREATE TABLE ds_vendor.contact
-    (
-		-- COLUMNS
-		ID uuid,
-        
-		FirstName VARCHAR(255) NOT NULL,
-        LastName VARCHAR(255) NOT NULL,
-        
-        TelPrimary VARCHAR(50),
-        TelOther VARCHAR(50),
-        
-        CreateTimeStamp TIMESTAMP NOT NULL,
-        
-        VendorID uuid NOT NULL,
-        
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-        
-        FOREIGN KEY (VendorID)
-			REFERENCES ds_vendor.account(ID)
-    );
-	
-    ------------------
-    -- SERVICE INFO --
-    ------------------
 
-	CREATE TABLE ds_service.application
+    -------------------
+    -- SOFTWARE INFO --
+    -------------------
+
+	CREATE TABLE ds_software.application
 	(
-		
 		-- COLUMNS
 		ID uuid,
 
@@ -126,106 +82,11 @@ start transaction;
 
 		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID)
-
 	);
 
-	CREATE TABLE ds_service.deployment
-	(
-		-- COLUMNS
-		ID uuid,
-
-		application_id uuid,
-
-		DeploymentName VARCHAR(255) NOT NULL,
-		
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-
-		FOREIGN KEY (ApplicationID)
-			REFERENCES ds_service.application(ID)
-	);
-    
-    --------------------
-    -- SERVICE ACCESS --
-    --------------------
-    
-    CREATE TABLE ds_software.application
-    (
-		-- COLUMNS
-		ID uuid,
-        
-		SoftwareName VARCHAR(255) NOT NULL,
-        
-        CreateTimeStamp TIMESTAMP NOT NULL,
-        VendorID uuid NOT NULL,
-        
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-        
-        FOREIGN KEY (VendorID)
-			REFERENCES ds_vendor.account(ID)
-    );
-        
-    CREATE TABLE ds_software.applicationkey
-	(
-		-- COLUMNS
-		ID uuid,
-        
-        APPKey uuid unique not null,
-        
-        CreateTimeStamp TIMESTAMP NOT NULL,
-        ApplicationID uuid NOT NULL,
-        DeploymentID uuid NOT NULL,
-        
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-        
-        FOREIGN KEY (ApplicationID)
-			REFERENCES ds_software.application(ID),
-            
-		FOREIGN KEY (DeploymentID)
-			REFERENCES ds_service.deployment(ID)
-    );
-
-   	-----------------------
-   	-- Deployment Tables --
-   	-----------------------
-   
-   	create table ds_deployment.deployment
-   	(
-   		-- COLUMNS
-		id uuid,
-		createTimeStamp TIMESTAMP,
-		active boolean,
-		
-		vendorID uuid NOT NULL,
-		
-		applicationKeyID uuid,
-
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (id),
-		
-		FOREIGN KEY (vendorID)
-			REFERENCES ds_vendor.account(ID),
-		
-		FOREIGN KEY (applicationKeyID)
-			REFERENCES ds_software.applicationKey(ID)
-   	);
-   
 	------------------
     -- Audit Tables --
     ------------------
-
-    create table ds_audit.chatlog
-	(
-		-- COLUMNS
-		id uuid,
-		content VARCHAR(255),
-		create_timestamp TIMESTAMP,
-
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (id)
-	);
 
 	create table ds_audit.connection_log
 	(
