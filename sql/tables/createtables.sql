@@ -309,20 +309,4 @@ start transaction;
 		PRIMARY KEY (id)
 	);
 
-    -----------------
-    -- Data Tables --
-    -----------------
-
-    create table ds_data.country
-    (
-        -- COLUMNS
-        id integer,
-        code VARCHAR(3), -- ISO 3166-3
-        name VARCHAR(255),
-
-        -- KEY CONSTRAINTS
-        PRIMARY KEY (id)
-    )
-
---ROLLBACK;
 COMMIT;
