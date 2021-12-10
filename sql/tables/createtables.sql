@@ -33,6 +33,7 @@ start transaction;
 	drop schema if exists ds_software cascade;
 	drop schema if exists ds_config cascade;
 	drop schema if exists ds_deployment cascade;
+    drop schema if exists ds_data cascade;
 	
 commit;
 	
@@ -48,6 +49,7 @@ start transaction;
 	create schema ds_software;
 	create schema ds_config;
 	create schema ds_deployment;
+    create schema ds_data;
 	
 commit;
 
@@ -306,6 +308,20 @@ start transaction;
 		-- KEY CONSTRAINTS
 		PRIMARY KEY (id)
 	);
+
+    -----------------
+    -- Data Tables --
+    -----------------
+
+    create table ds_data.country
+    (
+        -- COLUMNS
+        id integer,
+
+
+        -- KEY CONSTRAINTS
+        PRIMARY KEY (id)
+    )
 
 --ROLLBACK;
 COMMIT;

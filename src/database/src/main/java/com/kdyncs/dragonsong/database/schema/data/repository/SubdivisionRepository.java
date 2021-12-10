@@ -24,6 +24,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface SubdivisionRepository extends JpaRepository<SubdivisionModel, Integer> {
+public interface SubdivisionRepository extends JpaRepository<SubdivisionModel, Integer> {
 
 }
