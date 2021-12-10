@@ -115,17 +115,6 @@ start transaction;
     ------------------
     -- SERVICE INFO --
     ------------------
-		
-	CREATE TABLE ds_service.environment
-	(
-		-- COLUMNS
-		ID uuid,
-
-		EnvironmentName VARCHAR(255) NOT NULL,
-
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID)
-	);
 
 	CREATE TABLE ds_service.application
 	(
@@ -145,8 +134,7 @@ start transaction;
 		-- COLUMNS
 		ID uuid,
 
-		ApplicationID uuid,
-		EnvironmentID uuid,
+		application_id uuid,
 
 		DeploymentName VARCHAR(255) NOT NULL,
 		
@@ -154,11 +142,7 @@ start transaction;
 		PRIMARY KEY (ID),
 
 		FOREIGN KEY (ApplicationID)
-			REFERENCES ds_service.application(ID),
-
-		FOREIGN KEY (EnvironmentID)
-			REFERENCES ds_service.environment(ID)
-
+			REFERENCES ds_service.application(ID)
 	);
     
     --------------------
@@ -217,10 +201,7 @@ start transaction;
 		vendorID uuid NOT NULL,
 		
 		applicationKeyID uuid,
-		configID uuid,
-		ruleID uuid,
-		
-		
+
 		-- KEY CONSTRAINTS
 		PRIMARY KEY (id),
 		
