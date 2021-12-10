@@ -85,7 +85,7 @@ start transaction;
         
         VendorID uuid NOT NULL,
         
-        -- KEY CONSTAINTS
+        -- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
         
 		FOREIGN KEY (VendorID)
@@ -107,7 +107,7 @@ start transaction;
         
         VendorID uuid NOT NULL,
         
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
         
         FOREIGN KEY (VendorID)
@@ -125,7 +125,7 @@ start transaction;
 
 		EnvironmentName VARCHAR(255) NOT NULL,
 
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID)
 	);
 
@@ -137,7 +137,7 @@ start transaction;
 
 		ApplicationName VARCHAR(255) NOT NULL,
 
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID)
 
 	);
@@ -152,7 +152,7 @@ start transaction;
 
 		DeploymentName VARCHAR(255) NOT NULL,
 		
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
 
 		FOREIGN KEY (ApplicationID)
@@ -177,7 +177,7 @@ start transaction;
         CreateTimeStamp TIMESTAMP NOT NULL,
         VendorID uuid NOT NULL,
         
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
         
         FOREIGN KEY (VendorID)
@@ -195,7 +195,7 @@ start transaction;
         ApplicationID uuid NOT NULL,
         DeploymentID uuid NOT NULL,
         
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
         
         FOREIGN KEY (ApplicationID)
@@ -223,7 +223,7 @@ start transaction;
 		FOREIGN KEY (vendorID)
 			REFERENCES ds_vendor.account(ID),
 		
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID)    
     );
 	
@@ -238,7 +238,7 @@ start transaction;
 		
 		vendorID uuid NOT NULL,
 		
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
 		
 		FOREIGN KEY (vendorID)
@@ -264,7 +264,7 @@ start transaction;
 		ruleID uuid,
 		
 		
-		-- KEY CONSTAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
 		
 		FOREIGN KEY (vendorID)
@@ -294,7 +294,7 @@ start transaction;
 		
         APPKey uuid NOT NULL,
         
-		-- KEY CONTRAINTS
+		-- KEY CONSTRAINTS
 		PRIMARY KEY (ID),
         
         FOREIGN KEY (APPKey)
