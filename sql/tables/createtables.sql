@@ -31,9 +31,7 @@ start transaction;
 	drop schema if exists ds_vendor cascade;
 	drop schema if exists ds_service cascade;
 	drop schema if exists ds_software cascade;
-	drop schema if exists ds_config cascade;
 	drop schema if exists ds_deployment cascade;
-    drop schema if exists ds_data cascade;
 	
 commit;
 	
@@ -47,9 +45,7 @@ start transaction;
 	create schema ds_vendor;
 	create schema ds_service;
 	create schema ds_software;
-	create schema ds_config;
 	create schema ds_deployment;
-    create schema ds_data;
 	
 commit;
 
@@ -206,48 +202,7 @@ start transaction;
 		FOREIGN KEY (DeploymentID)
 			REFERENCES ds_service.deployment(ID)
     );
-    
-	
-	---------------------------
-	-- Special Configuration --
-	---------------------------
-	
-    create table ds_config.config
-    (
-    	-- COLUMNS
-		ID uuid,
-        
-		fileData text,
-		fileName varchar(255),
-		
-		vendorID uuid NOT NULL,
-		
-		FOREIGN KEY (vendorID)
-			REFERENCES ds_vendor.account(ID),
-		
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID)    
-    );
-	
-    create table ds_config.rules
-    (
-    	-- COLUMNS
-		ID uuid,
-        
-		fileData text,
-		fileName varchar(255),
-		dsl boolean,
-		
-		vendorID uuid NOT NULL,
-		
-		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID),
-		
-		FOREIGN KEY (vendorID)
-			REFERENCES ds_vendor.account(ID)
-		
-    );
-	
+
    	-----------------------
    	-- Deployment Tables --
    	-----------------------
@@ -273,14 +228,7 @@ start transaction;
 			REFERENCES ds_vendor.account(ID),
 		
 		FOREIGN KEY (applicationKeyID)
-			REFERENCES ds_software.applicationKey(ID),
-			
-		FOREIGN KEY (configID)
-			REFERENCES ds_config.config(ID),
-			
-		FOREIGN KEY (ruleID)
-			REFERENCES ds_config.rules(ID)
-			
+			REFERENCES ds_software.applicationKey(ID)
    	);
    
 	------------------
