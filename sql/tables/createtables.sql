@@ -317,7 +317,8 @@ start transaction;
     (
         -- COLUMNS
         id integer,
-
+        code VARCHAR(3), -- ISO 3166-3
+        name VARCHAR(255),
 
         -- KEY CONSTRAINTS
         PRIMARY KEY (id)

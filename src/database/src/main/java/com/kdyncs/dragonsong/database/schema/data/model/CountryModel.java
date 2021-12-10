@@ -28,67 +28,35 @@ public class CountryModel {
     @Id
     @GeneratedValue
     private Integer id;
-    
+
     @Column
     private String code;
-    
+
     @Column
     private String name;
 
-    @Column
-    private String alpha_two;
 
-    @Column
-    private String alpha_three;
-
-    @Column
-    private String numeric;
-    
     public Integer getId() {
         return id;
-    }
-    
-    public String getCode() {
-        return code;
     }
     
     public String getName() {
         return name;
     }
 
-    public String getAlpha_two() {
-        return alpha_two;
-    }
-
-    public String getAlpha_three() {
-        return alpha_three;
-    }
-
-    public String getNumeric() {
-        return numeric;
+    public String getCode() {
+        return code;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setAlpha_two(String alpha_two) {
-        this.alpha_two = alpha_two;
-    }
-
-    public void setAlpha_three(String alpha_three) {
-        this.alpha_three = alpha_three;
-    }
-
-    public void setNumeric(String numeric) {
-        this.numeric = numeric;
+    public void setCode(String alpha_two) {
+        this.code = alpha_two;
     }
 }
