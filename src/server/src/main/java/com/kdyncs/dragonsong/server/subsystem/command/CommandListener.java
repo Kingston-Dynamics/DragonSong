@@ -50,7 +50,7 @@ public class CommandListener implements ConnectionListener {
         this.listener = new Thread(this);
 
         // Name Thread
-        this.listener.setName("ADMIN_LISTENER");
+        this.listener.setName("COMMAND_LISTENER");
 
         this.port = PORT;
     }
