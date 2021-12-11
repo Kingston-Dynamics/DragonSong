@@ -31,6 +31,6 @@ import java.util.UUID;
 public interface ApplicationRepository extends JpaRepository<ApplicationModel, UUID> {
     
     @Query("from ApplicationModel app where app.active=true")
-    List<ApplicationModel> findAllActiveDeployments();
+    List<ApplicationModel> findAllActiveApplications();
 
 }

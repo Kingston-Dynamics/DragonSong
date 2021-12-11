@@ -38,6 +38,6 @@ public class ApplicationDAO {
     }
     
     public List<ApplicationModel> getAllActiveApplications() {
-        return SafeList.get(repository.findAllActiveDeployments());
+        return SafeList.get(repository.findAllActiveApplications());
     }
 }

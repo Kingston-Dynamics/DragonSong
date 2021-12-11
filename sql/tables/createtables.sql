@@ -79,6 +79,7 @@ start transaction;
 		id uuid,
 		name VARCHAR(255) NOT NULL,
 		active boolean NOT NULL,
+		api_key uuid NOT NULL,
 
 		-- KEY CONSTRAINTS
 		PRIMARY KEY (id)

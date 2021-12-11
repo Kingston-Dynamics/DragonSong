@@ -36,7 +36,7 @@ public class ApplicationModel {
     @Column
     private boolean active;
 
-    @Column
+    @Column(name = "api_key")
     private UUID key;
     
     public UUID getId() {

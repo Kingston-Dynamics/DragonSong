@@ -35,12 +35,9 @@ public class AccountModel {
     private String username;
 
     @Column
-    private String email;
-
-    @Column
     private String password;
 
-    @Column
+    @Column(name = "create_timestamp")
     private OffsetDateTime createtimestamp;
 
     public UUID getId() {
@@ -57,14 +54,6 @@ public class AccountModel {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {
