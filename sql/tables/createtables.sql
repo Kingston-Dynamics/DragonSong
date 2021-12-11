@@ -76,12 +76,12 @@ start transaction;
 	CREATE TABLE ds_software.application
 	(
 		-- COLUMNS
-		ID uuid,
-
-		ApplicationName VARCHAR(255) NOT NULL,
+		id uuid,
+		name VARCHAR(255) NOT NULL,
+		active boolean NOT NULL,
 
 		-- KEY CONSTRAINTS
-		PRIMARY KEY (ID)
+		PRIMARY KEY (id)
 	);
 
 	------------------
