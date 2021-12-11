@@ -23,7 +23,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "ApplicationModel")
-@Table(name = "applications", schema = "ds_software")
+@Table(name = "application", schema = "ds_software")
 public class ApplicationModel {
 
     @Id
