@@ -13,5 +13,6 @@
     <modules>
         <module>cli</module>
         <module>common</module>
+        <module>gui</module>
     </modules>
 </project>
