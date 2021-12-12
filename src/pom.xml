@@ -11,12 +11,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>server</module>
+        <module>api</module>
+        <module>client</module>
+        <module>common</module>
         <module>database</module>
         <module>protocol</module>
-        <module>common</module>
-        <module>cli</module>
-        <module>client</module>
-        <module>api</module>
+        <module>server</module>
     </modules>
 </project>
