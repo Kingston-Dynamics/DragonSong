@@ -1,7 +1,7 @@
 package com.kdyncs.dragonsong.client.common.gui.components;
 
-import javafx.fxml.FXML;
+import net.rgielen.fxweaver.core.FxmlView;
 
-@FXMLView("")
+@FxmlView
 public class MainView {
 }
