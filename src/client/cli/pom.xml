@@ -64,8 +64,8 @@
     <dependencies>
         <!-- Internal Dependencies -->
         <dependency>
-            <groupId>com.kingstondynamics.dragonsong</groupId>
-            <artifactId>client</artifactId>
+            <groupId>com.kingstondynamics.dragonsong.client</groupId>
+            <artifactId>common</artifactId>
             <version>1.0.0</version>
         </dependency>
 
