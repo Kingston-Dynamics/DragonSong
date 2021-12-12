@@ -28,6 +28,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
@@ -63,6 +64,9 @@ public class Server implements CommandLineRunner {
         
         // Create a Spring Application
         SpringApplication application = new SpringApplication(Server.class);
+
+        // This application does not use a web server
+        application.setWebApplicationType(WebApplicationType.NONE);
         
         // Run Application
         application.run(args);
