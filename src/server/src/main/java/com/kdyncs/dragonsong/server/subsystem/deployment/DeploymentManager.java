@@ -100,13 +100,11 @@ public class DeploymentManager implements Runnable {
             /*
               Find Active Applications
              */
-            
             List<ApplicationModel> applications = applicationDAO.getAllActiveApplications();
             
             log.debug("Currently Active Apps: " + applications.size());
             log.debug("Currently Deployed Apps: " + applicationPool.deployCount());
-            
-            
+
             // Deploy Valid Applications.
             for (ApplicationModel application : applications) {
                 // If Not Deploy then Deploy

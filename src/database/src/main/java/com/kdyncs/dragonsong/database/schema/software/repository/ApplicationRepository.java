@@ -30,7 +30,7 @@ import java.util.UUID;
 @Repository
 public interface ApplicationRepository extends JpaRepository<ApplicationModel, UUID> {
     
-    @Query("from ApplicationModel app where app.deployed=true")
-    List<ApplicationModel> findAllActiveDeployments();
-    
+    @Query("from ApplicationModel app where app.active=true")
+    List<ApplicationModel> findAllActiveApplications();
+
 }

@@ -17,56 +17,58 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.data.model;
+package com.kdyncs.dragonsong.database.schema.vendor.model;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
+import java.util.UUID;
 
-@Entity(name = "SubdivisionModel")
-@Table(name = "subdivision", schema = "ds_data")
-public class SubdivisionModel {
+@Entity(name = "AccountModel")
+@Table(name = "account", schema = "ds_vendor")
+public class AccountModel {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    private UUID id;
 
     @Column
-    private String name;
+    private String username;
 
     @Column
-    private String code;
+    private String password;
 
-    @Column
-    private Integer countryId;
+    @Column(name = "create_timestamp")
+    private OffsetDateTime createtimestamp;
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getCode() {
-        return code;
+    public String getPassword() {
+        return password;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Integer getCountryId() {
-        return countryId;
+    public OffsetDateTime getCreatetimestamp() {
+        return createtimestamp;
     }
 
-    public void setCountryId(Integer countryId) {
-        this.countryId = countryId;
+    public void setCreatetimestamp(OffsetDateTime createtimestamp) {
+        this.createtimestamp = createtimestamp;
     }
 }

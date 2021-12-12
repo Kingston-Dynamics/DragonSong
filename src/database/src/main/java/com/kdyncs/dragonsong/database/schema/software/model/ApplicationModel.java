@@ -23,29 +23,27 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "ApplicationModel")
-@Table(name = "applications", schema = "ds_software")
+@Table(name = "application", schema = "ds_software")
 public class ApplicationModel {
 
     @Id
     @GeneratedValue
-    @Column(name = "application_id")
-    private Integer id;
+    private UUID id;
     
-    @Column (name = "application_name")
+    @Column
     private String name;
     
-    @Column(name = "is_deployed")
-    private boolean deployed;
+    @Column
+    private boolean active;
 
-    @GeneratedValue
-    @Column (name = "application_key")
+    @Column(name = "api_key")
     private UUID key;
     
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
     
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
     
@@ -53,16 +51,16 @@ public class ApplicationModel {
         return name;
     }
     
-    public void setName(String softwarename) {
-        this.name = softwarename;
+    public void setName(String name) {
+        this.name = name;
     }
     
-    public boolean isDeployed() {
-        return deployed;
+    public boolean isActive() {
+        return active;
     }
     
-    public void setDeployed(boolean deployed) {
-        this.deployed = deployed;
+    public void setActive(boolean active) {
+        this.active = active;
     }
     
     public UUID getKey() {

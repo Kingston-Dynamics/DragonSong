@@ -17,26 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.organization.model;
+package com.kdyncs.dragonsong.database.schema.vendor.dao;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.kdyncs.dragonsong.database.schema.vendor.model.AccountModel;
+import com.kdyncs.dragonsong.database.schema.vendor.repository.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-@Entity(name = "OrganizationModel")
-@Table(name = "organization", schema = "ds_organization")
-public class OrganizationModel {
-    
-    @Id
-    @GeneratedValue
-    private Integer id;
-    
-    public Integer getId() {
-        return id;
+@Component
+public class AccountDAO {
+
+    private final AccountRepository repository;
+
+    @Autowired
+    public AccountDAO(AccountRepository repository) {
+        this.repository = repository;
     }
-    
-    public void setId(Integer id) {
-        this.id = id;
+
+    public void save(AccountModel account) {
+        repository.save(account);
     }
 }

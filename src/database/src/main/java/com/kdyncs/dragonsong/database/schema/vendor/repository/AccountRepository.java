@@ -17,13 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.data.repository;
+package com.kdyncs.dragonsong.database.schema.vendor.repository;
 
-import com.kdyncs.dragonsong.database.schema.data.model.CountryModel;
+import com.kdyncs.dragonsong.database.schema.vendor.model.AccountModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
-interface CountryRepository extends JpaRepository<CountryModel, Integer> {
+import java.util.UUID;
 
+@Repository
+public interface AccountRepository extends JpaRepository<AccountModel, UUID> {
 }
