@@ -1,6 +1,6 @@
-package com.kdyncs.dragonsong.client.common.gui;
+package com.kdyncs.dragonsong.client.gui;
 
-import com.kdyncs.dragonsong.client.common.gui.components.MainView;
+import com.kdyncs.dragonsong.client.gui.components.MainView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Parent;

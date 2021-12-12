@@ -1,4 +1,4 @@
-package com.kdyncs.dragonsong.client.common.gui.components;
+package com.kdyncs.dragonsong.client.gui.components;
 
 import net.rgielen.fxweaver.core.FxmlView;
 
