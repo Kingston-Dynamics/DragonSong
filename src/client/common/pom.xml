@@ -7,42 +7,44 @@
     <artifactId>common</artifactId>
     <version>1.0.0</version>
 
-    <name>dragonsong-client</name>
+    <name>dragonsong-client-common</name>
 
+    <!-- SpringBoot Parent Data -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.1</version>
+        <relativePath/>
+    </parent>
+
+    <!-- Build Instructions -->
     <build>
 
         <!-- Built Artifact Name -->
-        <finalName>dragonsong-client</finalName>
+        <finalName>dragonsong-client-common</finalName>
 
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-
+        <!-- Compiler -->
         <plugins>
-
-            <!-- Compiler -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
                 <configuration>
                     <release>11</release>
                 </configuration>
             </plugin>
-
-            <!-- Jar it Up -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
 
-    <packaging>jar</packaging>
     <dependencies>
+
+        <!-- SpringBoot Dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
 
         <!-- Logging Dependencies -->
         <dependency>
