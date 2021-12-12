@@ -32,8 +32,11 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
         // Assign Scene to Stage
         stage.setScene(scene);
 
-        // No need to resize this. 
+        // No need to resize this.
         stage.setResizable(false);
+
+        // Set Title Text
+        stage.setTitle("DragonSong Client");
 
         // Show Stage
         stage.show();
