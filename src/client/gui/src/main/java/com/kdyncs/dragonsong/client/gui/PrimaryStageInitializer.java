@@ -22,9 +22,20 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
 
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
+
+        // Get Stage from Event
         Stage stage = event.stage;
-        Scene scene = new Scene(weaver.loadView(MainView.class), 400, 300);
+
+        // Loan up Main View
+        Scene scene = new Scene(weaver.loadView(MainView.class));
+
+        // Assign Scene to Stage
         stage.setScene(scene);
+
+        // No need to resize this. 
+        stage.setResizable(false);
+
+        // Show Stage
         stage.show();
     }
 }
