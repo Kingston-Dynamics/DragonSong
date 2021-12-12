@@ -14,11 +14,11 @@
         <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <logger name="com.kdyncs.dragonsong.client.DragonNet" level="DEBUG" additivity="false">
+    <logger name="com.kdyncs.dragonsong.client.common.DragonNet" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
 
-    <logger name="com.kdyncs.dragonsong.client.DragonNet" level="DEBUG" additivity="false">
+    <logger name="com.kdyncs.dragonsong.client.common.DragonNet" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
     </logger>
 

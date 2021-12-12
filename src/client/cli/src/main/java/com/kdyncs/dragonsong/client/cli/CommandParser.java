@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.cli;
+package com.kdyncs.dragonsong.client.cli;
 
-import com.kdyncs.dragonsong.client.DragonConfig;
-import com.kdyncs.dragonsong.client.DragonSong;
+import com.kdyncs.dragonsong.client.common.DragonConfig;
+import com.kdyncs.dragonsong.client.common.DragonSong;
 import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

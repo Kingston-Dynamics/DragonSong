@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.client;
+package com.kdyncs.dragonsong.client.common;
 
 import com.kdyncs.dragonsong.protocol.message.Message;
 import com.kdyncs.dragonsong.protocol.message.data.MessageType;

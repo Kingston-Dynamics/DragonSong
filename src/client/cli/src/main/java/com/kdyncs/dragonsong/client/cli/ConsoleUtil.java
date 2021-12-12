@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.cli;
+package com.kdyncs.dragonsong.client.cli;
 
 public class ConsoleUtil {
     
