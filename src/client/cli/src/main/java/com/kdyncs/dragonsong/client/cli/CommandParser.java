@@ -84,9 +84,9 @@ public class CommandParser {
         String privateID = Keyinator.generateGUID();
         log.info("Private ID is {}", privateID);
         
-        DragonConfig config = new DragonConfig(host, PORT, "ac77bcf1-4b07-4477-8b90-c515a7f2e752", "DragonSong-DEV", "NULL", privateID, "Steve");
-        client = new DragonSong(config);
-        client.connect();
+        //DragonConfig config = new DragonConfig(host, PORT, "ac77bcf1-4b07-4477-8b90-c515a7f2e752", "DragonSong-DEV", "NULL", privateID, "Steve");
+        //client = new DragonSong(config);
+        //client.connect();
     }
     
     // "/d"

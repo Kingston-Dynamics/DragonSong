@@ -24,20 +24,24 @@ import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
 import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
 import com.kdyncs.dragonsong.protocol.message.type.heartbeat.HeartbeatPing;
 import com.kdyncs.dragonsong.protocol.message.type.user.UserTransmit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 
+@Component
 public class DragonSong {
     
     // Data Connection
     private final DragonNet network;
     private final DragonConfig config;
-    
-    public DragonSong(DragonConfig config) {
+
+    @Autowired
+    public DragonSong(DragonConfig config, DragonNet network) {
         
         // Setup Networking
         this.config = config;
-        this.network = new DragonNet(config);
+        this.network = network;
         
         new LinkedList<>();
     }

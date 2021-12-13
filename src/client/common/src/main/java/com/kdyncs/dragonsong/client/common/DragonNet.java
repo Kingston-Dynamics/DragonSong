@@ -29,10 +29,13 @@ import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
 import com.kdyncs.dragonsong.protocol.utils.Determinator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.Socket;
 
+@Component
 public class DragonNet implements NetworkManager {
     
     // Logging
@@ -42,7 +45,8 @@ public class DragonNet implements NetworkManager {
     // Socket Connections
     private Socket socket;
     private NetworkWriter writer;
-    
+
+    @Autowired
     public DragonNet(DragonConfig config) {
         this.config = config;
     }

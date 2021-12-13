@@ -19,6 +19,9 @@
 
 package com.kdyncs.dragonsong.client.common;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class DragonConfig {
     
     // Connection Details
