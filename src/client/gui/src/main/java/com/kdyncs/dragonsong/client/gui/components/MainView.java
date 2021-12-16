@@ -2,6 +2,7 @@ package com.kdyncs.dragonsong.client.gui.components;
 
 import com.kdyncs.dragonsong.client.common.DragonConfig;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -40,7 +41,23 @@ public class MainView {
         config.setHostname(address.getText());
         config.setPort(Integer.parseInt(port.getText()));
 
+        // Get Stage
         Stage stage = new Stage();
+
+        // Loan up Main View
+        Scene scene = new Scene(weaver.loadView(ChatView.class));
+
+        // Assign Scene to Stage
+        stage.setScene(scene);
+
+        // No need to resize this.
+        stage.setResizable(false);
+
+        // Set Title Text
+        stage.setTitle("Chat Window");
+
+        // Show Stage
+        stage.show();
 
     }
 }
