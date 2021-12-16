@@ -27,8 +27,6 @@ import com.kdyncs.dragonsong.protocol.message.type.user.UserTransmit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
-
 @Component
 public class DragonSong {
     
@@ -42,8 +40,6 @@ public class DragonSong {
         // Setup Networking
         this.config = config;
         this.network = network;
-        
-        new LinkedList<>();
     }
     
     public void connect() {

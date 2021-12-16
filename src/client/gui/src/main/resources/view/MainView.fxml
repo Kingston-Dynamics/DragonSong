@@ -12,7 +12,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kdyncs.dragonsong.client.gui.components.MainView">
    <children>
       <Text layoutX="96.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello World" wrappingWidth="129.13671875" />
-      <Button layoutX="526.0" layoutY="361.0" mnemonicParsing="false" text="Connect" />
+      <Button layoutX="526.0" layoutY="361.0" mnemonicParsing="false" onAction="#connect" text="Connect" />
       <VBox layoutX="148.0" layoutY="225.0" prefHeight="84.0" prefWidth="304.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="344.0">
@@ -23,7 +23,7 @@
                      </font>
                   </Text>
                   <Separator orientation="VERTICAL" prefHeight="75.0" prefWidth="20.0" />
-                  <TextField promptText="127.0.0.1" />
+                  <TextField fx:id="address" promptText="127.0.0.1" text="127.0.0.1" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="344.0">
@@ -34,10 +34,11 @@
                      </font>
                   </Text>
                   <Separator orientation="VERTICAL" prefHeight="75.0" prefWidth="20.0" />
-                  <TextField promptText="27888" text="27888" />
+                  <TextField fx:id="port" promptText="27888" text="27888" />
                </children>
             </HBox>
          </children>
       </VBox>
+      <Text fx:id="errorText" layoutX="33.0" layoutY="378.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="473.13671875" />
    </children>
 </AnchorPane>

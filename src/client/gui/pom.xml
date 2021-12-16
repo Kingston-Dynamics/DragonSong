@@ -69,6 +69,13 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
+        <!-- Dragonsong Client Common -->
+        <dependency>
+            <groupId>com.kingstondynamics.dragonsong.client</groupId>
+            <artifactId>client-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- Dragonsong Common -->
         <dependency>
             <groupId>com.kingstondynamics.dragonsong</groupId>
