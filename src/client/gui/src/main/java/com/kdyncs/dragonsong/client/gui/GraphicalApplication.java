@@ -1,6 +1,7 @@
 package com.kdyncs.dragonsong.client.gui;
 
 import com.kdyncs.dragonsong.client.gui.event.StageReadyEvent;
+import com.kdyncs.dragonsong.common.event.ShutdownEvent;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -36,6 +37,10 @@ public class GraphicalApplication extends Application {
 
     @Override
     public void stop() {
+
+        context.publishEvent(new ShutdownEvent(this));
+
+
         this.context.close();
         Platform.exit();
     }

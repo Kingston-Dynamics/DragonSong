@@ -19,12 +19,14 @@
 
 package com.kdyncs.dragonsong.client.common;
 
+import com.kdyncs.dragonsong.common.event.ShutdownEvent;
 import com.kdyncs.dragonsong.protocol.message.Message;
 import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
 import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
 import com.kdyncs.dragonsong.protocol.message.type.heartbeat.HeartbeatPing;
 import com.kdyncs.dragonsong.protocol.message.type.user.UserTransmit;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -75,4 +77,10 @@ public class DragonSong {
         Message packet = new UserTransmit(privateId, message);
         network.write(packet);
     }
+
+    @EventListener
+    private void onShutdown(ShutdownEvent event) {
+
+    }
+
 }

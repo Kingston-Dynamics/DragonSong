@@ -6,11 +6,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxWeaver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PrimaryStageInitializer implements ApplicationListener<StageReadyEvent> {
+public class PrimaryStageInitializer {
 
     private final FxWeaver weaver;
 
@@ -20,7 +20,7 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
         this.weaver = weaver;
     }
 
-    @Override
+    @EventListener
     public void onApplicationEvent(StageReadyEvent event) {
 
         // Get Stage from Event
