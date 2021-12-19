@@ -28,8 +28,6 @@ public class DedicatedConfiguration {
     
     private boolean isDedicated;
     private String apiKey;
-    private String appID;
-    private String appVer;
     
     public boolean isDedicated() {
         return isDedicated;
@@ -45,21 +43,5 @@ public class DedicatedConfiguration {
     
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
-    }
-    
-    public String getAppID() {
-        return appID;
-    }
-    
-    public void setAppID(String appID) {
-        this.appID = appID;
-    }
-    
-    public String getAppVer() {
-        return appVer;
-    }
-    
-    public void setAppVer(String appVer) {
-        this.appVer = appVer;
     }
 }
