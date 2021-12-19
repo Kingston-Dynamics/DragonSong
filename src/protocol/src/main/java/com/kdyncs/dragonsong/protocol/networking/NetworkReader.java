@@ -67,6 +67,7 @@ public class NetworkReader implements Runnable {
                 
             } catch (IOException ex) {
                 if (manager.getSocket().isClosed()) {
+                    LOG.info("Socket Closed", ex);
                     running = false;
                 } else {
                     LOG.debug("Issue Reading From Socket", ex);

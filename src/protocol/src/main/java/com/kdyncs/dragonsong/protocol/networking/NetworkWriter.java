@@ -59,8 +59,7 @@ public class NetworkWriter implements Runnable {
                 
                 // Write Message length and Data
                 DataOutputStream output = new DataOutputStream(manager.getSocket().getOutputStream());
-                
-                //Byteinator.intToBytes(data.length);
+
                 LOG.info("Writing Length {} Bytes", data.length);
                 output.write(Byteinator.intToBytes(data.length));
                 
