@@ -27,7 +27,7 @@ public class Determinator {
      * Private Constructor for Utlity Class
      */
     private Determinator() {
-        throw new AssertionError();
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     public static MessageType determinate(byte[] data) {

@@ -25,7 +25,7 @@ public class Concatinator {
      * Private Constructor for Utility Class
      */
     private Concatinator() {
-        throw new AssertionError();
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     public static byte[] ConcatinateByteArrays(byte[]... arrays) {

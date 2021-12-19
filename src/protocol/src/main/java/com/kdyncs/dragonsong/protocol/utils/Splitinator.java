@@ -27,7 +27,7 @@ public class Splitinator {
      * Private Constructor for Utility Class
      */
     private Splitinator() {
-        throw new AssertionError();
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     public static byte[][] splitByteArray(byte[] data, int splits) {

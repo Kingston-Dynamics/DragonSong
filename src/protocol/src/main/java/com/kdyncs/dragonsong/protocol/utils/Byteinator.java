@@ -23,10 +23,12 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 public final class Byteinator {
-    
-    // Uninstantiable
+
+    /**
+     * Private Constructor for Utility Class
+     */
     private Byteinator() {
-        throw new AssertionError("Instantiating utility class.");
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     public static byte[] doubleToBytes(double value) {
