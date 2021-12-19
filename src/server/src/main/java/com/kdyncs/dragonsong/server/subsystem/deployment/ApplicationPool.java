@@ -43,7 +43,7 @@ public class ApplicationPool {
 
     public void add(Application application) {
         log.info("Adding Application to Pool");
-        applications.put(application.getApplicationKey(), application);
+        applications.put(application.getApiKey(), application);
         log.info("Deployments: " + deployCount());
     }
     

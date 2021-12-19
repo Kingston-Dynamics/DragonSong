@@ -145,14 +145,14 @@ public class AuthenticationService {
         Application application = applications.get(message.getApplicationKey());
         
         // Verify Application
-        if (!application.getApplicationKey().equals(message.getApplicationKey())) {
+        if (!application.getApiKey().equals(message.getApplicationKey())) {
             // TODO: What to do here
-            log.warn("Application Mismatch {}", application.getApplicationKey());
+            log.warn("Application Mismatch {}", application.getApiKey());
         }
         
         // Update User Information
         connection.setDisplayName(message.getDisplayName());
-        connection.setApplicationKey(application.getApplicationKey());
+        connection.setApplicationKey(application.getApiKey());
         connection.setExternalID(message.getUniqueIdentifier());
         
         log.info("Private ID: {}", message.getUniqueIdentifier());

@@ -28,6 +28,9 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class Application {
 
+    // Application Data
+    private String apiKey;
+
     // Spring Components
     private final UserPool users;
     private final ChannelPool channels;
@@ -37,20 +40,17 @@ public class Application {
         this.users = users;
         this.channels = channels;
     }
-    
-    // Application Data
-    private String ApplicationKey;
-    
+
     public void disconnect(ClientConnection user) {
         users.remove(user.getExternalID());
     }
     
-    public String getApplicationKey() {
-        return ApplicationKey;
+    public String getApiKey() {
+        return apiKey;
     }
     
-    public void setApplicationKey(String applicationKey) {
-        this.ApplicationKey = applicationKey;
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     public ChannelPool getChannels() {
