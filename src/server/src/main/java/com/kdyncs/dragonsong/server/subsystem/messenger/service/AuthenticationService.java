@@ -134,8 +134,8 @@ public class AuthenticationService {
         AuthenticationLogin message = new AuthenticationLogin(command.getCommand());
         
         // Application must be deployed
-        if (applications.isDeployed(message.getApplicationKey())) {
-            log.info("Wrong Application");
+        if (!applications.isDeployed(message.getApplicationKey())) {
+            log.info("Application with Key {} not deployed", message.getApplicationKey());
             Notification notification = new Notification(NotificationType.APPLICATION_NOT_DEPLOYED);
             connection.getWriter().write(notification.build());
             return;

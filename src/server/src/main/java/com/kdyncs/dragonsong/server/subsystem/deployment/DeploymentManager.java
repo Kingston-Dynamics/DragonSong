@@ -78,7 +78,7 @@ public class DeploymentManager implements Runnable {
         if (config.isDedicated()) {
             
             log.info("DragonSong is running in dedicated mode");
-            log.info("Deploying dedicated application");
+            log.info("Deploying dedicated application {}", config.getApiKey());
             
             // Build Application
             Application application = context.getBean(Application.class);
