@@ -22,5 +22,7 @@ public class ChatView {
         this.weaver = weaver;
 
         server.connect();
+
+        server.sendAuthHandshake();
     }
 }

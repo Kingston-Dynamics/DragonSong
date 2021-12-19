@@ -40,6 +40,7 @@ public class DragonNet implements NetworkManager {
     
     // Logging
     private static final Logger LOG = LoggerFactory.getLogger(DragonNet.class);
+
     // Client Configuration
     private final DragonConfig config;
 
