@@ -146,7 +146,10 @@ public class AuthenticationService {
         
         // Verify Application
         if (!application.getApiKey().equals(message.getApplicationKey())) {
-            // TODO: What to do here
+            /**
+             * Note: We used to do some more advanced application verification but that no longer occurs
+             * as we removed some old application ID and application version code.
+             */
             log.warn("Application Mismatch {}", application.getApiKey());
         }
         
