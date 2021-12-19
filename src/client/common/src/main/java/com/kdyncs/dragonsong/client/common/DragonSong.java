@@ -81,6 +81,7 @@ public class DragonSong {
     @EventListener
     private void onShutdown(ShutdownEvent event) {
 
+        // Force Disconnection
+        disconnect();
     }
-
 }

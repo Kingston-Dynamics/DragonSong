@@ -40,7 +40,6 @@ public class GraphicalApplication extends Application {
 
         context.publishEvent(new ShutdownEvent(this));
 
-
         this.context.close();
         Platform.exit();
     }

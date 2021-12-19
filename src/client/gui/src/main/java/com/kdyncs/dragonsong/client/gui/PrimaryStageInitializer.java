@@ -21,7 +21,7 @@ public class PrimaryStageInitializer {
     }
 
     @EventListener
-    public void onApplicationEvent(StageReadyEvent event) {
+    private void onApplicationEvent(StageReadyEvent event) {
 
         // Get Stage from Event
         Stage stage = event.stage;
