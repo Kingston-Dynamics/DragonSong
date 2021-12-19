@@ -24,7 +24,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DragonConfig {
-    
+
+    // User Details
+    private String displayName;
+
+    // Application Details
+    private String apiKey;
+
     // Connection Details
     private String hostname;
     private int port;
@@ -32,6 +38,22 @@ public class DragonConfig {
     @Autowired
     public DragonConfig() {
         // Do Nothing
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
     }
 
     public String getHostname() {

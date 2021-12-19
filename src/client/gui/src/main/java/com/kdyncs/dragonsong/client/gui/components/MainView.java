@@ -16,6 +16,12 @@ import org.springframework.stereotype.Component;
 public class MainView {
 
     @FXML
+    private TextField displayName;
+
+    @FXML
+    private TextField apiKey;
+
+    @FXML
     private TextField address;
 
     @FXML
@@ -37,7 +43,13 @@ public class MainView {
     private void connect() {
         errorText.setText("Connecting...");
 
-        // Set host information
+        // Set User Details
+        config.setDisplayName(displayName.getText());
+
+        // Set Application Details
+        config.setApiKey(apiKey.getText());
+
+        // Set Host Details
         config.setHostname(address.getText());
         config.setPort(Integer.parseInt(port.getText()));
 
@@ -58,6 +70,5 @@ public class MainView {
 
         // Show Stage
         stage.show();
-
     }
 }

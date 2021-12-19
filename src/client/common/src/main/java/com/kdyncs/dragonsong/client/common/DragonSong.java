@@ -21,10 +21,12 @@ package com.kdyncs.dragonsong.client.common;
 
 import com.kdyncs.dragonsong.common.event.ShutdownEvent;
 import com.kdyncs.dragonsong.protocol.message.Message;
+import com.kdyncs.dragonsong.protocol.message.type.authentication.AuthenticationLogin;
 import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
 import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
 import com.kdyncs.dragonsong.protocol.message.type.heartbeat.HeartbeatPing;
 import com.kdyncs.dragonsong.protocol.message.type.user.UserTransmit;
+import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -53,9 +55,8 @@ public class DragonSong {
     }
     
     public void sendAuthHandshake() {
-        //TODO: Fix this
-        //Message handshake = new AuthenticationLogin(config.getAPIKey(), config.getAppID(), config.getAppVer(), config.getConnectionID(), config.getDisplayName());
-        //network.write(handshake);
+        Message handshake = new AuthenticationLogin(config.getApiKey(), Keyinator.generateGUID(), config.getDisplayName());
+        network.write(handshake);
     }
     
     public void sendPing() {

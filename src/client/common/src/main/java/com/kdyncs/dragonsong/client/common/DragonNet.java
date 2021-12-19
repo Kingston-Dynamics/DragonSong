@@ -152,5 +152,4 @@ public class DragonNet implements NetworkManager {
     public Socket getSocket() {
         return this.socket;
     }
-    
 }
