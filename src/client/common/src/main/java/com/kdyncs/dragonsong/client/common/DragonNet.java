@@ -42,9 +42,11 @@ public class DragonNet implements NetworkManager {
     private static final Logger LOG = LoggerFactory.getLogger(DragonNet.class);
     // Client Configuration
     private final DragonConfig config;
+
     // Socket Connections
     private Socket socket;
     private NetworkWriter writer;
+    private NetworkReader reader;
 
     @Autowired
     public DragonNet(DragonConfig config) {
@@ -69,7 +71,7 @@ public class DragonNet implements NetworkManager {
             
             // Create Data Streams
             LOG.debug("Opening Streams");
-            NetworkReader reader = new NetworkReader(this);
+            reader = new NetworkReader(this);
             writer = new NetworkWriter(this);
             
             // Start Connections
@@ -91,21 +93,21 @@ public class DragonNet implements NetworkManager {
             LOG.debug("No Connection to Close");
         }
         
-        //try {
+        try {
         
-        Message message = new AuthenticationDisconnect();
-        write(message);
+            Message message = new AuthenticationDisconnect();
+            write(message);
+
+            LOG.info("Closing Reader");
+            reader.stop();
+            LOG.info("Closing Writer");
+            writer.stop();
+            LOG.info("Closing Socket");
+            socket.close();
         
-        LOG.info("Closing Reader");
-        //reader.stop();
-        LOG.info("Closing Writer");
-        //writer.stop();
-        LOG.info("Closing Socket");
-        //socket.close();
-        
-        //} catch (IOException ex) {
-        //	LOG.error("Shits Broke", ex);
-        //}
+        } catch (IOException ex) {
+        	LOG.error("Shits Broke", ex);
+        }
     }
     
     public void write(Message packet) {
