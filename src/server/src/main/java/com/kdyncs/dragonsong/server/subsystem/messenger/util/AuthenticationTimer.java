@@ -25,13 +25,11 @@ public class AuthenticationTimer implements Runnable{
     @PostConstruct
     public void init() {
 
-        //
+        // Create Thread
         this.task = new Thread(this);
 
-        // Mark thread as Daaemon
+        // Mark this thread as Daemon
         this.task.setDaemon(true);
-
-
     }
 
     public void start() {
@@ -42,6 +40,8 @@ public class AuthenticationTimer implements Runnable{
     public void run() {
 
         try {
+
+            // We only need to do this after 10 seconds
             Thread.sleep(TimeUnit.SECONDS.toMillis(DELAY));
         } catch (InterruptedException e) {
             //e.printStackTrace();
