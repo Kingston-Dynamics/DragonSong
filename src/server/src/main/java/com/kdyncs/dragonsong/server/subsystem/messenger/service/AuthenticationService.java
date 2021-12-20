@@ -92,7 +92,7 @@ public class AuthenticationService {
         }
         
         // Handle unauthenticated users
-        if (connection.getApplicationKey() != null) {
+        if (isAuthenticated(connection)) {
             // TODO: Remove User Channels
             
             // Remove From User Pool
@@ -122,8 +122,8 @@ public class AuthenticationService {
         // Retrieve Client
         ClientConnection connection = connections.get(command.getIssuer());
         
-        // User Can't Login Twice
-        if (connection.getApplicationKey() != null) {
+        // User Can't Log in Twice
+        if (isAuthenticated(connection)) {
             log.info("Already Authenticated");
             Notification notification = new Notification(NotificationType.ALREADY_AUTHENTICATED);
             connection.getWriter().write(notification.build());
@@ -177,5 +177,14 @@ public class AuthenticationService {
     
     public void reconnect(Command command) {
     
+    }
+
+    /**
+     * Check if Client is Authenticated
+     *
+     * If Client has an assigned Application Key they are considered to be Authenticated.
+     */
+    public Boolean isAuthenticated(ClientConnection client) {
+        return client.getApplicationKey() != null;
     }
 }
