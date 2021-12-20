@@ -35,9 +35,7 @@ public class ClientConnectionTimer implements Runnable {
     private static final Logger LOG = LogManager.getLogger();
     private static final long DELAY = 10000;
     private ClientConnection user;
-    private Thread timer;
-
-
+    private final Thread timer;
 
     @Autowired
     public ClientConnectionTimer(AuthenticationService authentication) {
@@ -60,18 +58,19 @@ public class ClientConnectionTimer implements Runnable {
             // This timer needs to
             Thread.sleep(DELAY);
 
-            if (user.getApplicationKey() == null) {
+            if (!authentication.isAuthenticated(user)) {
+
+                // TODO: Send Disconnect Message
+
+                // TODO: Disconnect Client
+
 
             }
 
         } catch (InterruptedException ex) {
-
+            // Not sure if this can be triggered
+            LOG.warn("Connection Timer Interrupted");
         }
-
-//        if (user.getApplication() == null) {
-//            disconnectMessage();
-//            user.kill();
-//        }
     }
 
     public void setUser(ClientConnection user) {
@@ -86,9 +85,4 @@ public class ClientConnectionTimer implements Runnable {
 
         timer.start();
     }
-
-//    private void disconnectMessage() {
-//        Transmission message = new TransmissionFactory().buildReturnTransmission(ResponseCode.AUTHENTICATION_TIME_EXCEEDED);
-//        user.post(message);
-//    }
 }
