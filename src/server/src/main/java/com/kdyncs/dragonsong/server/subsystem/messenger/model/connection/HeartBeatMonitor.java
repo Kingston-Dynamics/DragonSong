@@ -41,5 +41,12 @@ public class HeartBeatMonitor implements Runnable{
     @Override
     public void run() {
         LOG.info("CHECKING HEARTBEAT!");
+
+        // TODO: Check Heartbeat Time
+
+        // TODO: Kick Off User
+
+        // TODO: Cancel Self
+
     }
 }
