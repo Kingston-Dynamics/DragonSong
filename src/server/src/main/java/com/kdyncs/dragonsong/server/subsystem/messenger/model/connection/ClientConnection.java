@@ -24,8 +24,11 @@ import com.kdyncs.dragonsong.protocol.networking.NetworkReader;
 import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Processor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.net.Socket;
@@ -34,7 +37,10 @@ import java.time.Instant;
 @Component
 @Scope("prototype")
 public class ClientConnection implements NetworkManager {
-    
+
+    // Logging
+    private static final Logger LOG = LogManager.getLogger();
+
     // Spring Components
     private final Processor processor;
     
@@ -45,17 +51,39 @@ public class ClientConnection implements NetworkManager {
     private NetworkWriter writer;
     private NetworkReader reader;
 
-    //
+    /**
+     * External ID.
+     *
+     * Provided by Connecting Client.
+     */
     private String externalID;
-    
-    // Connection Pool Reference
+
+    /**
+     * Connection ID.
+     *
+     * Internal ID used to differentiate each user across the server.
+     */
     private String connectionID;
+
+    /**
+     * API Key.
+     *
+     * Linked to connected Application
+     */
     private String applicationKey;
-    
-    // Helpful Bits
+
+    /**
+     * Display Name
+     *
+     * Name associated with connected user.
+     */
     private String displayName;
 
-    //
+    /**
+     * Last Heartbeat
+     *
+     * The time at which the last heartbeat ocurred.
+     */
     private Instant lastHeartBeat;
     
     @Autowired
@@ -132,4 +160,12 @@ public class ClientConnection implements NetworkManager {
     public void handleInput(byte[] data) {
         processor.queueCommand(new Command(connectionID, data));
     }
+
+    @Scheduled
+    private void checkHeartRate() {
+
+        //LOG.info
+
+    }
+
 }

@@ -60,6 +60,9 @@ public class ClientConnectionTimer implements Runnable {
 
             if (!authentication.isAuthenticated(user)) {
 
+                LOG.debug("User {} failed authentication timeout", user.getConnectionID());
+
+
                 // TODO: Send Disconnect Message
 
                 // TODO: Disconnect Client
