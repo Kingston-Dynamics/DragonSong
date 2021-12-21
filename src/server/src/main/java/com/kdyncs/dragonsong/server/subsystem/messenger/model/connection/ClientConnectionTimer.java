@@ -58,6 +58,8 @@ public class ClientConnectionTimer implements Runnable {
             // This timer needs to
             Thread.sleep(DELAY);
 
+            // TODO: Double check that user is still connected
+
             if (!authentication.isAuthenticated(user)) {
 
                 LOG.debug("User {} failed authentication timeout", user.getConnectionID());

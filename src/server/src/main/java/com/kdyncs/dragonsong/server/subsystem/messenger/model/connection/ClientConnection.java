@@ -31,6 +31,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.net.Socket;
 import java.time.Instant;
 
@@ -89,6 +90,14 @@ public class ClientConnection implements NetworkManager {
     @Autowired
     public ClientConnection(Processor processor) {
         this.processor = processor;
+    }
+
+    @PostConstruct
+    private void init() {
+        /*
+         * Prepopulate The Heartbeat
+         */
+        this.lastHeartBeat = Instant.now();
     }
     
     @Override
@@ -161,11 +170,9 @@ public class ClientConnection implements NetworkManager {
         processor.queueCommand(new Command(connectionID, data));
     }
 
-    @Scheduled
+    @Scheduled(fixedDelay = 5000, initialDelay = 5000)
     private void checkHeartRate() {
 
-        //LOG.info
-
+        LOG.info("CHECKING HEARTBEAT");
     }
-
 }
