@@ -47,6 +47,5 @@ public class HeartBeatMonitor implements Runnable{
         // TODO: Kick Off User
 
         // TODO: Cancel Self
-
     }
 }
