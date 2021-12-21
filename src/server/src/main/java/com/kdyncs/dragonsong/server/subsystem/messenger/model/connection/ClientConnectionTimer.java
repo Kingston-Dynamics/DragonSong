@@ -41,7 +41,7 @@ public class ClientConnectionTimer implements Runnable {
     private final TaskScheduler scheduler;
 
     private static final Logger LOG = LogManager.getLogger();
-    private static final long DELAY = 5;
+    private static final long DELAY = 10;
     private ClientConnection user;
 
     @Autowired
