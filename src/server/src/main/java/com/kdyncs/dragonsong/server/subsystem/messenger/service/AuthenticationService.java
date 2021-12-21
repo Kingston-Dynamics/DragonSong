@@ -8,6 +8,7 @@ import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
 import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnectionTimer;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
 import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
 import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
@@ -70,12 +71,14 @@ public class AuthenticationService {
         // Start Networking
         reader.start();
         writer.start();
-        
-        // Start Timeout
-        // ClientConnectionTimer timer = context.getBean(ClientConnectionTimer.class);
-        // timer.setUser(connection);
-        // timer.start();
-        
+
+        /*
+         * Create a Client Connection Timer
+         *
+         * Upon connection, we afford the user a grace period to log in to a particular application. If this user
+         * does not log in within the specified time frame they will be disconnected from the server.
+         */
+        context.getBean(ClientConnectionTimer.class).setUser(connection);
     }
     
     public void disconnect(ClientConnection connection) {

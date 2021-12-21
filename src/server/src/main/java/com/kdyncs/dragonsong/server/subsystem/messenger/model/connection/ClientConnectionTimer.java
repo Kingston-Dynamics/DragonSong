@@ -41,7 +41,7 @@ public class ClientConnectionTimer implements Runnable {
     private final TaskScheduler scheduler;
 
     private static final Logger LOG = LogManager.getLogger();
-    private static final long DELAY = 10000;
+    private static final long DELAY = 5;
     private ClientConnection user;
 
     @Autowired
@@ -54,7 +54,7 @@ public class ClientConnectionTimer implements Runnable {
 
     @PostConstruct
     public void init() {
-        scheduler.schedule(this, Instant.now().plus(Duration.of(5, ChronoUnit.SECONDS)));
+        scheduler.schedule(this, Instant.now().plus(Duration.of(DELAY, ChronoUnit.SECONDS)));
     }
 
     @Override
