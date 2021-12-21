@@ -27,6 +27,7 @@ import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Processor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -47,6 +48,8 @@ public class ClientConnection implements NetworkManager {
     
     // Store instance of Socket
     private Socket socket;
+
+    private HeartBeatMonitor heartBeatMonitor;
     
     // Input and Output
     private NetworkWriter writer;
@@ -88,8 +91,9 @@ public class ClientConnection implements NetworkManager {
     private Instant lastHeartBeat;
     
     @Autowired
-    public ClientConnection(Processor processor) {
+    public ClientConnection(Processor processor, HeartBeatMonitor heartBeatMonitor) {
         this.processor = processor;
+        this.heartBeatMonitor = heartBeatMonitor;
     }
 
     @PostConstruct
@@ -164,15 +168,14 @@ public class ClientConnection implements NetworkManager {
     public void setLastHeartBeat(Instant lastHeartBeat) {
         this.lastHeartBeat = lastHeartBeat;
     }
-    
+
+    // Allow access to Heartbeat Monitor
+    public HeartBeatMonitor getHeartBeatMonitor() {
+        return heartBeatMonitor;
+    }
+
     @Override
     public void handleInput(byte[] data) {
         processor.queueCommand(new Command(connectionID, data));
-    }
-
-    @Scheduled(fixedDelay = 5000, initialDelay = 5000)
-    private void checkHeartRate() {
-
-        LOG.info("CHECKING HEARTBEAT");
     }
 }

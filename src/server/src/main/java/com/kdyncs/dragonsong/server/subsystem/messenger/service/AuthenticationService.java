@@ -98,6 +98,9 @@ public class AuthenticationService {
             // Remove From User Pool
             applications.get(connection.getApplicationKey()).getUsers().remove(connection.getExternalID());
         }
+
+        // Shutdown Heart Beat Monitor
+        connection.getHeartBeatMonitor().stop();
         
         // Remove Connection from Connections List
         connections.remove(connection.getConnectionID());
