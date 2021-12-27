@@ -20,7 +20,6 @@
 package com.kdyncs.dragonsong.server.subsystem.messenger.model.connection;
 
 import com.kdyncs.dragonsong.server.subsystem.messenger.service.AuthenticationService;
-import org.apache.commons.logging.Log;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

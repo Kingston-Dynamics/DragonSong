@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.server.subsystem.messenger.model.connection;
+package com.kdyncs.dragonsong.client.common;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,37 +34,42 @@ import java.util.concurrent.ScheduledFuture;
 
 @Component
 @Scope("prototype")
-public class HeartBeatMonitor implements Runnable{
+public class AutoHeartBeat implements Runnable{
 
     // Logging
     private static final Logger LOG = LogManager.getLogger();
 
     //
     private final TaskScheduler scheduler;
+    private final DragonSong connection;
+
+    //
     private ScheduledFuture<?> future;
 
     @Autowired
-    public HeartBeatMonitor(TaskScheduler scheduler) {
+    public AutoHeartBeat(TaskScheduler scheduler, DragonSong connection) {
         this.scheduler = scheduler;
+        this.connection = connection;
+    }
+
+    @PostConstruct
+    public void init() {
+        future = scheduler.scheduleWithFixedDelay(this, Instant.now().plus(Duration.of(3, ChronoUnit.SECONDS)), Duration.of(5, ChronoUnit.SECONDS));
+    }
+
+    public void start() {
+        // future = scheduler.scheduleWithFixedDelay(this, Instant.now().plus(Duration.of(3, ChronoUnit.SECONDS)), Duration.of(5, ChronoUnit.SECONDS));
     }
 
     public void stop() {
         future.cancel(true);
     }
 
-    @PostConstruct
-    public void init() {
-        future = scheduler.scheduleWithFixedDelay(this, Instant.now().plus(Duration.of(5, ChronoUnit.SECONDS)), Duration.of(5, ChronoUnit.SECONDS));
-    }
-
     @Override
     public void run() {
-        LOG.info("CHECKING HEARTBEAT!");
+        LOG.info("SENDING HEARTBEAT!");
 
-        // TODO: Check Heartbeat Time
-
-        // TODO: Kick Off User
-
-        // TODO: Cancel Self
+        // Fire off Ping
+        connection.sendPing();
     }
 }

@@ -30,6 +30,7 @@ import com.kdyncs.dragonsong.protocol.utils.Determinator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -43,6 +44,10 @@ public class DragonNet implements NetworkManager {
 
     // Client Configuration
     private final DragonConfig config;
+    private final ApplicationContext context;
+
+    // Test
+    private AutoHeartBeat heartBeat;
 
     // Socket Connections
     private Socket socket;
@@ -50,8 +55,9 @@ public class DragonNet implements NetworkManager {
     private NetworkReader reader;
 
     @Autowired
-    public DragonNet(DragonConfig config) {
+    public DragonNet(DragonConfig config, ApplicationContext context) {
         this.config = config;
+        this.context = context;
     }
     
     public void connect() {
@@ -78,6 +84,9 @@ public class DragonNet implements NetworkManager {
             // Start Connections
             reader.start();
             writer.start();
+
+            // Startup Heartbeat
+            heartBeat = context.getBean(AutoHeartBeat.class);
             
         } catch (IOException ex) {
             
@@ -98,6 +107,9 @@ public class DragonNet implements NetworkManager {
         
             Message message = new AuthenticationDisconnect();
             write(message);
+
+            // Stop Heartbeat
+            heartBeat.stop();
 
             LOG.info("Closing Reader");
             reader.stop();
