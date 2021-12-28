@@ -5,10 +5,10 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.User
 {
     public class UserTransmit : Message
     {
-        public static readonly MessageType Type = MessageType.USER_TRANSMIT;
-        
-        public readonly string Identifier;
-        public readonly string Message;
+        private const MessageType Type = MessageType.USER_TRANSMIT;
+
+        private readonly string Identifier;
+        private readonly string Message;
 
         public UserTransmit(string id, string message, string auditId) :  base((int)Type, auditId)
         {

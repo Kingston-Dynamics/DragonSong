@@ -5,7 +5,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication
 {
     public class AuthenticationReconnect : Message
     {
-        private static readonly MessageType Type = MessageType.AUTHENTICATION_LOGIN;
+        private const MessageType Type = MessageType.AUTHENTICATION_LOGIN;
 
         public AuthenticationReconnect(string auditId) : base((int)Type, auditId)
         {

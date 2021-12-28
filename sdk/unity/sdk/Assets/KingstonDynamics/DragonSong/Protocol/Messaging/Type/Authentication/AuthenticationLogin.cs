@@ -5,8 +5,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication
 {
     public class AuthenticationLogin : Message
     {
-        private static readonly MessageType Type = MessageType.AUTHENTICATION_LOGIN;
-        
+        private const MessageType Type = MessageType.AUTHENTICATION_LOGIN;
+
         private readonly string _playerId;
         private readonly string _characterId;
 
