@@ -5,21 +5,21 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.User
 {
     public class UserTransmit : Message
     {
-        public static readonly MessageType type = MessageType.USER_TRANSMIT;
+        public static readonly MessageType Type = MessageType.USER_TRANSMIT;
         
-        public readonly string identifier;
-        public readonly string message;
+        public readonly string Identifier;
+        public readonly string Message;
 
-        public UserTransmit(string id, string message, string auditId) :  base((int)type, auditId)
+        public UserTransmit(string id, string message, string auditId) :  base((int)Type, auditId)
         {
-            identifier = id;
-            this.message = message;
+            Identifier = id;
+            this.Message = message;
         }
 
         public UserTransmit(Readinator reader) : base(reader)
         {
-            identifier = reader.ReadIntPrefixedString();
-            message = reader.ReadIntPrefixedString();
+            Identifier = reader.ReadIntPrefixedString();
+            Message = reader.ReadIntPrefixedString();
         }
 
         public UserTransmit(byte[] data) : this(new Readinator(data))
@@ -29,8 +29,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.User
 
         public new byte[] Build()
         {
-            var b1 = Byteinator.StringToBytesPrefixed(identifier);
-            var b2 = Byteinator.StringToBytesPrefixed(message);
+            var b1 = Byteinator.StringToBytesPrefixed(Identifier);
+            var b2 = Byteinator.StringToBytesPrefixed(Message);
             return Concatinator.ConctatinateByteArrays(base.Build(), b1, b2);
         }
     }

@@ -2,8 +2,8 @@ namespace KingstonDynamics.DragonSong.Client.Example
 {
     public enum CommandType
     {
-        Chat,
-        Whisper,
-        Unknown,
+        CHAT,
+        WHISPER,
+        UNKNOWN,
     }
 }

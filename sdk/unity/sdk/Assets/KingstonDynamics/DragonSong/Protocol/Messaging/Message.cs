@@ -7,10 +7,10 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging
         private int TypeCode { get; }
         private string AuditId { get; }
 
-        protected Message(int TypeCode, string AuditId)
+        protected Message(int typeCode, string auditId)
         {
-            this.TypeCode = TypeCode;
-            this.AuditId = AuditId;
+            this.TypeCode = typeCode;
+            this.AuditId = auditId;
         }
 
         protected Message(Readinator reader)

@@ -4,10 +4,10 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Data
     {
         private NotificationType(string value)
         {
-            this.value = value;
+            this.Value = value;
         }
 
-        public string value { get; set; }
+        public string Value { get; set; }
         
         
         /*

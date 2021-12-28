@@ -5,9 +5,9 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication
 {
     public class AuthenticationLogout : Message
     {
-        private static readonly MessageType type = MessageType.AUTHENTICATION_LOGOUT;
+        private static readonly MessageType Type = MessageType.AUTHENTICATION_LOGOUT;
 
-        public AuthenticationLogout(string AuditId) : base((int)type, AuditId)
+        public AuthenticationLogout(string auditId) : base((int)Type, auditId)
         {
             // Empty
         }
