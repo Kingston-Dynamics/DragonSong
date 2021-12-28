@@ -21,8 +21,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging
 
         public byte[] Build()
         {
-            byte[] b1 = Byteinator.IntToBytes(TypeCode);
-            byte[] b2 = Byteinator.StringToBytes(AuditId);
+            var b1 = Byteinator.IntToBytes(TypeCode);
+            var b2 = Byteinator.StringToBytes(AuditId);
 
             return Concatinator.ConctatinateByteArrays(b1, b2);
         }

@@ -29,8 +29,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.User
 
         public new byte[] Build()
         {
-            byte[] b1 = Byteinator.StringToBytesPrefixed(identifier);
-            byte[] b2 = Byteinator.StringToBytesPrefixed(message);
+            var b1 = Byteinator.StringToBytesPrefixed(identifier);
+            var b2 = Byteinator.StringToBytesPrefixed(message);
             return Concatinator.ConctatinateByteArrays(base.Build(), b1, b2);
         }
     }

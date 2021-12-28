@@ -40,7 +40,7 @@ namespace KingstonDynamics.DragonSong.Client
 
         public void SendPing()
         {
-            HeartbeatPing message = new HeartbeatPing();
+            var message = new HeartbeatPing();
             Write(message);
         }
         

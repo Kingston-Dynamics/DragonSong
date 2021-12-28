@@ -6,7 +6,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Utils
         {
             var length = 0;
 
-            foreach(byte[] array in arrays)
+            foreach(var array in arrays)
             {
                 length += array.Length;
             }
@@ -15,7 +15,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Utils
 
             var position = 0;
             
-            foreach (byte[] array in arrays)
+            foreach (var array in arrays)
             {
                 array.CopyTo(combined, position);
                 position += array.Length;

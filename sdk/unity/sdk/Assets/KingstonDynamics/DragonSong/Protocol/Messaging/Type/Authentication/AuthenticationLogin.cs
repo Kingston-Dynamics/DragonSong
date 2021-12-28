@@ -34,8 +34,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication
 
         public new byte[] Build()
         {
-            byte[] b1 = Byteinator.StringToBytesPrefixed(PlayerId);
-            byte[] b2 = Byteinator.StringToBytesPrefixed(CharacterId);
+            var b1 = Byteinator.StringToBytesPrefixed(PlayerId);
+            var b2 = Byteinator.StringToBytesPrefixed(CharacterId);
 
             return Concatinator.ConctatinateByteArrays(base.Build(), b1, b2);
         }

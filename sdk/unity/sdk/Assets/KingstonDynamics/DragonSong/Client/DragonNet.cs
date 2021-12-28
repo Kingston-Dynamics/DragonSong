@@ -11,7 +11,7 @@ using Debug = UnityEngine.Debug;
 
 namespace KingstonDynamics.DragonSong.Client
 {
-    public class DragonNet : NetworkManager
+    public class DragonNet : INetworkManager
     {
 
         //Our Data Connections
