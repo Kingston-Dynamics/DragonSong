@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace KingstonDynamics.DragonSong.Client.Example
+namespace KingstonDynamics.DragonSong.Example.Interface
 {
     public class ChatDisplay : MonoBehaviour
     {

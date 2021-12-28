@@ -1,11 +1,11 @@
 using System;
-using System.Security.Cryptography;
 
 namespace KingstonDynamics.DragonSong.Protocol.Utils
 {
-    public class Keyinator
+    public static class Keyinator
     {
 
+        // ReSharper disable once InconsistentNaming
         public static string GenerateGUID()
         {
             return Guid.NewGuid().ToString();

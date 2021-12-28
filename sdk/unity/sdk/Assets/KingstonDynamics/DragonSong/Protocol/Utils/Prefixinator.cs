@@ -1,6 +1,6 @@
 namespace KingstonDynamics.DragonSong.Protocol.Utils
 {
-    public class Prefixinator
+    public static class Prefixinator
     {
 
         public static byte[] Prefix(byte[] data)

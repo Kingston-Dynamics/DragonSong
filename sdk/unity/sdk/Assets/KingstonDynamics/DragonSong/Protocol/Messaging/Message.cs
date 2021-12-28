@@ -16,7 +16,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging
         protected Message(Readinator reader)
         {
             TypeCode = reader.ReadInt();
-            AuditId = reader.readAuditId();
+            AuditId = reader.ReadAuditId();
         }
 
         public byte[] Build()
