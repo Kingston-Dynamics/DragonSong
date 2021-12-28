@@ -1,18 +1,17 @@
-using System;
 using UnityEngine;
 
 namespace KingstonDynamics.DragonSong.Client.Example
 {
     public class Heartbeat : MonoBehaviour
     {
-        private Client _client;
+        private KingstonDynamics.DragonSong.Example.Client.Client _client;
 
         public float delay = 1.0f;
         public float repeat = 2.0f;
         
         private void Start()
         {
-            _client = Client.Instance;
+            _client = KingstonDynamics.DragonSong.Example.Client.Client.Instance;
             InvokeRepeating(nameof(Ping), delay, repeat);
         }
 

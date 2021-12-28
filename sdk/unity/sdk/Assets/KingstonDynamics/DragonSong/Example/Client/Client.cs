@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using KingstonDynamics.DragonSong.Client.Configuration;
+﻿using KingstonDynamics.DragonSong.Client;
+using KingstonDynamics.DragonSong.Client.Example;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.UI;
 
 //
 // This class is a simple test class to test IO using keys. 
 //
 
-namespace KingstonDynamics.DragonSong.Client.Example
+namespace KingstonDynamics.DragonSong.Example.Client
 {
 
     public class Client : Singleton<Client>
     {
  
         // High Level Client
-        private DragonSong _client;
+        private DragonSong.Client.DragonSong _client;
         
         // Unity Exposed Bits
         public string hostname;
@@ -28,12 +26,12 @@ namespace KingstonDynamics.DragonSong.Client.Example
         private void Start()
         {
             // Pull values from Player Preferences
-            hostname = UserPrefs.GetString("SERVER_ADDRESS", "127.0.0.1");
-            port = UserPrefs.GetInt("SERVER_PORT", 27888);
-            playerId = UserPrefs.GetString("PLAYER_ID", playerId);
-            characterId = UserPrefs.GetString("CHARACTER_ID", characterId);
+            hostname = PlayerPrefs.GetString("SERVER_ADDRESS", "127.0.0.1");
+            port = PlayerPrefs.GetInt("SERVER_PORT", 27888);
+            playerId = PlayerPrefs.GetString("PLAYER_ID", playerId);
+            characterId = PlayerPrefs.GetString("CHARACTER_ID", characterId);
             autoConnect = UserPrefs.GetBool("AUTO_CONNECT", autoConnect);
-;
+            
             // Sanity Checks
             Assert.IsFalse(string.IsNullOrWhiteSpace(hostname));
             Assert.IsFalse(string.IsNullOrWhiteSpace(playerId));
@@ -44,7 +42,7 @@ namespace KingstonDynamics.DragonSong.Client.Example
 	        var config = new DragonConfig(hostname, port, autoConnect, playerId, characterId);
 
             //Create DragonSong Instance
-            _client = new DragonSong(config);
+            _client = new DragonSong.Client.DragonSong(config);
         }
         
         private void OnDestroy()
