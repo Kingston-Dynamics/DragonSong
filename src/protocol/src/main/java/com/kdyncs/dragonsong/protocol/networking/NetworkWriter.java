@@ -20,8 +20,8 @@
 package com.kdyncs.dragonsong.protocol.networking;
 
 import com.kdyncs.dragonsong.protocol.utils.Byteinator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class NetworkWriter implements Runnable {
     
     // Logging
-    private static final Logger LOG = LoggerFactory.getLogger(NetworkWriter.class);
+    private static final Logger LOG = LogManager.getLogger();
     
     // Threading
     private final Thread thread;
@@ -59,8 +59,7 @@ public class NetworkWriter implements Runnable {
                 
                 // Write Message length and Data
                 DataOutputStream output = new DataOutputStream(manager.getSocket().getOutputStream());
-                
-                //Byteinator.intToBytes(data.length);
+
                 LOG.info("Writing Length {} Bytes", data.length);
                 output.write(Byteinator.intToBytes(data.length));
                 

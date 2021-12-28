@@ -37,7 +37,7 @@ public class MessengerListener implements ConnectionListener {
     private static final int PORT = 27888;
     
     // Logging
-    private static final Logger log = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger();
     
     // Spring Components
     private final AuthenticationService auth;
@@ -71,7 +71,7 @@ public class MessengerListener implements ConnectionListener {
     @Override
     public void run() {
         
-        log.info("Attempting to Open Listen Port: " + port);
+        LOG.info("Attempting to Open Listen Port: " + port);
         
         try {
             
@@ -85,29 +85,29 @@ public class MessengerListener implements ConnectionListener {
                 Socket client = socket.accept();
                 
                 // Logging
-                log.info("Client Connecting On: {}", socket.getLocalPort());
-                log.info("Client Routed to: {}", client.getPort());
+                LOG.info("Client Connecting On: {}", socket.getLocalPort());
+                LOG.info("Client Routed to: {}", client.getPort());
                 
                 // Create a new Connection Object
                 auth.connect(client);
             }
             
-            log.info("Closing Listening Socket");
+            LOG.info("Closing Listening Socket");
             socket.close();
             
         } catch (IOException e) {
-            log.error("Exception caught when trying to listen on port {} or listening for a connection", port);
-            log.error(e.getMessage());
+            LOG.error("Exception caught when trying to listen on port {} or listening for a connection", port);
+            LOG.error(e.getMessage());
         }
     }
     
     @Override
     public void start() {
         
-        log.info("Attempting to open Messenger Listener on Port {}", port);
+        LOG.info("Attempting to open Messenger Listener on Port {}", port);
         
         if (listener.isAlive()) {
-            log.warn("Messenger Listener Already Started");
+            LOG.warn("Messenger Listener Already Started");
             return;
         }
         
@@ -118,20 +118,20 @@ public class MessengerListener implements ConnectionListener {
     @Override
     public void stop() {
         
-        log.info("Attempting to close Messenger Listener on Port {}", port);
+        LOG.info("Attempting to close Messenger Listener on Port {}", port);
         
         if (!listener.isAlive()) {
-            log.warn("Messenger Listener is Already Stopped");
+            LOG.warn("Messenger Listener is Already Stopped");
             return;
         }
         
         try {
-            log.info("Closed Messenger Listener");
+            LOG.info("Closed Messenger Listener");
             running = false;
             socket.close();
             
         } catch (IOException ex) {
-            log.error("Error Closing Messenger Listener", ex);
+            LOG.error("Error Closing Messenger Listener", ex);
         }
     }
 }

@@ -25,7 +25,7 @@ public class Prefixinator {
      * Private Constructor for Utility Class
      */
     private Prefixinator() {
-        throw new AssertionError();
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     public static byte[] prefix(byte[] data) {

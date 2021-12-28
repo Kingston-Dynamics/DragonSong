@@ -8,6 +8,7 @@ import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
 import com.kdyncs.dragonsong.protocol.utils.Keyinator;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnectionTimer;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
 import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
 import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
@@ -70,12 +71,14 @@ public class AuthenticationService {
         // Start Networking
         reader.start();
         writer.start();
-        
-        // Start Timeout
-        // ClientConnectionTimer timer = context.getBean(ClientConnectionTimer.class);
-        // timer.setUser(connection);
-        // timer.start();
-        
+
+        /*
+         * Create a Client Connection Timer
+         *
+         * Upon connection, we afford the user a grace period to log in to a particular application. If this user
+         * does not log in within the specified time frame they will be disconnected from the server.
+         */
+        context.getBean(ClientConnectionTimer.class).setUser(connection);
     }
     
     public void disconnect(ClientConnection connection) {
@@ -92,12 +95,15 @@ public class AuthenticationService {
         }
         
         // Handle unauthenticated users
-        if (connection.getApplicationKey() != null) {
+        if (isAuthenticated(connection)) {
             // TODO: Remove User Channels
             
             // Remove From User Pool
             applications.get(connection.getApplicationKey()).getUsers().remove(connection.getExternalID());
         }
+
+        // Shutdown Heart Beat Monitor
+        connection.getHeartBeatMonitor().stop();
         
         // Remove Connection from Connections List
         connections.remove(connection.getConnectionID());
@@ -122,8 +128,8 @@ public class AuthenticationService {
         // Retrieve Client
         ClientConnection connection = connections.get(command.getIssuer());
         
-        // User Can't Login Twice
-        if (connection.getApplicationKey() != null) {
+        // User Can't Log in Twice
+        if (isAuthenticated(connection)) {
             log.info("Already Authenticated");
             Notification notification = new Notification(NotificationType.ALREADY_AUTHENTICATED);
             connection.getWriter().write(notification.build());
@@ -134,8 +140,8 @@ public class AuthenticationService {
         AuthenticationLogin message = new AuthenticationLogin(command.getCommand());
         
         // Application must be deployed
-        if (applications.isDeployed(message.getApplicationKey())) {
-            log.info("Wrong Application");
+        if (!applications.isDeployed(message.getApplicationKey())) {
+            log.info("Application with Key {} not deployed", message.getApplicationKey());
             Notification notification = new Notification(NotificationType.APPLICATION_NOT_DEPLOYED);
             connection.getWriter().write(notification.build());
             return;
@@ -145,14 +151,17 @@ public class AuthenticationService {
         Application application = applications.get(message.getApplicationKey());
         
         // Verify Application
-        if (!application.getApplicationKey().equals(message.getApplicationKey())) {
-            // TODO: What to do here
-            log.warn("Application Mismatch {}", application.getApplicationKey());
+        if (!application.getApiKey().equals(message.getApplicationKey())) {
+            /*
+             * Note: We used to do some more advanced application verification but that no longer occurs
+             * as we removed some old application ID and application version code.
+             */
+            log.warn("Application Mismatch {}", application.getApiKey());
         }
         
         // Update User Information
         connection.setDisplayName(message.getDisplayName());
-        connection.setApplicationKey(application.getApplicationKey());
+        connection.setApplicationKey(application.getApiKey());
         connection.setExternalID(message.getUniqueIdentifier());
         
         log.info("Private ID: {}", message.getUniqueIdentifier());
@@ -175,72 +184,13 @@ public class AuthenticationService {
     public void reconnect(Command command) {
     
     }
-    
-    // TODO This is the code from the Application for connecting.
-    // Transform it so it fits here
-//  public boolean connect(ClientConnection user, Authentication auth) {
-//
-//      String APIKey = auth.getAPIKey().getFieldData();
-//      String AppID = auth.getAppID().getFieldData();
-//      String AppVer = auth.getAppVer().getFieldData();
-//
-//      if (this.APIKey.equals(APIKey) && this.AppID.equals(AppID) && this.AppVer.equals(AppVer)) {
-//
-//          //Get Provided Private ID
-//          String privateID = auth.getUniqueIdentifier().getFieldData();
-//          String connectionID = user.getConnectionID();
-//
-//          //Check if User Already Exists
-//          if (users.findUser(privateID) != null) {
-//              LOG.debug("User with this Private ID already exists");
-//              
-//              //If User is Reconnecting We gotta do something
-//              if (!connectionPool.getConnection(users.findUser(privateID)).isConnected()) {
-//                  reconnect(user, auth, privateID, connectionID);
-//                  LOG.info("User Reconnected");
-//                  return true;
-//              }
-//              
-//              //If they're already connected they can fuck off. 
-//              LOG.error("User Already Connected");
-//              return false;
-//          }
-//          //Add User to Application User Pool
-//          users.registerUser(privateID, connectionID);
-//
-//          //Update client references
-//          user.setPrivateID(privateID);
-//          user.setApplication(this);
-//
-//          //Successfully Authenticated
-//          return true;
-//      } else {
-//          LOG.error("AUTH DETAILS INVALID");
-//          return false;
-//      }
-//  }
 
-//  private void reconnect(ClientConnection user, Authentication auth, String privateID, String connectionID) {
-//      
-//      //Get the Old Connection
-//      ClientConnection oldConnection = connectionPool.getConnection(users.findUser(privateID));
-//      
-//      //Stop it from deleting itself
-//      oldConnection.stopReconnectTimer();
-//      
-//      //Replace the user with the new connection
-//      users.replaceUser(privateID, connectionID);
-//      
-//      // Get Old Connection Data
-////      List<Transmission> oldTransmissions = oldConnection.getTransmissionCache();
-//      
-//      // Destroy the Old User
-//      oldConnection.destroy();
-//      
-//      // Send Data to User if Necessary
-//      //for (Transmission transmission : oldTransmissions) {
-//      //    user.post(transmission);
-//      //}
-//  }
-
+    /**
+     * Check if Client is Authenticated
+     *
+     * If Client has an assigned Application Key they are considered to be Authenticated.
+     */
+    public Boolean isAuthenticated(ClientConnection client) {
+        return client.getApplicationKey() != null;
+    }
 }

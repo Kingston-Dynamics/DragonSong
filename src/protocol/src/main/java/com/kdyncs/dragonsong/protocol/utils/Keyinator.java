@@ -27,7 +27,7 @@ public class Keyinator {
      * Private Constructor for Utility Class
      */
     private Keyinator() {
-        throw new AssertionError();
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     // Generates a GUID

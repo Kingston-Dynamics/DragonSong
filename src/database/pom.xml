@@ -63,7 +63,7 @@
         <!-- Data Utils -->
         <dependency>
             <groupId>com.kingstondynamics.dragonsong</groupId>
-            <artifactId>commons</artifactId>
+            <artifactId>common</artifactId>
             <version>1.0.0</version>
         </dependency>
 

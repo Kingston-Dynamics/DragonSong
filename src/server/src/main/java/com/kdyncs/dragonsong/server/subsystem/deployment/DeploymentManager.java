@@ -78,11 +78,11 @@ public class DeploymentManager implements Runnable {
         if (config.isDedicated()) {
             
             log.info("DragonSong is running in dedicated mode");
-            log.info("Deploying dedicated application");
+            log.info("Deploying dedicated application {}", config.getApiKey());
             
             // Build Application
             Application application = context.getBean(Application.class);
-            application.setApplicationKey(config.getApiKey());
+            application.setApiKey(config.getApiKey());
             
             // Add Application to Application Pool
             applicationPool.add(application);
@@ -115,7 +115,7 @@ public class DeploymentManager implements Runnable {
                     Application deployableApplication = context.getBean(Application.class);
                     
                     // Fill Out Data
-                    deployableApplication.setApplicationKey(application.getKey().toString());
+                    deployableApplication.setApiKey(application.getKey().toString());
                     
                     // Register (Accept Connections)
                     applicationPool.add(deployableApplication);

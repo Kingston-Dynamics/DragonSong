@@ -72,7 +72,7 @@ public class ApplicationService {
         // Lookup Application Name
         Application application = applications.get(connection.getApplicationKey());
         //noinspection ResultOfMethodCallIgnored
-        application.getApplicationKey();
+        application.getApiKey();
         
         // Return It
         

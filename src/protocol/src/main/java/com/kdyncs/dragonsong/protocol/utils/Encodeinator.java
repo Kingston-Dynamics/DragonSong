@@ -27,7 +27,7 @@ public class Encodeinator {
      * Private Constructor for Utility Class
      */
     private Encodeinator() {
-        throw new AssertionError();
+        throw new AssertionError("Attempted to instantiate utility class.");
     }
     
     public static byte[] encodeinate(byte[] bytes) {
