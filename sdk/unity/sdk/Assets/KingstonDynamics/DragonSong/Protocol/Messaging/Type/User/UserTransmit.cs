@@ -13,7 +13,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.User
         public UserTransmit(string id, string message, string auditId) :  base((int)Type, auditId)
         {
             Identifier = id;
-            this.Message = message;
+            Message = message;
         }
 
         public UserTransmit(Readinator reader) : base(reader)

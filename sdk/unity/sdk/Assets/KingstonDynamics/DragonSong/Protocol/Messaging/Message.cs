@@ -9,8 +9,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging
 
         protected Message(int typeCode, string auditId)
         {
-            this.TypeCode = typeCode;
-            this.AuditId = auditId;
+            TypeCode = typeCode;
+            AuditId = auditId;
         }
 
         protected Message(Readinator reader)
