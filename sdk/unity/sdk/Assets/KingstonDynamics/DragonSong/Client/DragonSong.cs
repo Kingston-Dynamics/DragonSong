@@ -4,7 +4,6 @@
 
 using System;
 using System.Collections;
-using KingstonDynamics.DragonSong.Client.Configuration;
 using KingstonDynamics.DragonSong.Protocol.Messaging;
 using KingstonDynamics.DragonSong.Protocol.Messaging.Type.Heartbeat;
 

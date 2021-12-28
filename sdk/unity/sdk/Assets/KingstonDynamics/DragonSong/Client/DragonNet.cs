@@ -1,7 +1,5 @@
 ﻿using System.Net.Sockets;
-using KingstonDynamics.DragonSong.Client.Configuration;
 using KingstonDynamics.DragonSong.Protocol.Messaging;
-using KingstonDynamics.DragonSong.Protocol.Messaging.Data;
 using KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication;
 using KingstonDynamics.DragonSong.Protocol.Networking;
 using KingstonDynamics.DragonSong.Protocol.Utils;
@@ -17,8 +15,7 @@ namespace KingstonDynamics.DragonSong.Client
     {
 
         //Our Data Connections
-        private TcpClient _socket;
-        public TcpClient Socket => _socket;
+        public TcpClient Socket { get; private set; }
 
         // Reader and Writer
         private NetworkReader _reader;
@@ -39,7 +36,7 @@ namespace KingstonDynamics.DragonSong.Client
         {
             Debug.Log("Attempting to Open Connection");
 
-            if (_socket != null)
+            if (Socket != null)
             {
                 Debug.Log("Connection Already Established");
                 return;
@@ -49,14 +46,14 @@ namespace KingstonDynamics.DragonSong.Client
             {
                 //Connect to Server
                 Debug.Log("Opening Socket");
-                _socket = new TcpClient(_config.Hostname, _config.Port) {Client = {Blocking = true}};
+                Socket = new TcpClient(_config.Hostname, _config.Port) {Client = {Blocking = true}};
             }
             catch (SocketException ex)
             {
                 Debug.Log("DRAGONSONG SERVER APPEARS TO BE DOWN");
                 Debug.Log(ex.ToString());
 
-                _socket = null;
+                Socket = null;
 
                 return;
             }
@@ -80,7 +77,7 @@ namespace KingstonDynamics.DragonSong.Client
             Debug.Log("CLOSING CONNECTION");
 
             // Check if Socket exists
-            if (_socket == null)
+            if (Socket == null)
             {
                 Debug.Log("Connection Already Closed");
                 return;
@@ -91,29 +88,29 @@ namespace KingstonDynamics.DragonSong.Client
             //write(message);
             
             //Close Socket
-            if (_socket != null)
+            if (Socket != null)
             {
                 //Close Socket and Stream
-                _socket.Close();
-                _socket = null;
+                Socket.Close();
+                Socket = null;
             }
         }
 
         public void Login()
         {
-            AuthenticationLogin message = new AuthenticationLogin(_config.PlayerId, _config.CharacterId, Keyinator.GenerateGUID());
+            var message = new AuthenticationLogin(_config.PlayerId, _config.CharacterId, Keyinator.GenerateGUID());
             Write(message);
         }
 
         public void Write(Message message)
         {
             // Must have Socket to Write
-            if (_socket == null)
+            if (Socket == null)
             {
                 return;
             }
 
-            byte[] b = message.Build();
+            var b = message.Build();
             
             Debug.Log("Sending Message of Length: " + b.Length);
             _writer.Write(message.Build());
@@ -124,7 +121,7 @@ namespace KingstonDynamics.DragonSong.Client
             Debug.Log("Received Input");
             Debug.Log("Input Length: " + data.Length);
             
-            MessageType type = Determinator.Determinate(data);
+            var type = Determinator.Determinate(data);
             
             Debug.Log(type.ToString());
             
