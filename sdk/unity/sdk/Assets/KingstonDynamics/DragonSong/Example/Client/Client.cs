@@ -1,5 +1,4 @@
 ﻿using KingstonDynamics.DragonSong.Client;
-using KingstonDynamics.DragonSong.Client.Example;
 using UnityEngine;
 using UnityEngine.Assertions;
 
