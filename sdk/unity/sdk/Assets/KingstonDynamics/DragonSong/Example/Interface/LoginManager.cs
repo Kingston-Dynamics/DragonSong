@@ -10,12 +10,12 @@ namespace KingstonDynamics.DragonSong.Example.Interface
     {
 
         // Must be assigned in Editor
-        [FormerlySerializedAs("PlayerIDInput")] public InputField playerIDInput;
-        [FormerlySerializedAs("CharacterIDInput")] public InputField characterIDInput;
+        public InputField playerIDInput;
+        public InputField characterIDInput;
 
-        [FormerlySerializedAs("AutoConnect")] public Toggle autoConnect;
-        [FormerlySerializedAs("ServerAddressInput")] public InputField serverAddressInput;
-        [FormerlySerializedAs("ServerPortInput")] public InputField serverPortInput;
+        public Toggle autoConnect;
+        public InputField serverAddressInput;
+        public InputField serverPortInput;
 
         private void Start()
         {
