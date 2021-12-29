@@ -74,7 +74,10 @@ namespace KingstonDynamics.DragonSong.Client
         //
         public void Process()
         {
-            _packets.Dequeue();
+            if (_packets.Count != 0)
+            {
+                _packets.Dequeue();
+            }
         }
     }
 }
