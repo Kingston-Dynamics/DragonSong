@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Toggle = UnityEngine.UI.Toggle;
 
@@ -9,8 +10,8 @@ namespace KingstonDynamics.DragonSong.Example.Interface
     {
 
         // Must be assigned in Editor
-        public InputField playerIDInput;
-        public InputField characterIDInput;
+        public InputField apiKeyInput;
+        public InputField displayNameInput;
 
         public Toggle autoConnect;
         public InputField serverAddressInput;
@@ -41,8 +42,8 @@ namespace KingstonDynamics.DragonSong.Example.Interface
             // This will be used for authentication later
 
             // Set Login Variables
-            PlayerPrefs.SetString("PLAYER_ID", playerIDInput.text);
-            PlayerPrefs.SetString("CHARACTER_ID", characterIDInput.text);
+            PlayerPrefs.SetString("API_KEY", apiKeyInput.text);
+            PlayerPrefs.SetString("DISPLAY_NAME", displayNameInput.text);
         }
 
         private void SaveConfig()
