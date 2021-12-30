@@ -5,6 +5,7 @@
 using System;
 using System.Collections;
 using KingstonDynamics.DragonSong.Protocol.Messaging;
+using KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication;
 using KingstonDynamics.DragonSong.Protocol.Messaging.Type.Heartbeat;
 
 namespace KingstonDynamics.DragonSong.Client
@@ -46,6 +47,8 @@ namespace KingstonDynamics.DragonSong.Client
         
         public void SendAuthHandshake()
         {
+            var message = new AuthenticationLogin();
+            
             throw new NotImplementedException();
         }
 
