@@ -31,7 +31,13 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 /**
+ * Client Reconnect Timer
  *
+ * If a client disconnects in a manner which is unclean, which is to say if they didn't properly disconnect such as if
+ * an application crashed or their heartbeat stops, we will afford them a grace period. During this grace period messages
+ * they would have received will be cached to be sent later. If they reconnect during this grace period they will resume
+ * as normal and all missed messages will be transmitted back. If they do not reconnect within the grace period they
+ * will be fully disconnect and any pending messages will be dropped.
  */
 @Component
 @Scope("prototype")
