@@ -45,6 +45,7 @@ public class HeartBeatMonitor implements Runnable{
     private final TaskScheduler scheduler;
     private ScheduledFuture<?> future;
 
+    //
     private ClientConnection user;
 
     @Autowired
