@@ -3,7 +3,7 @@ using System.Text;
 
 namespace KingstonDynamics.DragonSong.Protocol.Utils
 {
-    public class Byteinator
+    public static class Byteinator
     {
         public static byte[] IntToBytes(int value)
         {

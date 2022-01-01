@@ -9,7 +9,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
     {
 
         // Manager
-        private readonly NetworkManager _manager;
+        private readonly INetworkManager _manager;
         
         // Threading
         private readonly Thread _thread;
@@ -20,7 +20,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
         private readonly NetworkStream _stream;
 
         // Constructor
-        public NetworkReader(NetworkManager manager)
+        public NetworkReader(INetworkManager manager)
         {
             // Pull Data
             _manager = manager;
@@ -61,10 +61,10 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
             while (_running)
             {
                 // Length Prefix
-                int length = ReadLength();
+                var length = ReadLength();
             
                 // Byte Data
-                byte[] data = ReadData(length);
+                var data = ReadData(length);
 
                 if (data.Length != 0)
                 {
@@ -79,8 +79,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
             Debug.Log("Reading Length");
             
             // Frame Siz
-            int read = 0;
-            byte[] buffer = new byte[4];
+            var read = 0;
+            var buffer = new byte[4];
             
             // Read Fully
             while (read < 4)
@@ -103,8 +103,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
             Debug.Log("Reading Data of Length:" + length);
             
             // Frame Data
-            int read = 0;
-            byte[] buffer = new byte[length];
+            var read = 0;
+            var buffer = new byte[length];
             
             // Read Fully
             while (read < length)

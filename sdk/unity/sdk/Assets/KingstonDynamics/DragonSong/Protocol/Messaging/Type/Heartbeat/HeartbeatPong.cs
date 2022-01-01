@@ -5,9 +5,9 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Heartbeat
 {
     public class HeartbeatPong : Message
     {
-        private static readonly MessageType type = MessageType.HEARTBEAT_PING;
+        private const MessageType Type = MessageType.HEARTBEAT_PING;
 
-        public HeartbeatPong(string AuditId) : base((int)type, AuditId)
+        public HeartbeatPong(string auditId) : base((int)Type, auditId)
         {
             // Empty
         }

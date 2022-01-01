@@ -1,15 +1,12 @@
-using System;
 using UnityEngine;
 
-namespace KingstonDynamics.DragonSong.Client.Example
+namespace KingstonDynamics.DragonSong.Example.Client
 {
-    
-    
     public abstract class Singleton<T> : Singleton where T : MonoBehaviour
     {
         private static T _instance;
         private static readonly object Lock = new object();
-        private bool _persistence = true;
+        private const bool Persistence = true;
 
         public static T Instance
         {
@@ -52,7 +49,7 @@ namespace KingstonDynamics.DragonSong.Client.Example
 
         private void Awake()
         {
-            if (_persistence)
+            if (Persistence)
             {
                 DontDestroyOnLoad(gameObject);
             }

@@ -1,20 +1,21 @@
 namespace KingstonDynamics.DragonSong.Protocol.Utils
 {
-    public class Concatinator
+    public static class Concatinator
     {
         public static byte[] ConctatinateByteArrays(params byte[][] arrays)
         {
-            int length = 0;
+            var length = 0;
 
-            foreach(byte[] array in arrays)
+            foreach(var array in arrays)
             {
                 length += array.Length;
             }
 
-            byte[] combined = new byte[length];
+            var combined = new byte[length];
 
-            int position = 0;
-            foreach (byte[] array in arrays)
+            var position = 0;
+            
+            foreach (var array in arrays)
             {
                 array.CopyTo(combined, position);
                 position += array.Length;

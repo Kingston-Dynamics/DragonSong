@@ -50,7 +50,7 @@ public class NetworkReader implements Runnable {
                 DataInputStream input = new DataInputStream(manager.getSocket().getInputStream());
                 
                 // Get Data Length
-                // TODO: This throws an EOF Excepetion on socket close. Not very clean.
+                // TODO: This throws an EOF Exception on socket close. Not very clean.
                 int length = input.readInt();
                 LOG.info("Received Length {} Bytes", length);
                 

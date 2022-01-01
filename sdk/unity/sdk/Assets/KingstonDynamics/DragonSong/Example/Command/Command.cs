@@ -11,7 +11,7 @@ namespace KingstonDynamics.DragonSong.Client.Example
         public Command(string s)
         {
             Value = s;
-            Type = CommandParser.getType(s);
+            Type = CommandParser.GetType(s);
         }
     }
 }

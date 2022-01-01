@@ -5,26 +5,29 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication
 {
     public class AuthenticationLogin : Message
     {
-        private static readonly MessageType type = MessageType.AUTHENTICATION_LOGIN;
-        
-        private readonly string PlayerId;
-        private readonly string CharacterId;
+        private const MessageType Type = MessageType.AUTHENTICATION_LOGIN;
 
-        public AuthenticationLogin(string playerId, string characterId, string auditId) : base((int)type, auditId)
+        private readonly string _applicationKey;
+        private readonly string _uniqueID;
+        private readonly string _displayName;
+
+        public AuthenticationLogin(string applicationKey, string uniqueID, string displayName, string auditId) : base((int)Type, auditId)
         {
-            PlayerId = playerId;
-            CharacterId = characterId;
+            _applicationKey = applicationKey;
+            _uniqueID = uniqueID;
+            _displayName = displayName;
         }
 
-        public AuthenticationLogin(string playerId, string characterId) : this(playerId, characterId,Keyinator.GenerateGUID())
+        public AuthenticationLogin(string applicationKey, string uniqueID, string displayName) : this(applicationKey, uniqueID, displayName, Keyinator.GenerateGUID())
         {
             // Empty
         }
 
         public AuthenticationLogin(Readinator reader) : base(reader)
         {
-            PlayerId = reader.ReadIntPrefixedString();
-            CharacterId = reader.ReadIntPrefixedString();
+            _applicationKey = reader.ReadIntPrefixedString();
+            _uniqueID = reader.ReadIntPrefixedString();
+            _displayName = reader.ReadIntPrefixedString();
         }
 
         public AuthenticationLogin(byte[] data) : base(new Readinator(data)) 
@@ -34,10 +37,11 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication
 
         public new byte[] Build()
         {
-            byte[] b1 = Byteinator.StringToBytesPrefixed(PlayerId);
-            byte[] b2 = Byteinator.StringToBytesPrefixed(CharacterId);
+            var b1 = Byteinator.StringToBytesPrefixed(_applicationKey);
+            var b2 = Byteinator.StringToBytesPrefixed(_uniqueID);
+            var b3 = Byteinator.StringToBytesPrefixed(_displayName);
 
-            return Concatinator.ConctatinateByteArrays(base.Build(), b1, b2);
+            return Concatinator.ConctatinateByteArrays(base.Build(), b1, b2, b3);
         }
     }
 }

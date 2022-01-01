@@ -4,8 +4,8 @@
 
 using System;
 using System.Collections;
-using KingstonDynamics.DragonSong.Client.Configuration;
 using KingstonDynamics.DragonSong.Protocol.Messaging;
+using KingstonDynamics.DragonSong.Protocol.Messaging.Type.Authentication;
 using KingstonDynamics.DragonSong.Protocol.Messaging.Type.Heartbeat;
 
 namespace KingstonDynamics.DragonSong.Client
@@ -41,31 +41,33 @@ namespace KingstonDynamics.DragonSong.Client
 
         public void SendPing()
         {
-            HeartbeatPing message = new HeartbeatPing();
-            write(message);
+            var message = new HeartbeatPing();
+            Write(message);
         }
         
         public void SendAuthHandshake()
         {
+            var message = new AuthenticationLogin();
+            
             throw new NotImplementedException();
         }
 
-        public void JoinChannel(string ChannelID)
+        public void JoinChannel(string channelID)
         {
             throw new NotImplementedException();
         }
 
-        public void PublishMessage(string ChannelID, string message)
+        public void PublishMessage(string channelID, string message)
         {
             throw new NotImplementedException();
         }
 
-        public void SendPrivateMessage(string RecipientID, string message)
+        public void SendPrivateMessage(string recipientID, string message)
         {
             throw new NotImplementedException();
         }
 
-        private void write(Message message)
+        private void Write(Message message)
         {
             _network.Write(message);
         }
@@ -75,7 +77,10 @@ namespace KingstonDynamics.DragonSong.Client
         //
         public void Process()
         {
-            // _packets.Dequeue();
+            if (_packets.Count != 0)
+            {
+                _packets.Dequeue();
+            }
         }
     }
 }

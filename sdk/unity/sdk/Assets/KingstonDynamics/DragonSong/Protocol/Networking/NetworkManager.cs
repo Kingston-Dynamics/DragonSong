@@ -2,7 +2,7 @@ using System.Net.Sockets;
 
 namespace KingstonDynamics.DragonSong.Protocol.Networking
 {
-    public interface NetworkManager
+    public interface INetworkManager
     {
         
         // Input From Reader

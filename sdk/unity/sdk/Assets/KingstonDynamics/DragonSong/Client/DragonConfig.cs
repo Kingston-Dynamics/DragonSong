@@ -4,34 +4,23 @@
 // Server should be stored within this class. 
 //
 
-namespace KingstonDynamics.DragonSong.Client.Configuration
+namespace KingstonDynamics.DragonSong.Client
 {
     public class DragonConfig
     {
-        public string Hostname => _hostname;
-        public int Port => _port;
-        public bool AutoConnect => _autoConnect;
-        public string PlayerId => _playerId;
-        public string CharacterId => _characterId;
-
-        //Direct Connection Details
-        private readonly string _hostname;
-        private readonly int _port;
-        
-        //Connection Options
-        private readonly bool _autoConnect;
-
-        //User Connection Details
-        private readonly string _playerId;
-        private readonly string _characterId;
+        public string Hostname { get; }
+        public int Port { get; }
+        public bool AutoConnect { get; }
+        public string PlayerId { get; }
+        public string CharacterId { get; }
 
         public DragonConfig(string hostname, int port, bool autoConnect, string playerId, string characterId)
         {
-            _hostname = hostname;
-            _port = port;
-            _autoConnect = autoConnect;
-            _playerId = playerId;
-            _characterId = characterId;
+            Hostname = hostname;
+            Port = port;
+            AutoConnect = autoConnect;
+            PlayerId = playerId;
+            CharacterId = characterId;
         }
     }
 }

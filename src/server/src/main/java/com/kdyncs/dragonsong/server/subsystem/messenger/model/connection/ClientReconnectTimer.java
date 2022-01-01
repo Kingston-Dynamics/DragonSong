@@ -19,37 +19,61 @@
 
 package com.kdyncs.dragonsong.server.subsystem.messenger.model.connection;
 
-//import org.apache.logging.log4j.LogManager;
-//import org.apache.logging.log4j.Logger;
-//import org.springframework.context.annotation.Scope;
-//import org.springframework.stereotype.Component;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.context.annotation.Scope;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.stereotype.Component;
 
-/*
-  @author peter
+import javax.annotation.PostConstruct;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+
+/**
+ * Client Reconnect Timer
+ *
+ * If a client disconnects in a manner which is unclean, which is to say if they didn't properly disconnect such as if
+ * an application crashed or their heartbeat stops, we will afford them a grace period. During this grace period messages
+ * they would have received will be cached to be sent later. If they reconnect during this grace period they will resume
+ * as normal and all missed messages will be transmitted back. If they do not reconnect within the grace period they
+ * will be fully disconnect and any pending messages will be dropped.
  */
+@Component
+@Scope("prototype")
+public class ClientReconnectTimer implements Runnable{
 
-//@Component
-//@Scope("prototype")
-//public class ClientReconnectTimer implements Runnable{
-//    
-//    private static final Logger log = LogManager.getLogger();
-//    
-//    private final long connectionTimer = 10000;
-//
-//    private ClientConnection user;
-//
-//    public ClientReconnectTimer(ClientConnection user) {
-//        this.user = user;
-//    }
-//
-//    @Override
-//    public void run() {
-//
-//        try {
-//            Thread.sleep(connectionTimer);
-//            user.kill();
-//        } catch (InterruptedException ex) {
-//            log.info("Reconnect Timer Interrupted; Client Reconnected");
-//        }
-//    }    
-//}
+    // Logging
+    private static final Logger log = LogManager.getLogger();
+
+    // Scheduling
+    private final TaskScheduler scheduler;
+
+    // Reconnect Timeout
+    private static final long DELAY = 10;
+
+    // Data
+    private ClientConnection user;
+
+    public ClientReconnectTimer(TaskScheduler scheduler) {
+        this.scheduler = scheduler;
+    }
+
+    @PostConstruct
+    public void init() {
+        scheduler.schedule(this, Instant.now().plus(Duration.of(DELAY, ChronoUnit.SECONDS)));
+    }
+
+    @Override
+    public void run() {
+        log.info("CHECKING CONNECTION STATUS OF USER: {}", user.getConnectionID());
+
+        // TODO: Determine if user has reconnected or not
+
+        // TODO: Cleanup user if they haven't reconnected
+    }
+
+    public void setUser(ClientConnection user) {
+        this.user = user;
+    }
+}

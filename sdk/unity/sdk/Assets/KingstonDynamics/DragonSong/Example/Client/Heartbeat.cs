@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace KingstonDynamics.DragonSong.Client.Example
+namespace KingstonDynamics.DragonSong.Example.Client
 {
     public class Heartbeat : MonoBehaviour
     {

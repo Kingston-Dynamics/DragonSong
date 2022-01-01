@@ -19,6 +19,7 @@
 
 package com.kdyncs.dragonsong.server.subsystem.messenger.model.connection;
 
+import com.kdyncs.dragonsong.server.subsystem.messenger.service.AuthenticationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,16 @@ public class HeartBeatMonitor implements Runnable{
     private static final Logger LOG = LogManager.getLogger();
 
     //
+    private final AuthenticationService authentication;
     private final TaskScheduler scheduler;
     private ScheduledFuture<?> future;
 
+    //
+    private ClientConnection user;
+
     @Autowired
-    public HeartBeatMonitor(TaskScheduler scheduler) {
+    public HeartBeatMonitor(AuthenticationService authentication, TaskScheduler scheduler) {
+        this.authentication = authentication;
         this.scheduler = scheduler;
     }
 
@@ -61,10 +67,28 @@ public class HeartBeatMonitor implements Runnable{
     public void run() {
         LOG.info("CHECKING HEARTBEAT!");
 
-        // TODO: Check Heartbeat Time
+        if (user == null) {
+            LOG.error("User wasn't set on task");
+            return;
+        }
 
-        // TODO: Kick Off User
+        // Get Current Time
+        var now = Instant.now();
 
-        // TODO: Cancel Self
+        // Get time of last heart beat
+        var beat = user.getLastHeartBeat();
+
+        // Check if connection i
+        if ((beat.plus(Duration.of(10, ChronoUnit.SECONDS))).isBefore(now)) {
+
+            LOG.info("Heartbeat of user {} has stopped", user.getConnectionID());
+
+            // Disconnect Client
+
+        }
+    }
+
+    public void setUser(ClientConnection user) {
+        this.user = user;
     }
 }

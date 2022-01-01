@@ -1,16 +1,9 @@
 namespace KingstonDynamics.DragonSong.Protocol.Messaging.Data
 {
-    public class NotificationType
+    /*
+    public enum NotificationType
     {
-        private NotificationType(string value)
-        {
-            this.value = value;
-        }
-
-        public string value { get; set; }
-        
-        
-        /*
+    
         // AUTHENTICATION
         AUTHENTICATION_SUCCESSFUL = "AUTHEI0001", 
         AUTHENTICATION_FAILURE = "AUTHEE0001", 
@@ -33,6 +26,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging.Data
         APPLICATION_NOT_DEPLOYED = "APPLIE0000",
 	
         // SERVER SPECIFIC
-        DEPLOYMENT_SHUT_DOWN = "DISCOI0001"*/
+        DEPLOYMENT_SHUT_DOWN = "DISCOI0001"
     }
+    */
 }

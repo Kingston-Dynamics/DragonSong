@@ -4,41 +4,41 @@ namespace KingstonDynamics.DragonSong.Protocol.Utils
 {
     public class Readinator
     {
-        private int Position;
-        private readonly byte[] Data;
+        private int _position;
+        private readonly byte[] _data;
 
-        public Readinator(byte[] Data)
+        public Readinator(byte[] data)
         {
-            this.Data = Data;
-            Position = 0;
+            _data = data;
+            _position = 0;
         }
 
         private void Advance()
         {
-            Position++;
+            _position++;
         }
 
         private void Advance(int distance)
         {
-            Position += distance;
+            _position += distance;
         }
 
         public void Reset()
         {
-            Position = 0;
+            _position = 0;
         }
 
         public byte ReadByte()
         {
-            byte temp = Data[Position];
+            var temp = _data[_position];
             Advance();
             return temp;
         }
         
         public byte[] ReadBytes(int length)
         {
-            byte[] temp = new byte[length];
-            Array.Copy(Data, Position, temp, 0, length);
+            var temp = new byte[length];
+            Array.Copy(_data, _position, temp, 0, length);
 
             Advance(length);
 
@@ -47,26 +47,26 @@ namespace KingstonDynamics.DragonSong.Protocol.Utils
         
         public short ReadShort()
         {
-            byte b1 = ReadByte();
-            byte b2 = ReadByte();
+            var b1 = ReadByte();
+            var b2 = ReadByte();
 
             return (short)((b1 << 8) | (b2 & 0xFF));
         }
         
         public int ReadInt()
         {
-            byte b1 = ReadByte();
-            byte b2 = ReadByte();
-            byte b3 = ReadByte();
-            byte b4 = ReadByte();
+            var b1 = ReadByte();
+            var b2 = ReadByte();
+            var b3 = ReadByte();
+            var b4 = ReadByte();
 
             return b1 << 24 | (b2 & 0xFF) << 16 | (b3 & 0xFF) << 8 | (b4 & 0xFF);
         }
         
         public string ReadString(int length) 
         {
-            byte[] temp = new byte[length];
-            Array.Copy(Data, Position, temp, 0, length);
+            var temp = new byte[length];
+            Array.Copy(_data, _position, temp, 0, length);
 
             Advance(length);
 
@@ -76,13 +76,13 @@ namespace KingstonDynamics.DragonSong.Protocol.Utils
         public string ReadIntPrefixedString()
         {
             // Length prefixes the String as an integer
-            int length = ReadInt();
+            var length = ReadInt();
 
             // Get String by Length
             return ReadString(length);
         }
         
-        public string readAuditId()
+        public string ReadAuditId()
         {
             return ReadString(36);
         }

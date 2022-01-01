@@ -1,8 +1,9 @@
+using KingstonDynamics.DragonSong.Client.Example;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace KingstonDynamics.DragonSong.Client.Example
+namespace KingstonDynamics.DragonSong.Example.Interface
 {
     public class ChatInput : MonoBehaviour
     {

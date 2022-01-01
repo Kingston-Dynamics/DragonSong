@@ -1,58 +1,59 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Toggle = UnityEngine.UI.Toggle;
 
-public class LoginManager : MonoBehaviour
+namespace KingstonDynamics.DragonSong.Example.Interface
 {
-
-    // Must be assigned in Editoe
-    public InputField PlayerIDInput;
-    public InputField CharacterIDInput;
-
-    public Toggle AutoConnect;
-    public InputField ServerAddressInput;
-    public InputField ServerPortInput;
-
-    private void Start()
+    public class LoginManager : MonoBehaviour
     {
 
-        // Set Default Value
-        AutoConnect.isOn = UserPrefs.GetBool("AUTO_CONNECT");
+        // Must be assigned in Editor
+        public InputField apiKeyInput;
+        public InputField displayNameInput;
 
-    }
+        public Toggle autoConnect;
+        public InputField serverAddressInput;
+        public InputField serverPortInput;
 
-    public void Login()
-    {
+        private void Start()
+        {
 
-        // Save Inputs
-        SaveLogin();
-        SaveConfig();
+            // Set Default Value
+            autoConnect.isOn = UserPrefs.GetBool("AUTO_CONNECT");
 
-        // Transition
-        SceneManager.LoadScene("Chat");
-    }
+        }
 
-    private void SaveLogin()
-    {
-        // Save login information to player preferences
-        // This will be used for authentication later
+        public void Login()
+        {
 
-        // Set Login Variables
-        UserPrefs.SetString("PLAYER_ID", PlayerIDInput.text);
-        UserPrefs.SetString("CHARACTER_ID", CharacterIDInput.text);
-    }
+            // Save Inputs
+            SaveLogin();
+            SaveConfig();
 
-    private void SaveConfig()
-    {
-        // Save Config information to player preferences
-        // This will be used for configuration later. 
+            // Transition
+            SceneManager.LoadScene("Chat");
+        }
 
-        // Set Config Variables
-        UserPrefs.SetBool("AUTO_CONNECT", AutoConnect.isOn);
-        UserPrefs.SetString("SERVER_ADDRESS", ServerAddressInput.text);
-        UserPrefs.SetInt("SERVER_PORT", Int32.Parse(ServerPortInput.text));
+        private void SaveLogin()
+        {
+            // Save login information to player preferences
+            // This will be used for authentication later
+
+            // Set Login Variables
+            PlayerPrefs.SetString("API_KEY", apiKeyInput.text);
+            PlayerPrefs.SetString("DISPLAY_NAME", displayNameInput.text);
+        }
+
+        private void SaveConfig()
+        {
+            // Save Config information to player preferences
+            // This will be used for configuration later. 
+
+            // Set Config Variables
+            UserPrefs.SetBool("AUTO_CONNECT", autoConnect.isOn);
+            PlayerPrefs.SetString("SERVER_ADDRESS", serverAddressInput.text);
+            PlayerPrefs.SetInt("SERVER_PORT", int.Parse(serverPortInput.text));
+        }
     }
 }

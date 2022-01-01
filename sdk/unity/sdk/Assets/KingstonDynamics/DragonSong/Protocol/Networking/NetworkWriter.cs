@@ -8,7 +8,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
     public class NetworkWriter
     {
         // Manager
-        private readonly NetworkManager _manager;
+        private readonly INetworkManager _manager;
         
         // Threading
         private readonly Thread _thread;
@@ -21,7 +21,7 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
         // Write Queue
         private readonly BlockingCollection<byte[]> _queue;
         
-        public NetworkWriter(NetworkManager manager)
+        public NetworkWriter(INetworkManager manager)
         {
             // Pull Data
             _manager = manager;
@@ -65,8 +65,8 @@ namespace KingstonDynamics.DragonSong.Protocol.Networking
 
             while (_running)
             {
-                byte[] data = _queue.Take();
-                byte[] length = Byteinator.IntToBytes(data.Length);
+                var data = _queue.Take();
+                var length = Byteinator.IntToBytes(data.Length);
 
                 if (_stream.CanWrite)
                 {

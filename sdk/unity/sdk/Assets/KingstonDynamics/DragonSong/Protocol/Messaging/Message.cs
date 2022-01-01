@@ -7,22 +7,22 @@ namespace KingstonDynamics.DragonSong.Protocol.Messaging
         private int TypeCode { get; }
         private string AuditId { get; }
 
-        protected Message(int TypeCode, string AuditId)
+        protected Message(int typeCode, string auditId)
         {
-            this.TypeCode = TypeCode;
-            this.AuditId = AuditId;
+            TypeCode = typeCode;
+            AuditId = auditId;
         }
 
         protected Message(Readinator reader)
         {
             TypeCode = reader.ReadInt();
-            AuditId = reader.readAuditId();
+            AuditId = reader.ReadAuditId();
         }
 
         public byte[] Build()
         {
-            byte[] b1 = Byteinator.IntToBytes(TypeCode);
-            byte[] b2 = Byteinator.StringToBytes(AuditId);
+            var b1 = Byteinator.IntToBytes(TypeCode);
+            var b2 = Byteinator.StringToBytes(AuditId);
 
             return Concatinator.ConctatinateByteArrays(b1, b2);
         }
