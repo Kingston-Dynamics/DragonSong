@@ -22,6 +22,11 @@ package com.kdyncs.dragonsong.server.core.configuration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+/**
+ * Dedicated Configuration
+ *
+ * This class provides access to the 'dedicated config' variables should they be provided.
+ */
 @Component
 @ConfigurationProperties("dragonsong.dedicated")
 public class DedicatedConfiguration {
