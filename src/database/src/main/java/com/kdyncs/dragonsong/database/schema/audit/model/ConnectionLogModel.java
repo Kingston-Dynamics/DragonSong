@@ -37,6 +37,7 @@ public class ConnectionLogModel {
     @Column
     private OffsetDateTime createTimestamp;
     
+    @SuppressWarnings("unused")
     public UUID getId() {
         return id;
     }
