@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.common;
+package com.kdyncs.dragonsong.common.util;
 
 import java.util.Collections;
 import java.util.List;
