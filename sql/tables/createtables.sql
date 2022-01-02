@@ -29,7 +29,6 @@ start transaction;
 	
 	drop schema if exists ds_audit cascade;
 	drop schema if exists ds_vendor cascade;
-	drop schema if exists ds_service cascade;
 	drop schema if exists ds_software cascade;
 	
 commit;
@@ -42,7 +41,6 @@ start transaction;
 	
 	create schema ds_audit;
 	create schema ds_vendor;
-	create schema ds_service;
 	create schema ds_software;
 	
 commit;
