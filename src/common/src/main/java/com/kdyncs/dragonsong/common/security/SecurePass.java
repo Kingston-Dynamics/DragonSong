@@ -20,37 +20,79 @@
 package com.kdyncs.dragonsong.common.security;
 
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Hash and verify passwords.
+ *
+ * TODO: Use passay to implement password rules.
+ */
 public class SecurePass {
 
-    private final SHA512 SHA;
+    private final MessageDigest digest;
 
     public SecurePass() throws SecurePassException {
 
         try {
-            SHA = new SHA512();
+            this.digest = MessageDigest.getInstance("SHA-512");
         } catch (NoSuchAlgorithmException e) {
             throw new SecurePassException("SYSTEM ERROR");
         }
     }
 
+    /**
+     * Hash Provided Password
+     *
+     * Using the users provided password we will hash it using SHA-512 and then run that through JBCrypt's hash password
+     * function. This allows us to take in a password of arbitrary length, hash it, and salt it, for storage within a
+     * database for later with with verification.
+     */
     public String hash(String password) {
 
-        // Hash Using SHA512 to handle super long passwords
-        String intermediate = SHA.hash(password);
+        // Hash password
+        String intermediate = digest(password);
 
         // Hash Password using BCrypt which is secure.
         // Hashes generated have a maximum length of 60
         return BCrypt.hashpw(intermediate, BCrypt.gensalt());
     }
 
+    /**
+     * Verify Hashed Password
+     *
+     * Using the users provided password we will hash it using SHA-512 and then run that through JBCrypt's verification
+     * function. This allows us to verify whether the entered password is a match for what we have on file and also
+     * allows us to use an arbitrary password length.
+     */
     public Boolean verify(String password, String hashed) {
 
-        // Hash Using SHA512 to handle super long passwords
-        String intermediate = SHA.hash(password);
+        // Hash password
+        String intermediate = digest(password);
 
         // Check password using BCrypt
         return BCrypt.checkpw(intermediate, hashed);
+    }
+
+    /**
+     * Hash password using SHA-512.
+     *
+     * By hashing the password first with SHA-512 we essentially provide a method for which we can allow passwords of
+     * arbitrary length. The reason to do this is that the limit for BCrypt is somewhere in the neighbourhood of
+     * 60 characters which puts an upper limit on how long a password may be. This allows us to avoid that.
+     */
+    protected String digest(String password) {
+
+        // Reset Digest if Necessary
+        digest.reset();
+
+        // Push password into Digest for hashing
+        digest.update(password.getBytes(StandardCharsets.UTF_8));
+
+        // Hash password
+        return String.format("%0128x", new BigInteger(1, digest.digest()));
     }
 }
