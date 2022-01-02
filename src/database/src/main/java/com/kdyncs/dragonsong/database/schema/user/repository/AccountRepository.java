@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.vendor.repository;
+package com.kdyncs.dragonsong.database.schema.user.repository;
 
-import com.kdyncs.dragonsong.database.schema.vendor.model.AccountModel;
+import com.kdyncs.dragonsong.database.schema.user.model.AccountModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

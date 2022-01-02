@@ -17,28 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.vendor.model;
+package com.kdyncs.dragonsong.database.schema.user.model;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity(name = "AccountModel")
-@Table(name = "account", schema = "ds_vendor")
+@Table(name = "account", schema = "ds_user")
 public class AccountModel {
 
     @Id
     @GeneratedValue
     private UUID id;
 
-    @Column
+    @Column(name = "username")
     private String username;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
     @Column(name = "create_timestamp")
-    private OffsetDateTime createtimestamp;
+    private OffsetDateTime createTimestamp;
 
     public UUID getId() {
         return id;
@@ -64,11 +64,11 @@ public class AccountModel {
         this.password = password;
     }
 
-    public OffsetDateTime getCreatetimestamp() {
-        return createtimestamp;
+    public OffsetDateTime getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setCreatetimestamp(OffsetDateTime createtimestamp) {
-        this.createtimestamp = createtimestamp;
+    public void setCreateTimestamp(OffsetDateTime createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 }

@@ -23,11 +23,11 @@
 
 start transaction;
 
-	------------------
-    -- Account Info --
-    ------------------
+	-----------------
+    -- User Tables --
+    -----------------
 
-    create table ds_vendor.account
+    create table ds_user.account
     (
 		-- Columns
         id uuid,

@@ -17,10 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.vendor.dao;
+package com.kdyncs.dragonsong.database.schema.user.dao;
 
-import com.kdyncs.dragonsong.database.schema.vendor.model.AccountModel;
-import com.kdyncs.dragonsong.database.schema.vendor.repository.AccountRepository;
+import com.kdyncs.dragonsong.database.schema.user.model.AccountModel;
+import com.kdyncs.dragonsong.database.schema.user.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
