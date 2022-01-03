@@ -19,8 +19,11 @@
 
 package com.kdyncs.dragonsong.database.schema.audit.model;
 
-import javax.persistence.*;
-import java.time.OffsetDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity(name = "ConnectionLogModel")
@@ -28,14 +31,13 @@ import java.util.UUID;
 public class ConnectionLogModel {
     
     @Id
-    @GeneratedValue
     private UUID id;
     
-    @Column
+    @Column(name = "address")
     private String address;
 
-    @Column
-    private OffsetDateTime createTimestamp;
+    @Column(name = "create_timestamp")
+    private LocalDateTime createTimestamp;
     
     @SuppressWarnings("unused")
     public UUID getId() {
@@ -54,11 +56,11 @@ public class ConnectionLogModel {
         this.address = address;
     }
 
-    public OffsetDateTime getCreateTimestamp() {
+    public LocalDateTime getCreateTimestamp() {
         return createTimestamp;
     }
     
-    public void setCreateTimestamp(OffsetDateTime created) {
+    public void setCreateTimestamp(LocalDateTime created) {
         this.createTimestamp = created;
     }
 }

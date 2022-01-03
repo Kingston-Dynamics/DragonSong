@@ -19,6 +19,7 @@
 
 package com.kdyncs.dragonsong.server.subsystem.messenger;
 
+import com.kdyncs.dragonsong.database.schema.audit.dao.ConnectionLogDAO;
 import com.kdyncs.dragonsong.server.subsystem.messenger.service.AuthenticationService;
 import com.kdyncs.dragonsong.server.subsystem.ConnectionListener;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +31,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Arrays;
 
 @Service
 public class MessengerListener implements ConnectionListener {
@@ -41,6 +43,7 @@ public class MessengerListener implements ConnectionListener {
     
     // Spring Components
     private final AuthenticationService auth;
+    private final ConnectionLogDAO connectionLog;
     
     // Socket Stuffs
     private ServerSocket socket;
@@ -51,8 +54,9 @@ public class MessengerListener implements ConnectionListener {
     private boolean running;
     
     @Autowired
-    public MessengerListener(AuthenticationService auth) {
+    public MessengerListener(AuthenticationService auth, ConnectionLogDAO connectionLog) {
         this.auth = auth;
+        this.connectionLog = connectionLog;
     }
     
     @PostConstruct
@@ -87,7 +91,10 @@ public class MessengerListener implements ConnectionListener {
                 // Logging
                 LOG.info("Client Connecting On: {}", socket.getLocalPort());
                 LOG.info("Client Routed to: {}", client.getPort());
-                
+
+                // Log IP of Connection
+                connectionLog.log(client.getRemoteSocketAddress().toString());
+
                 // Create a new Connection Object
                 auth.connect(client);
             }

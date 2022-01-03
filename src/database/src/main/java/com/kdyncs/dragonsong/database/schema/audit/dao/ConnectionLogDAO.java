@@ -24,7 +24,7 @@ import com.kdyncs.dragonsong.database.schema.audit.repository.ConnectionLogRepos
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Component
@@ -45,7 +45,7 @@ public class ConnectionLogDAO {
         // Populate Data
         model.setId(UUID.randomUUID());
         model.setAddress(address);
-        model.setCreateTimestamp(OffsetDateTime.now());
+        model.setCreateTimestamp(LocalDateTime.now());
 
         // Persist Data
         save(model);
