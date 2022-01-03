@@ -44,7 +44,7 @@ start transaction;
     -- SOFTWARE INFO --
     -------------------
 
-	CREATE TABLE ds_software.application
+	CREATE TABLE ds_data.partition
 	(
 		-- COLUMNS
 		id uuid,

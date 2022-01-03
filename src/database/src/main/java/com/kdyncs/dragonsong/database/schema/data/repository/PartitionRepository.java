@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.software.repository;
+package com.kdyncs.dragonsong.database.schema.data.repository;
 
-import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
+import com.kdyncs.dragonsong.database.schema.data.model.PartitionModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ApplicationRepository extends JpaRepository<ApplicationModel, UUID> {
+public interface PartitionRepository extends JpaRepository<PartitionModel, UUID> {
     
     @Query("from ApplicationModel app where app.active=true")
-    List<ApplicationModel> findAllActiveApplications();
+    List<PartitionModel> findAllActiveApplications();
 
 }

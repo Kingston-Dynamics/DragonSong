@@ -17,27 +17,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.software.dao;
+package com.kdyncs.dragonsong.database.schema.data.dao;
 
 import com.kdyncs.dragonsong.common.util.SafeList;
-import com.kdyncs.dragonsong.database.schema.software.repository.ApplicationRepository;
-import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
+import com.kdyncs.dragonsong.database.schema.data.repository.PartitionRepository;
+import com.kdyncs.dragonsong.database.schema.data.model.PartitionModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class ApplicationDAO {
+public class PartitionDAO {
     
-    private final ApplicationRepository repository;
+    private final PartitionRepository repository;
     
     @Autowired
-    public ApplicationDAO(ApplicationRepository repository) {
+    public PartitionDAO(PartitionRepository repository) {
         this.repository = repository;
     }
     
-    public List<ApplicationModel> getAllActiveApplications() {
+    public List<PartitionModel> getAllActiveApplications() {
         return SafeList.get(repository.findAllActiveApplications());
     }
 }

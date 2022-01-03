@@ -19,8 +19,8 @@
 
 package com.kdyncs.dragonsong.server.subsystem.deployment;
 
-import com.kdyncs.dragonsong.database.schema.software.dao.ApplicationDAO;
-import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
+import com.kdyncs.dragonsong.database.schema.data.dao.PartitionDAO;
+import com.kdyncs.dragonsong.database.schema.data.model.PartitionModel;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
 import com.kdyncs.dragonsong.server.core.configuration.DedicatedConfiguration;
 import org.apache.logging.log4j.LogManager;
@@ -41,7 +41,7 @@ public class DeploymentManager implements Runnable {
     private static final Logger log = LogManager.getLogger();
     
     // Spring Components
-    private final ApplicationDAO applicationDAO;
+    private final PartitionDAO applicationDAO;
     private final ApplicationPool applicationPool;
     private final ApplicationContext context;
     private final DeploymentService deploymentService;
@@ -52,7 +52,7 @@ public class DeploymentManager implements Runnable {
     private boolean running;
     
     @Autowired
-    public DeploymentManager(ApplicationDAO applicationDAO, ApplicationPool applicationPool, ApplicationContext context, DeploymentService deploymentService, DedicatedConfiguration config) {
+    public DeploymentManager(PartitionDAO applicationDAO, ApplicationPool applicationPool, ApplicationContext context, DeploymentService deploymentService, DedicatedConfiguration config) {
         this.applicationDAO = applicationDAO;
         this.applicationPool = applicationPool;
         this.context = context;
@@ -100,13 +100,13 @@ public class DeploymentManager implements Runnable {
             /*
               Find Active Applications
              */
-            List<ApplicationModel> applications = applicationDAO.getAllActiveApplications();
+            List<PartitionModel> applications = applicationDAO.getAllActiveApplications();
             
             log.debug("Currently Active Apps: " + applications.size());
             log.debug("Currently Deployed Apps: " + applicationPool.deployCount());
 
             // Deploy Valid Applications.
-            for (ApplicationModel application : applications) {
+            for (PartitionModel application : applications) {
                 // If Not Deploy then Deploy
                 if (applicationPool.isDeployed(application.getKey().toString())) {
                     log.debug("Deploying Application");
@@ -163,9 +163,9 @@ public class DeploymentManager implements Runnable {
      * @param key          key of stopped application
      * @return should application be undeployed
      */
-    private boolean shouldUndeploy(List<ApplicationModel> applications, String key) {
+    private boolean shouldUndeploy(List<PartitionModel> applications, String key) {
         
-        for (ApplicationModel application : applications) {
+        for (PartitionModel application : applications) {
             if (key.equals(application.getKey().toString())) {
                 return true;
             }

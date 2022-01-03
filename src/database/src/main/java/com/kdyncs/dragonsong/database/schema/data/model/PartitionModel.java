@@ -17,14 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.software.model;
+package com.kdyncs.dragonsong.database.schema.data.model;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity(name = "ApplicationModel")
 @Table(name = "application", schema = "ds_software")
-public class ApplicationModel {
+public class PartitionModel {
 
     @Id
     @GeneratedValue

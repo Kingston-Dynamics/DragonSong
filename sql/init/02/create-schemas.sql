@@ -24,8 +24,7 @@
 start transaction;
 
 	create schema ds_audit;
-	create schema ds_vendor;
-	create schema ds_software;
+    create schema ds_data;
     create schema ds_user;
 
 commit;
