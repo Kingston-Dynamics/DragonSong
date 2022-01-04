@@ -37,7 +37,7 @@ public class DeploymentManager implements Runnable {
     
     public static final int L = 10000;
     // Logging
-    private static final Logger log = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger();
     
     // Spring Components
     private final PartitionDAO partitionDAO;
@@ -69,25 +69,25 @@ public class DeploymentManager implements Runnable {
     @Override
     public void run() {
         
-        log.info("Starting deployment manager.");
+        LOG.info("Starting deployment manager.");
 
         while (running) {
             
-            log.debug("Checking Deployments.");
+            LOG.debug("Checking Deployments.");
 
             /*
               Find Active Applications
              */
             List<PartitionModel> applications = partitionDAO.getAllActiveApplications();
             
-            log.debug("Currently Active Apps: " + applications.size());
-            log.debug("Currently Deployed Apps: " + applicationPool.deployCount());
+            LOG.debug("Currently Active Apps: " + applications.size());
+            LOG.debug("Currently Deployed Apps: " + applicationPool.deployCount());
 
             // Deploy Valid Applications.
             for (PartitionModel application : applications) {
                 // If Not Deploy then Deploy
                 if (applicationPool.isDeployed(application.getKey().toString())) {
-                    log.debug("Deploying Application");
+                    LOG.debug("Deploying Application");
                     
                     // Create Instance of Application Component
                     Application deployableApplication = context.getBean(Application.class);
@@ -124,14 +124,14 @@ public class DeploymentManager implements Runnable {
             
             // Slow it down
             try {
-                log.debug("Finished Checking Deployments.");
+                LOG.debug("Finished Checking Deployments.");
                 Thread.sleep(L);
             } catch (InterruptedException ex) {
-                log.debug("Deployment Manager Interrupted.");
+                LOG.debug("Deployment Manager Interrupted.");
             }
         }
         
-        log.info("Stopping Deployment Manager.");
+        LOG.info("Stopping Deployment Manager.");
     }
     
     /**
@@ -157,10 +157,10 @@ public class DeploymentManager implements Runnable {
      */
     public void start() {
 
-        log.info("Attempting to start deployment manager");
+        LOG.info("Attempting to start deployment manager");
 
         if (listener.isAlive()) {
-            log.warn("Deployment Manager Already Started");
+            LOG.warn("Deployment Manager Already Started");
             return;
         }
         
@@ -173,10 +173,10 @@ public class DeploymentManager implements Runnable {
      */
     public void stop() {
         
-        log.info("Attempting to stop Deployment Manager");
+        LOG.info("Attempting to stop Deployment Manager");
         
         if (!listener.isAlive()) {
-            log.warn("Deployment Manager is Already Stopped");
+            LOG.warn("Deployment Manager is Already Stopped");
             return;
         }
         
