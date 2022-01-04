@@ -22,7 +22,6 @@ package com.kdyncs.dragonsong.server.subsystem.deployment;
 import com.kdyncs.dragonsong.database.schema.data.dao.PartitionDAO;
 import com.kdyncs.dragonsong.database.schema.data.model.PartitionModel;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
-import com.kdyncs.dragonsong.server.core.configuration.DedicatedConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,23 +40,21 @@ public class DeploymentManager implements Runnable {
     private static final Logger log = LogManager.getLogger();
     
     // Spring Components
-    private final PartitionDAO applicationDAO;
+    private final PartitionDAO partitionDAO;
     private final ApplicationPool applicationPool;
     private final ApplicationContext context;
     private final DeploymentService deploymentService;
-    private final DedicatedConfiguration config;
     
     // Threading
     private Thread listener;
     private boolean running;
     
     @Autowired
-    public DeploymentManager(PartitionDAO applicationDAO, ApplicationPool applicationPool, ApplicationContext context, DeploymentService deploymentService, DedicatedConfiguration config) {
-        this.applicationDAO = applicationDAO;
+    public DeploymentManager(PartitionDAO applicationDAO, ApplicationPool applicationPool, ApplicationContext context, DeploymentService deploymentService) {
+        this.partitionDAO = applicationDAO;
         this.applicationPool = applicationPool;
         this.context = context;
         this.deploymentService = deploymentService;
-        this.config = config;
     }
     
     @PostConstruct
@@ -73,25 +70,6 @@ public class DeploymentManager implements Runnable {
     public void run() {
         
         log.info("Starting deployment manager.");
-        
-        // Check if configuration is in dedicated mode
-        if (config.isDedicated()) {
-            
-            log.info("DragonSong is running in dedicated mode");
-            log.info("Deploying dedicated application {}", config.getApiKey());
-            
-            // Build Application
-            Application application = context.getBean(Application.class);
-            application.setApiKey(config.getApiKey());
-            
-            // Add Application to Application Pool
-            applicationPool.add(application);
-            
-            // Stop Deployment Manager
-            running = false;
-        } else {
-            log.info("DragonSong is running in shared mode");
-        }
 
         while (running) {
             
@@ -100,7 +78,7 @@ public class DeploymentManager implements Runnable {
             /*
               Find Active Applications
              */
-            List<PartitionModel> applications = applicationDAO.getAllActiveApplications();
+            List<PartitionModel> applications = partitionDAO.getAllActiveApplications();
             
             log.debug("Currently Active Apps: " + applications.size());
             log.debug("Currently Deployed Apps: " + applicationPool.deployCount());
