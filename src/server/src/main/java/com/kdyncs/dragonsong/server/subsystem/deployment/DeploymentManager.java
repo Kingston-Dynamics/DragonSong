@@ -86,14 +86,14 @@ public class DeploymentManager implements Runnable {
             // Deploy Valid Applications.
             for (PartitionModel application : applications) {
                 // If Not Deploy then Deploy
-                if (applicationPool.isDeployed(application.getKey().toString())) {
+                if (applicationPool.isDeployed(application.getId().toString())) {
                     LOG.debug("Deploying Application");
                     
                     // Create Instance of Application Component
                     Application deployableApplication = context.getBean(Application.class);
                     
                     // Fill Out Data
-                    deployableApplication.setApiKey(application.getKey().toString());
+                    deployableApplication.setApiKey(application.getId().toString());
                     
                     // Register (Accept Connections)
                     applicationPool.add(deployableApplication);
@@ -144,7 +144,7 @@ public class DeploymentManager implements Runnable {
     private boolean shouldUndeploy(List<PartitionModel> applications, String key) {
         
         for (PartitionModel application : applications) {
-            if (key.equals(application.getKey().toString())) {
+            if (key.equals(application.getId().toString())) {
                 return true;
             }
         }
