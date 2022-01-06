@@ -17,12 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
----------------------------
--- ADD DEFAULT PARTITION --
----------------------------
+----------------------------
+-- ADD DEFAULT PARTITIONS --
+----------------------------
 
 start transaction;
 
+    -- Add System Partition
     INSERT INTO ds_data.partition (
         id,
         name,
@@ -32,6 +33,20 @@ start transaction;
     (
         '00000000-0000-0000-0000-000000000000',
         '#SYSTEM',
+        TRUE,
+        CURRENT_TIMESTAMP
+    );
+
+    -- Add Default Partition
+    INSERT INTO ds_data.partition (
+        id,
+        name,
+        active,
+        create_timestamp
+    ) VALUES
+    (
+        '00000000-0000-0000-0000-000000000001',
+        '#DEFAULT',
         TRUE,
         CURRENT_TIMESTAMP
     );
