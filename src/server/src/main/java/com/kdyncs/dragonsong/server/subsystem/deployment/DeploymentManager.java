@@ -84,16 +84,16 @@ public class DeploymentManager implements Runnable {
             LOG.debug("Currently Deployed Partitions: " + applicationPool.deployCount());
 
             // Deploy Valid Applications.
-            for (PartitionModel application : applications) {
+            for (PartitionModel partition : applications) {
                 // If Not Deploy then Deploy
-                if (!applicationPool.isDeployed(application.getId().toString())) {
-                    LOG.info("Deploying Partition {} {}", application.getName(), application.getId());
+                if (shouldDeploy(partition)) {
+                    LOG.info("Deploying Partition {} {}", partition.getName(), partition.getId());
                     
                     // Create Instance of Application Component
                     Application deployableApplication = context.getBean(Application.class);
                     
                     // Fill Out Data
-                    deployableApplication.setApiKey(application.getId().toString());
+                    deployableApplication.setApiKey(partition.getId().toString());
                     
                     // Register (Accept Connections)
                     applicationPool.add(deployableApplication);
@@ -133,7 +133,11 @@ public class DeploymentManager implements Runnable {
         
         LOG.info("Stopping Deployment Manager.");
     }
-    
+
+    private boolean shouldDeploy(PartitionModel partition) {
+        return !applicationPool.isDeployed(partition.getId().toString());
+    }
+
     /**
      * Check if application should undeploy
      *
