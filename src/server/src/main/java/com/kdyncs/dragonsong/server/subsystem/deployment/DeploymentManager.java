@@ -86,8 +86,8 @@ public class DeploymentManager implements Runnable {
             // Deploy Valid Applications.
             for (PartitionModel application : applications) {
                 // If Not Deploy then Deploy
-                if (applicationPool.isDeployed(application.getId().toString())) {
-                    LOG.debug("Deploying Application");
+                if (!applicationPool.isDeployed(application.getId().toString())) {
+                    LOG.info("Deploying Partition {} {}", application.getName(), application.getId());
                     
                     // Create Instance of Application Component
                     Application deployableApplication = context.getBean(Application.class);
