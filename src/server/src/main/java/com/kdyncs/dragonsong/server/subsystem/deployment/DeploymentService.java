@@ -19,7 +19,7 @@
 
 package com.kdyncs.dragonsong.server.subsystem.deployment;
 
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import com.kdyncs.dragonsong.server.subsystem.messenger.service.AuthenticationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,11 +35,11 @@ public class DeploymentService {
     private static final Logger log = LogManager.getLogger();
     
     // Spring Components
-    private final ApplicationPool applications;
+    private final PartitionPool applications;
     private final AuthenticationService authentication;
     
     @Autowired
-    public DeploymentService(ApplicationPool applications, AuthenticationService authentication) {
+    public DeploymentService(PartitionPool applications, AuthenticationService authentication) {
         this.applications = applications;
         this.authentication = authentication;
     }
@@ -52,17 +52,17 @@ public class DeploymentService {
         
         log.info("Undeploying application {}", key);
         
-        Application application = applications.get(key);
+        Partition partition = applications.get(key);
 
         // Sanity Checking
-        if (application == null) {
+        if (partition == null) {
             throw new DeploymentException("Application ");
         }
 
         // Shutdown Application
-        if (application != null) {
+        if (partition != null) {
             
-            Map<String, String> users = application.getUsers().getAll();
+            Map<String, String> users = partition.getUsers().getAll();
             
             for (String user : users.values()) {
                 authentication.disconnect(user);

@@ -6,12 +6,12 @@ import com.kdyncs.dragonsong.protocol.message.type.notification.Notification;
 import com.kdyncs.dragonsong.protocol.networking.NetworkReader;
 import com.kdyncs.dragonsong.protocol.networking.NetworkWriter;
 import com.kdyncs.dragonsong.protocol.utils.Keyinator;
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnectionTimer;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
 import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
-import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
+import com.kdyncs.dragonsong.server.subsystem.deployment.PartitionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,11 @@ public class AuthenticationService {
     
     // Spring Components
     private final ConnectionPool connections;
-    private final ApplicationPool applications;
+    private final PartitionPool applications;
     private final ApplicationContext context;
     
     @Autowired
-    public AuthenticationService(ConnectionPool connections, ApplicationPool applications, ApplicationContext context) {
+    public AuthenticationService(ConnectionPool connections, PartitionPool applications, ApplicationContext context) {
         this.connections = connections;
         this.applications = applications;
         this.context = context;
@@ -148,26 +148,26 @@ public class AuthenticationService {
         }
         
         // Get Application
-        Application application = applications.get(message.getApplicationKey());
+        Partition partition = applications.get(message.getApplicationKey());
         
         // Verify Application
-        if (!application.getApiKey().equals(message.getApplicationKey())) {
+        if (!partition.getApiKey().equals(message.getApplicationKey())) {
             /*
              * Note: We used to do some more advanced application verification but that no longer occurs
              * as we removed some old application ID and application version code.
              */
-            log.warn("Application Mismatch {}", application.getApiKey());
+            log.warn("Application Mismatch {}", partition.getApiKey());
         }
         
         // Update User Information
         connection.setDisplayName(message.getDisplayName());
-        connection.setApplicationKey(application.getApiKey());
+        connection.setApplicationKey(partition.getApiKey());
         connection.setExternalID(message.getUniqueIdentifier());
         
         log.info("Private ID: {}", message.getUniqueIdentifier());
         
         // Add User to Application
-        application.getUsers().add(connection.getExternalID(), connection.getConnectionID());
+        partition.getUsers().add(connection.getExternalID(), connection.getConnectionID());
         
         // Notify User
         Notification notification = new Notification(NotificationType.AUTHENTICATION_SUCCESSFUL);

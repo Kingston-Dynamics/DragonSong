@@ -19,7 +19,7 @@
 
 package com.kdyncs.dragonsong.server.subsystem.deployment;
 
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,20 +30,20 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class ApplicationPool {
+public class PartitionPool {
 
-    private final Map<String, Application> applications;
+    private final Map<String, Partition> applications;
     private final Logger log = LogManager.getLogger();
 
     @Autowired
-    public ApplicationPool() {
+    public PartitionPool() {
         log.info("Creating new Application Pool");
         applications = new ConcurrentHashMap<>(100);
     }
 
-    public void add(Application application) {
+    public void add(Partition partition) {
         log.info("Adding Application to Pool");
-        applications.put(application.getApiKey(), application);
+        applications.put(partition.getApiKey(), partition);
         log.info("Deployments: " + deployCount());
     }
     
@@ -52,7 +52,7 @@ public class ApplicationPool {
         applications.remove(applicationKey);
     }
     
-    public Application get(String applicationKey) {
+    public Partition get(String applicationKey) {
         return applications.get(applicationKey);
     }
     

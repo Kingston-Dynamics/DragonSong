@@ -1,10 +1,10 @@
 package com.kdyncs.dragonsong.server.subsystem.messenger.service;
 
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
 import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
-import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
+import com.kdyncs.dragonsong.server.subsystem.deployment.PartitionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ public class ApplicationService {
     
     // Spring Components
     private final ConnectionPool connections;
-    private final ApplicationPool applications;
+    private final PartitionPool applications;
     
     // Start Time
     private final Instant start = Instant.now();
     
     @Autowired
-    public ApplicationService(ConnectionPool connections, ApplicationPool applications) {
+    public ApplicationService(ConnectionPool connections, PartitionPool applications) {
         this.connections = connections;
         this.applications = applications;
     }
@@ -47,11 +47,11 @@ public class ApplicationService {
         }
         
         // Lookup Application Name
-        Application application = applications.get(connection.getApplicationKey());
+        Partition partition = applications.get(connection.getApplicationKey());
         
         // Get a list of all channels
         //noinspection ResultOfMethodCallIgnored
-        application.getChannels();
+        partition.getChannels();
         
         // Return It
         
@@ -70,9 +70,9 @@ public class ApplicationService {
         }
         
         // Lookup Application Name
-        Application application = applications.get(connection.getApplicationKey());
+        Partition partition = applications.get(connection.getApplicationKey());
         //noinspection ResultOfMethodCallIgnored
-        application.getApiKey();
+        partition.getApiKey();
         
         // Return It
         

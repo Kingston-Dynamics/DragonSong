@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class Application {
+public class Partition {
 
     // Application Data
     private String apiKey;
@@ -36,15 +36,11 @@ public class Application {
     private final ChannelPool channels;
     
     @Autowired
-    public Application(UserPool users, ChannelPool channels) {
+    public Partition(UserPool users, ChannelPool channels) {
         this.users = users;
         this.channels = channels;
     }
 
-    public void disconnect(ClientConnection user) {
-        users.remove(user.getExternalID());
-    }
-    
     public String getApiKey() {
         return apiKey;
     }

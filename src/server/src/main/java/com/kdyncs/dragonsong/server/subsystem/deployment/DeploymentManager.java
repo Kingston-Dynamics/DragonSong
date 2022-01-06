@@ -21,7 +21,7 @@ package com.kdyncs.dragonsong.server.subsystem.deployment;
 
 import com.kdyncs.dragonsong.database.schema.data.dao.PartitionDAO;
 import com.kdyncs.dragonsong.database.schema.data.model.PartitionModel;
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ public class DeploymentManager implements Runnable {
     
     // Spring Components
     private final PartitionDAO partitionDAO;
-    private final ApplicationPool applicationPool;
+    private final PartitionPool partitionPool;
     private final ApplicationContext context;
     private final DeploymentService deploymentService;
     
@@ -50,9 +50,9 @@ public class DeploymentManager implements Runnable {
     private boolean running;
     
     @Autowired
-    public DeploymentManager(PartitionDAO applicationDAO, ApplicationPool applicationPool, ApplicationContext context, DeploymentService deploymentService) {
+    public DeploymentManager(PartitionDAO applicationDAO, PartitionPool partitionPool, ApplicationContext context, DeploymentService deploymentService) {
         this.partitionDAO = applicationDAO;
-        this.applicationPool = applicationPool;
+        this.partitionPool = partitionPool;
         this.context = context;
         this.deploymentService = deploymentService;
     }
@@ -81,7 +81,7 @@ public class DeploymentManager implements Runnable {
             List<PartitionModel> applications = partitionDAO.getAllActivePartitions();
             
             LOG.debug("Currently Active Partitions: " + applications.size());
-            LOG.debug("Currently Deployed Partitions: " + applicationPool.deployCount());
+            LOG.debug("Currently Deployed Partitions: " + partitionPool.deployCount());
 
             /*
              * Deploy Partitions
@@ -97,13 +97,13 @@ public class DeploymentManager implements Runnable {
                     LOG.info("Deploying Partition {} {}", partition.getName(), partition.getId());
                     
                     // Create Instance of Application Component
-                    Application deployableApplication = context.getBean(Application.class);
+                    Partition deployablePartition = context.getBean(Partition.class);
                     
                     // Fill Out Data
-                    deployableApplication.setApiKey(partition.getId().toString());
+                    deployablePartition.setApiKey(partition.getId().toString());
                     
                     // Register (Accept Connections)
-                    applicationPool.add(deployableApplication);
+                    partitionPool.add(deployablePartition);
                 }
             }
 
@@ -113,7 +113,7 @@ public class DeploymentManager implements Runnable {
             ArrayList<String> undeployables = new ArrayList<>(100);
             
             // Find all undeployable Keys
-            for (String key : applicationPool.getKeys()) {
+            for (String key : partitionPool.getKeys()) {
                 
                 // Check if we should undeploy
                 boolean found = shouldUndeploy(applications, key);
@@ -145,7 +145,7 @@ public class DeploymentManager implements Runnable {
      * Check if Partition should be deployed
      */
     private boolean shouldDeploy(PartitionModel partition) {
-        return !applicationPool.isDeployed(partition.getId().toString());
+        return !partitionPool.isDeployed(partition.getId().toString());
     }
 
     /**
