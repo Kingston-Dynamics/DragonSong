@@ -83,10 +83,17 @@ public class DeploymentManager implements Runnable {
             LOG.debug("Currently Active Partitions: " + applications.size());
             LOG.debug("Currently Deployed Partitions: " + applicationPool.deployCount());
 
-            // Deploy Valid Applications.
+            /*
+             * Deploy Partitions
+             *
+             * If a Partition is marked as active it should be deployed onto the server.
+             */
             for (PartitionModel partition : applications) {
+
                 // If Not Deploy then Deploy
                 if (shouldDeploy(partition)) {
+
+                    // Log Info for debug purposes
                     LOG.info("Deploying Partition {} {}", partition.getName(), partition.getId());
                     
                     // Create Instance of Application Component
@@ -101,7 +108,7 @@ public class DeploymentManager implements Runnable {
             }
 
             /*
-              Undeploy Any Stopped Applications
+             * Undeploy Any Stopped Applications
              */
             ArrayList<String> undeployables = new ArrayList<>(100);
             
@@ -134,6 +141,9 @@ public class DeploymentManager implements Runnable {
         LOG.info("Stopping Deployment Manager.");
     }
 
+    /**
+     * Check if Partition should be deployed
+     */
     private boolean shouldDeploy(PartitionModel partition) {
         return !applicationPool.isDeployed(partition.getId().toString());
     }
