@@ -30,7 +30,7 @@ import java.util.UUID;
 @Repository
 public interface PartitionRepository extends JpaRepository<PartitionModel, UUID> {
     
-    @Query("from ApplicationModel app where app.active=true")
+    @Query("from PartitionModel part where part.active=true")
     List<PartitionModel> findAllActiveApplications();
 
 }

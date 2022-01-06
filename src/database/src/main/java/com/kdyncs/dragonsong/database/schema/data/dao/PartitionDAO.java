@@ -37,7 +37,7 @@ public class PartitionDAO {
         this.repository = repository;
     }
     
-    public List<PartitionModel> getAllActiveApplications() {
+    public List<PartitionModel> getAllActivePartitions() {
         return SafeList.get(repository.findAllActiveApplications());
     }
 }

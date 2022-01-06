@@ -78,10 +78,10 @@ public class DeploymentManager implements Runnable {
             /*
               Find Active Applications
              */
-            List<PartitionModel> applications = partitionDAO.getAllActiveApplications();
+            List<PartitionModel> applications = partitionDAO.getAllActivePartitions();
             
-            LOG.debug("Currently Active Apps: " + applications.size());
-            LOG.debug("Currently Deployed Apps: " + applicationPool.deployCount());
+            LOG.debug("Currently Active Partitions: " + applications.size());
+            LOG.debug("Currently Deployed Partitions: " + applicationPool.deployCount());
 
             // Deploy Valid Applications.
             for (PartitionModel application : applications) {
