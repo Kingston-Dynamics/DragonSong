@@ -37,18 +37,18 @@ public class PartitionPool {
 
     @Autowired
     public PartitionPool() {
-        log.info("Creating new Application Pool");
+        log.info("Creating new Partition Pool");
         applications = new ConcurrentHashMap<>(100);
     }
 
     public void add(Partition partition) {
-        log.info("Adding Application to Pool");
+        log.info("Adding Partition to Pool");
         applications.put(partition.getApiKey(), partition);
         log.info("Deployments: " + deployCount());
     }
     
     public void remove(String applicationKey) {
-        log.debug("Removing Application {} from Pool", applicationKey);
+        log.debug("Removing Partition {} from Pool", applicationKey);
         applications.remove(applicationKey);
     }
     
