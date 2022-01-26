@@ -37,4 +37,12 @@ public class AccountDAO {
     public void save(AccountModel account) {
         repository.save(account);
     }
+
+    public void delete(AccountModel account) {
+        repository.delete(account);
+    }
+
+    public AccountModel findByUsername(String username) {
+        return repository.getByUserName(username);
+    }
 }

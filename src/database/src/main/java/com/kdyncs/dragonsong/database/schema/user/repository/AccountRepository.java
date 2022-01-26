@@ -21,10 +21,15 @@ package com.kdyncs.dragonsong.database.schema.user.repository;
 
 import com.kdyncs.dragonsong.database.schema.user.model.AccountModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
 @Repository
 public interface AccountRepository extends JpaRepository<AccountModel, UUID> {
+
+    @Query("SELECT a FROM AccountModel a WHERE a.username = ?1")
+    AccountModel getByUserName(String username);
+
 }

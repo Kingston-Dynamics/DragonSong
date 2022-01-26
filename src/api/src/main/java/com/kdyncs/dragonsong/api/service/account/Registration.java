@@ -1,4 +1,4 @@
-package com.kdyncs.dragonsong.api.service.registration;
+package com.kdyncs.dragonsong.api.service.account;
 
 public class Registration {
 

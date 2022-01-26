@@ -20,7 +20,7 @@
 package com.kdyncs.dragonsong.database.schema.user.model;
 
 import javax.persistence.*;
-import java.time.OffsetDateTime;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity(name = "AccountModel")
@@ -38,7 +38,7 @@ public class AccountModel {
     private String password;
 
     @Column(name = "create_timestamp")
-    private OffsetDateTime createTimestamp;
+    private Timestamp createTimestamp;
 
     public UUID getId() {
         return id;
@@ -64,11 +64,11 @@ public class AccountModel {
         this.password = password;
     }
 
-    public OffsetDateTime getCreateTimestamp() {
+    public Timestamp getCreateTimestamp() {
         return createTimestamp;
     }
 
-    public void setCreateTimestamp(OffsetDateTime createTimestamp) {
+    public void setCreateTimestamp(Timestamp createTimestamp) {
         this.createTimestamp = createTimestamp;
     }
 }

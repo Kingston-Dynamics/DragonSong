@@ -1,6 +1,7 @@
 package com.kdyncs.dragonsong.api.web;
 
-import com.kdyncs.dragonsong.api.service.registration.Registration;
+import com.kdyncs.dragonsong.api.service.account.Registration;
+import com.kdyncs.dragonsong.api.service.account.RegistrationService;
 import com.kdyncs.dragonsong.api.util.response.ResponseFactory;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.logging.log4j.LogManager;
@@ -22,13 +23,15 @@ public class AccountController {
 
     // Spring Components
     private final ResponseFactory response;
+    private final RegistrationService registrationService;
 
     // Logging
     private final Logger log = LogManager.getLogger();
 
     @Autowired
-    public AccountController(ResponseFactory response) {
+    public AccountController(ResponseFactory response, RegistrationService registrationService) {
         this.response = response;
+        this.registrationService = registrationService;
     }
 
     @PostConstruct
@@ -38,13 +41,40 @@ public class AccountController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Registration registration) {
+
         log.trace("Creating Account.");
+
+        // Account must not exist to be created
+        if (registrationService.exists(registration.getUsername()))
+        {
+            return response.buildResponse(HttpStatus.BAD_REQUEST, "Username Taken");
+        }
+
+        registrationService.createAccount(registration);
+
+        // Tell user we created it.
         return response.buildResponse(HttpStatus.OK, "Account Registered");
     }
 
+    /*
+     * TODO: Fix This
+     *
+     * The implementation is super naive at the moment and only exists for testing purposes. In an ideal world I would
+     * add a boatload of security checks but unfortunately I didn't get that far in this particular version of the
+     * application. 
+     */
     @PostMapping("/delete")
     public ResponseEntity<?> delete(@RequestBody Registration registration) {
         log.trace("Deleting Account.");
+
+        // Account must exist to be deleted
+        if (!registrationService.exists(registration.getUsername()))
+        {
+            return response.buildResponse(HttpStatus.NOT_FOUND, "Unknown Account");
+        }
+
+        registrationService.deleteAccount(registration);
+
         return response.buildResponse(HttpStatus.OK, "Account Deleted");
     }
 }
