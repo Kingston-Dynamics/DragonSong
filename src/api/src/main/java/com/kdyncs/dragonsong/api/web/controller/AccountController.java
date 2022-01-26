@@ -39,10 +39,12 @@ public class AccountController {
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Registration registration) {
         log.trace("Creating Account.");
-
-        log.info("Username {}", registration.getUsername());
-
-
         return response.buildResponse(HttpStatus.OK, "Account Registered");
+    }
+
+    @PostMapping("/delete")
+    public ResponseEntity<?> delete(@RequestBody Registration registration) {
+        log.trace("Deleting Account.");
+        return response.buildResponse(HttpStatus.OK, "Account Deleted");
     }
 }
