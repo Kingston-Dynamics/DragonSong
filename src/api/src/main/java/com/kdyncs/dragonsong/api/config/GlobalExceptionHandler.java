@@ -50,10 +50,10 @@ public class GlobalExceptionHandler {
     public final ResponseEntity<?> handleServiceException(ServiceException ex) {
         return ex.getError();
     }
-    
+
     // TODO: Catch higher level exception
     @ExceptionHandler(MissingRequestHeaderException.class)
-    public final ResponseEntity<?> handleMissingRequestHeader(MissingRequestHeaderException ex) {
+    public final ResponseEntity<?> handleNotFoundException(MissingRequestHeaderException ex) {
         return response.buildResponse(HttpStatus.BAD_REQUEST, "BAD_REQUEST", ex.getMessage(), http.getRequestURI());
     }
     
