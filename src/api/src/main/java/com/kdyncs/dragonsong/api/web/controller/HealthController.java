@@ -25,6 +25,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +52,7 @@ public class HealthController {
         log.info("Loading {}", this.getClass().getSimpleName());
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ResponseEntity<?> health() {
         log.trace("Checking Health.");
         return response.buildResponse(HttpStatus.OK, "Application Running");
