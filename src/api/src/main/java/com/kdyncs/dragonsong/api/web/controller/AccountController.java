@@ -34,12 +34,9 @@ public class AccountController {
         log.info("Loading {}", this.getClass().getSimpleName());
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Registration registration) {
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody Registration registration) {
         log.trace("Registering Account.");
-
-
-
         return response.buildResponse(HttpStatus.OK, "Account Registered");
     }
 }
