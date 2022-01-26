@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.api.web.controller;
+package com.kdyncs.dragonsong.api.web;
 
 import com.kdyncs.dragonsong.api.util.response.ResponseFactory;
 import io.swagger.v3.oas.annotations.tags.Tag;

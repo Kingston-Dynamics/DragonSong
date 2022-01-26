@@ -1,4 +1,4 @@
-package com.kdyncs.dragonsong.api.web.controller;
+package com.kdyncs.dragonsong.api.web;
 
 import com.kdyncs.dragonsong.api.service.registration.Registration;
 import com.kdyncs.dragonsong.api.util.response.ResponseFactory;
