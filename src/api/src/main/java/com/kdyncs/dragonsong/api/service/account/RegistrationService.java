@@ -1,5 +1,7 @@
 package com.kdyncs.dragonsong.api.service.account;
 
+import com.kdyncs.dragonsong.common.security.SecurePass;
+import com.kdyncs.dragonsong.common.security.SecurePassException;
 import com.kdyncs.dragonsong.database.schema.user.dao.AccountDAO;
 import com.kdyncs.dragonsong.database.schema.user.model.AccountModel;
 import org.apache.logging.log4j.LogManager;
@@ -21,9 +23,12 @@ public class RegistrationService {
     // Spring Components
     private final AccountDAO accounts;
 
+    private final SecurePass sp;
+
     @Autowired
-    public RegistrationService(AccountDAO accounts) {
+    public RegistrationService(AccountDAO accounts) throws SecurePassException {
         this.accounts = accounts;
+        this.sp = new SecurePass();
     }
 
     public void createAccount(Registration registration)
@@ -32,12 +37,10 @@ public class RegistrationService {
 
         account.setId(UUID.randomUUID());
         account.setUsername(registration.getUsername());
-        // TODO: Use SecurePass here
-        account.setPassword(registration.getPassword());
+        account.setPassword(sp.hash(registration.getPassword()));
         account.setCreateTimestamp(Timestamp.from(Instant.now()));
 
         accounts.save(account);
-
     }
 
     public void deleteAccount(Registration registration)
