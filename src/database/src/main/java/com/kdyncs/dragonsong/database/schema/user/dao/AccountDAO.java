@@ -17,41 +17,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.audit.dao;
+package com.kdyncs.dragonsong.database.schema.user.dao;
 
-import com.kdyncs.dragonsong.database.schema.audit.model.ConnectionLogModel;
-import com.kdyncs.dragonsong.database.schema.audit.repository.ConnectionLogRepository;
+import com.kdyncs.dragonsong.database.schema.user.model.AccountModel;
+import com.kdyncs.dragonsong.database.schema.user.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 @Component
-public class ConnectionLogDAO {
+public class AccountDAO {
 
-    private final ConnectionLogRepository repository;
+    private final AccountRepository repository;
 
     @Autowired
-    public ConnectionLogDAO(ConnectionLogRepository repository) {
+    public AccountDAO(AccountRepository repository) {
         this.repository = repository;
     }
 
-    public void log(String address) {
-
-        // Generated Model
-        var model = new ConnectionLogModel();
-
-        // Populate Data
-        model.setId(UUID.randomUUID());
-        model.setAddress(address);
-        model.setCreateTimestamp(LocalDateTime.now());
-
-        // Persist Data
-        save(model);
-    }
-
-    public void save(ConnectionLogModel log) {
-        repository.save(log);
+    public void save(AccountModel account) {
+        repository.save(account);
     }
 }

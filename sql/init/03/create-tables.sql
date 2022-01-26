@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Kingston Dynamics Inc.
+ * Copyright (C) 2022 Kingston Dynamics Inc.
  *
  * This file is part of DragonSong
  *
@@ -17,54 +17,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
---------------------------------------------------
--- Master script to re/generate entire database --
---------------------------------------------------
-	
-------------------
--- Drop Schemas --
-------------------
-	
-start transaction;
-	
-	drop schema if exists ds_audit cascade;
-	drop schema if exists ds_vendor cascade;
-	drop schema if exists ds_service cascade;
-	drop schema if exists ds_software cascade;
-	
-commit;
-	
-------------------------
--- Create All Schemas --
-------------------------
-	
-start transaction;
-	
-	create schema ds_audit;
-	create schema ds_vendor;
-	create schema ds_service;
-	create schema ds_software;
-	
-commit;
-
 -----------------------
 -- Create All Tables --
 -----------------------
+
 start transaction;
-	
-	------------------
-    -- Account Info --
-    ------------------
-    
-    create table ds_vendor.account
-    ( 
+
+	-----------------
+    -- User Tables --
+    -----------------
+
+    create table ds_user.account
+    (
 		-- Columns
         id uuid,
         username VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR (60) NOT NULL,
-        
+
         create_timestamp TIMESTAMP NOT NULL,
-        
+
         -- KEY CONSTRAINTS
         PRIMARY KEY (ID)
     );
@@ -73,13 +44,14 @@ start transaction;
     -- SOFTWARE INFO --
     -------------------
 
-	CREATE TABLE ds_software.application
+	CREATE TABLE ds_data.partition
 	(
 		-- COLUMNS
 		id uuid,
 		name VARCHAR(255) NOT NULL,
 		active boolean NOT NULL,
-		api_key uuid NOT NULL,
+
+		create_timestamp TIMESTAMP NOT NULL,
 
 		-- KEY CONSTRAINTS
 		PRIMARY KEY (id)

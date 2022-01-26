@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Kingston Dynamics Inc.
+ * Copyright (C) 2020 Kingston Dynamics Inc.
  *
  * This file is part of DragonSong
  *
@@ -17,14 +17,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.vendor.repository;
+package com.kdyncs.dragonsong.common.util;
 
-import com.kdyncs.dragonsong.database.schema.vendor.model.AccountModel;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.Collections;
+import java.util.List;
 
-import java.util.UUID;
-
-@Repository
-public interface AccountRepository extends JpaRepository<AccountModel, UUID> {
+public class SafeList {
+    public static <T> List<T> get(List<T> other) {
+        return other == null ? Collections.emptyList() : other;
+    }
 }

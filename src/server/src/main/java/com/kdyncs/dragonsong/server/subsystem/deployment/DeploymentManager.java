@@ -19,10 +19,9 @@
 
 package com.kdyncs.dragonsong.server.subsystem.deployment;
 
-import com.kdyncs.dragonsong.database.schema.software.dao.ApplicationDAO;
-import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
-import com.kdyncs.dragonsong.server.core.configuration.DedicatedConfiguration;
+import com.kdyncs.dragonsong.database.schema.data.dao.PartitionDAO;
+import com.kdyncs.dragonsong.database.schema.data.model.PartitionModel;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,26 +37,24 @@ public class DeploymentManager implements Runnable {
     
     public static final int L = 10000;
     // Logging
-    private static final Logger log = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger();
     
     // Spring Components
-    private final ApplicationDAO applicationDAO;
-    private final ApplicationPool applicationPool;
+    private final PartitionDAO partitionDAO;
+    private final PartitionPool partitionPool;
     private final ApplicationContext context;
     private final DeploymentService deploymentService;
-    private final DedicatedConfiguration config;
     
     // Threading
     private Thread listener;
     private boolean running;
     
     @Autowired
-    public DeploymentManager(ApplicationDAO applicationDAO, ApplicationPool applicationPool, ApplicationContext context, DeploymentService deploymentService, DedicatedConfiguration config) {
-        this.applicationDAO = applicationDAO;
-        this.applicationPool = applicationPool;
+    public DeploymentManager(PartitionDAO applicationDAO, PartitionPool partitionPool, ApplicationContext context, DeploymentService deploymentService) {
+        this.partitionDAO = applicationDAO;
+        this.partitionPool = partitionPool;
         this.context = context;
         this.deploymentService = deploymentService;
-        this.config = config;
     }
     
     @PostConstruct
@@ -72,63 +69,51 @@ public class DeploymentManager implements Runnable {
     @Override
     public void run() {
         
-        log.info("Starting deployment manager.");
-        
-        // Check if configuration is in dedicated mode
-        if (config.isDedicated()) {
-            
-            log.info("DragonSong is running in dedicated mode");
-            log.info("Deploying dedicated application {}", config.getApiKey());
-            
-            // Build Application
-            Application application = context.getBean(Application.class);
-            application.setApiKey(config.getApiKey());
-            
-            // Add Application to Application Pool
-            applicationPool.add(application);
-            
-            // Stop Deployment Manager
-            running = false;
-        } else {
-            log.info("DragonSong is running in shared mode");
-        }
+        LOG.info("Starting deployment manager.");
 
         while (running) {
             
-            log.debug("Checking Deployments.");
+            LOG.debug("Checking Deployments.");
 
             /*
               Find Active Applications
              */
-            List<ApplicationModel> applications = applicationDAO.getAllActiveApplications();
+            List<PartitionModel> applications = partitionDAO.getAllActivePartitions();
             
-            log.debug("Currently Active Apps: " + applications.size());
-            log.debug("Currently Deployed Apps: " + applicationPool.deployCount());
+            LOG.debug("Currently Active Partitions: " + applications.size());
+            LOG.debug("Currently Deployed Partitions: " + partitionPool.deployCount());
 
-            // Deploy Valid Applications.
-            for (ApplicationModel application : applications) {
+            /*
+             * Deploy Partitions
+             *
+             * If a Partition is marked as active it should be deployed onto the server.
+             */
+            for (PartitionModel partition : applications) {
+
                 // If Not Deploy then Deploy
-                if (applicationPool.isDeployed(application.getKey().toString())) {
-                    log.debug("Deploying Application");
+                if (shouldDeploy(partition)) {
+
+                    // Log Info for debug purposes
+                    LOG.info("Deploying Partition {} {}", partition.getName(), partition.getId());
                     
                     // Create Instance of Application Component
-                    Application deployableApplication = context.getBean(Application.class);
+                    Partition deployablePartition = context.getBean(Partition.class);
                     
                     // Fill Out Data
-                    deployableApplication.setApiKey(application.getKey().toString());
+                    deployablePartition.setApiKey(partition.getId().toString());
                     
                     // Register (Accept Connections)
-                    applicationPool.add(deployableApplication);
+                    partitionPool.add(deployablePartition);
                 }
             }
 
             /*
-              Undeploy Any Stopped Applications
+             * Undeploy Any Stopped Applications
              */
             ArrayList<String> undeployables = new ArrayList<>(100);
             
             // Find all undeployable Keys
-            for (String key : applicationPool.getKeys()) {
+            for (String key : partitionPool.getKeys()) {
                 
                 // Check if we should undeploy
                 boolean found = shouldUndeploy(applications, key);
@@ -146,16 +131,23 @@ public class DeploymentManager implements Runnable {
             
             // Slow it down
             try {
-                log.debug("Finished Checking Deployments.");
+                LOG.debug("Finished Checking Deployments.");
                 Thread.sleep(L);
             } catch (InterruptedException ex) {
-                log.debug("Deployment Manager Interrupted.");
+                LOG.debug("Deployment Manager Interrupted.");
             }
         }
         
-        log.info("Stopping Deployment Manager.");
+        LOG.info("Stopping Deployment Manager.");
     }
-    
+
+    /**
+     * Check if Partition should be deployed
+     */
+    private boolean shouldDeploy(PartitionModel partition) {
+        return !partitionPool.isDeployed(partition.getId().toString());
+    }
+
     /**
      * Check if application should undeploy
      *
@@ -163,10 +155,10 @@ public class DeploymentManager implements Runnable {
      * @param key          key of stopped application
      * @return should application be undeployed
      */
-    private boolean shouldUndeploy(List<ApplicationModel> applications, String key) {
+    private boolean shouldUndeploy(List<PartitionModel> applications, String key) {
         
-        for (ApplicationModel application : applications) {
-            if (key.equals(application.getKey().toString())) {
+        for (PartitionModel application : applications) {
+            if (key.equals(application.getId().toString())) {
                 return true;
             }
         }
@@ -179,10 +171,10 @@ public class DeploymentManager implements Runnable {
      */
     public void start() {
 
-        log.info("Attempting to start deployment manager");
+        LOG.info("Attempting to start deployment manager");
 
         if (listener.isAlive()) {
-            log.warn("Deployment Manager Already Started");
+            LOG.warn("Deployment Manager Already Started");
             return;
         }
         
@@ -195,10 +187,10 @@ public class DeploymentManager implements Runnable {
      */
     public void stop() {
         
-        log.info("Attempting to stop Deployment Manager");
+        LOG.info("Attempting to stop Deployment Manager");
         
         if (!listener.isAlive()) {
-            log.warn("Deployment Manager is Already Stopped");
+            LOG.warn("Deployment Manager is Already Stopped");
             return;
         }
         

@@ -17,14 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.software.model;
+package com.kdyncs.dragonsong.database.schema.data.model;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity(name = "ApplicationModel")
-@Table(name = "application", schema = "ds_software")
-public class ApplicationModel {
+@Entity(name = "PartitionModel")
+@Table(name = "partition", schema = "ds_data")
+public class PartitionModel {
 
     @Id
     @GeneratedValue
@@ -36,9 +37,9 @@ public class ApplicationModel {
     @Column
     private boolean active;
 
-    @Column(name = "api_key")
-    private UUID key;
-    
+    @Column(name = "create_timestamp")
+    private LocalDateTime createTimestamp;
+
     public UUID getId() {
         return id;
     }
@@ -62,12 +63,12 @@ public class ApplicationModel {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
-    public UUID getKey() {
-        return key;
+
+    public LocalDateTime getCreateTimestamp() {
+        return createTimestamp;
     }
-    
-    public void setKey(UUID apikey) {
-        this.key = apikey;
+
+    public void setCreateTimestamp(LocalDateTime createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 }

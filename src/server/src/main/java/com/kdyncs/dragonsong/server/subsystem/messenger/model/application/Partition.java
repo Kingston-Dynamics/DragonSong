@@ -17,27 +17,43 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.software.dao;
+package com.kdyncs.dragonsong.server.subsystem.messenger.model.application;
 
-import com.kdyncs.dragonsong.common.SafeList;
-import com.kdyncs.dragonsong.database.schema.software.repository.ApplicationRepository;
-import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class ApplicationDAO {
-    
-    private final ApplicationRepository repository;
+@Scope("prototype")
+public class Partition {
+
+    // Application Data
+    private String apiKey;
+
+    // Spring Components
+    private final UserPool users;
+    private final ChannelPool channels;
     
     @Autowired
-    public ApplicationDAO(ApplicationRepository repository) {
-        this.repository = repository;
+    public Partition(UserPool users, ChannelPool channels) {
+        this.users = users;
+        this.channels = channels;
+    }
+
+    public String getApiKey() {
+        return apiKey;
     }
     
-    public List<ApplicationModel> getAllActiveApplications() {
-        return SafeList.get(repository.findAllActiveApplications());
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public ChannelPool getChannels() {
+        return channels;
+    }
+    
+    public UserPool getUsers() {
+        return users;
     }
 }

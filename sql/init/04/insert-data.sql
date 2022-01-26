@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Kingston Dynamics Inc.
+ * Copyright (C) 2022 Kingston Dynamics Inc.
  *
  * This file is part of DragonSong
  *
@@ -17,13 +17,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.common;
+----------------------------
+-- ADD DEFAULT PARTITIONS --
+----------------------------
 
-import java.util.Collections;
-import java.util.List;
+start transaction;
 
-public class SafeList {
-    public static <T> List<T> get(List<T> other) {
-        return other == null ? Collections.emptyList() : other;
-    }
-}
+    -- Add System Partition
+    INSERT INTO ds_data.partition (
+        id,
+        name,
+        active,
+        create_timestamp
+    ) VALUES
+    (
+        '00000000-0000-0000-0000-000000000000',
+        '#SYSTEM',
+        TRUE,
+        CURRENT_TIMESTAMP
+    );
+
+    -- Add Default Partition
+    INSERT INTO ds_data.partition (
+        id,
+        name,
+        active,
+        create_timestamp
+    ) VALUES
+    (
+        '00000000-0000-0000-0000-000000000001',
+        '#DEFAULT',
+        TRUE,
+        CURRENT_TIMESTAMP
+    );
+
+commit;

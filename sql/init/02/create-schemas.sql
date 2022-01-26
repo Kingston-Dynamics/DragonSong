@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2021 Kingston Dynamics Inc.
+ * Copyright (C) 2022 Kingston Dynamics Inc.
  *
  * This file is part of DragonSong
  *
@@ -17,20 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.kdyncs.dragonsong.database.schema.software.repository;
+------------------------
+-- Create All Schemas --
+------------------------
 
-import com.kdyncs.dragonsong.database.schema.software.model.ApplicationModel;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+start transaction;
 
-import java.util.List;
-import java.util.UUID;
+	create schema ds_audit;
+    create schema ds_data;
+    create schema ds_user;
 
-@Repository
-public interface ApplicationRepository extends JpaRepository<ApplicationModel, UUID> {
-    
-    @Query("from ApplicationModel app where app.active=true")
-    List<ApplicationModel> findAllActiveApplications();
-
-}
+commit;

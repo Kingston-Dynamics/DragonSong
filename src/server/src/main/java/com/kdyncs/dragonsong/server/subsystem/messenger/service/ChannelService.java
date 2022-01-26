@@ -4,7 +4,7 @@ import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelConnect;
 import com.kdyncs.dragonsong.protocol.message.type.channel.ChannelTransmit;
 import com.kdyncs.dragonsong.protocol.utils.Readinator;
 import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
-import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
+import com.kdyncs.dragonsong.server.subsystem.deployment.PartitionPool;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.*;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
@@ -20,9 +20,9 @@ public class ChannelService {
     
     // Spring Components
     private final ConnectionPool connections;
-    private final ApplicationPool applications;
+    private final PartitionPool applications;
     
-    public ChannelService(ConnectionPool connections, ApplicationPool applications) {
+    public ChannelService(ConnectionPool connections, PartitionPool applications) {
         this.connections = connections;
         this.applications = applications;
     }
@@ -41,10 +41,10 @@ public class ChannelService {
         // TODO: Validate Protocol State
         
         // Lookup Application
-        Application application = applications.get(connection.getApplicationKey());
+        Partition partition = applications.get(connection.getApplicationKey());
         
         // Get Channels
-        ChannelPool channels = application.getChannels();
+        ChannelPool channels = partition.getChannels();
         
         // Create Channel if not exists
         if (!channels.contains(message.getChannelId())) {
@@ -88,11 +88,11 @@ public class ChannelService {
         // TODO: Validate Protocol State
         
         // Lookup Application
-        Application application = applications.get(connection.getApplicationKey());
-        UserPool users = application.getUsers();
+        Partition partition = applications.get(connection.getApplicationKey());
+        UserPool users = partition.getUsers();
         
         // Get Channels
-        ChannelPool channels = application.getChannels();
+        ChannelPool channels = partition.getChannels();
         
         // TODO: Validate channel exists
         Channel channel = channels.find(message.getChannelId());

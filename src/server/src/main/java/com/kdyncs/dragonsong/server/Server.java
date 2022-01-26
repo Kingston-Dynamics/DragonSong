@@ -101,30 +101,4 @@ public class Server implements CommandLineRunner {
         deployment.start();
         
     }
-    
-    ///////////////////////////
-    // SERVER SHUTDOWN LOGIC //
-    ///////////////////////////
-    public void stop() {
-        
-        /////////////////////////////////
-        // SHUTDOWN MESSENGER LISTENER //
-        /////////////////////////////////
-        messenger.stop();
-        
-        /////////////////////////////
-        // SHUTDOWN ADMIN LISTENER //
-        /////////////////////////////
-        admin.stop();
-        
-        ///////////////////////////////
-        // SHUTDOWN COMMAND LISTENER //
-        ///////////////////////////////
-        command.stop();
-        
-        /////////////////////////////////
-        // SHUTDOWN DEPLOYMENT MANAGER //
-        /////////////////////////////////
-        deployment.stop();
-    }
 }

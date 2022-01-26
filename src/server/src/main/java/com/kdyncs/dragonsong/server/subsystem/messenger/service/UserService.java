@@ -2,11 +2,11 @@ package com.kdyncs.dragonsong.server.subsystem.messenger.service;
 
 import com.kdyncs.dragonsong.protocol.message.type.user.UserTransmit;
 import com.kdyncs.dragonsong.protocol.utils.Readinator;
-import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Application;
+import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.Partition;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.application.UserPool;
 import com.kdyncs.dragonsong.server.subsystem.messenger.model.connection.ClientConnection;
 import com.kdyncs.dragonsong.server.core.pools.ConnectionPool;
-import com.kdyncs.dragonsong.server.subsystem.deployment.ApplicationPool;
+import com.kdyncs.dragonsong.server.subsystem.deployment.PartitionPool;
 import com.kdyncs.dragonsong.server.subsystem.messenger.protocol.Command;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,10 +21,10 @@ public class UserService {
     
     // Spring Components
     private final ConnectionPool connections;
-    private final ApplicationPool applications;
+    private final PartitionPool applications;
     
     @Autowired
-    public UserService(ConnectionPool connections, ApplicationPool applications) {
+    public UserService(ConnectionPool connections, PartitionPool applications) {
         this.connections = connections;
         this.applications = applications;
     }
@@ -47,8 +47,8 @@ public class UserService {
         // TODO: Validate Protocol State
         
         // Lookup Application
-        Application application = applications.get(connection.getApplicationKey());
-        UserPool users = application.getUsers();
+        Partition partition = applications.get(connection.getApplicationKey());
+        UserPool users = partition.getUsers();
         
         // Get Recipient
         String connectionID = users.find(message.getIdentifier());
