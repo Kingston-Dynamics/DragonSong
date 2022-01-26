@@ -32,13 +32,11 @@ import javax.servlet.http.HttpServletRequest;
 public class ResponseFactory {
     
     // Spring Components
-    private BuildProperties properties;
     private HttpServletRequest request;
     
     @Autowired
-    public ResponseFactory(HttpServletRequest request, BuildProperties properties) {
+    public ResponseFactory(HttpServletRequest request) {
         this.request = request;
-        this.properties = properties;
     }
     
     /**
@@ -50,7 +48,7 @@ public class ResponseFactory {
      * @return
      */
     public <T> ResponseEntity<?> buildResponse(HttpStatus status, T message) {
-        GenericResponse<T> genericResponse = new GenericResponse<>(properties.getVersion(), status.value(), message, request.getRequestURI());
+        GenericResponse<T> genericResponse = new GenericResponse<>("1.0.0", status.value(), message, request.getRequestURI());
         return ResponseEntity.status(status).body(genericResponse);
     }
     
@@ -64,7 +62,7 @@ public class ResponseFactory {
      * @return
      */
     public <T> ResponseEntity<?> buildResponse(HttpStatus status, T message, String URI) {
-        GenericResponse<T> genericResponse = new GenericResponse<>(properties.getVersion(), status.value(), message, URI);
+        GenericResponse<T> genericResponse = new GenericResponse<>("1.0.0", status.value(), message, URI);
         return ResponseEntity.status(status).body(genericResponse);
     }
     
@@ -79,7 +77,7 @@ public class ResponseFactory {
      * @return
      */
     public <T> ResponseEntity<?> buildResponse(HttpStatus status, HttpHeaders headers, T message, String URI) {
-        GenericResponse<T> genericResponse = new GenericResponse<>(properties.getVersion(), status.value(), message, URI);
+        GenericResponse<T> genericResponse = new GenericResponse<>("1.0.0", status.value(), message, URI);
         return ResponseEntity.status(status).headers(headers).body(genericResponse);
     }
     
@@ -94,7 +92,7 @@ public class ResponseFactory {
      * @return
      */
     public <T> ResponseEntity<?> buildResponse(HttpStatus status, String error, T message, String URI) {
-        GenericResponse<T> genericResponse = new GenericResponse<>(properties.getVersion(), status.value(), error, message, URI);
+        GenericResponse<T> genericResponse = new GenericResponse<>("1.0.0", status.value(), error, message, URI);
         return ResponseEntity.status(status).body(genericResponse);
     }
     
@@ -110,7 +108,7 @@ public class ResponseFactory {
      * @return
      */
     public <T> ResponseEntity<?> buildResponse(HttpStatus status, HttpHeaders headers, String error, T message, String URI) {
-        GenericResponse<T> genericResponse = new GenericResponse<>(properties.getVersion(), status.value(), error, message, URI);
+        GenericResponse<T> genericResponse = new GenericResponse<>("1.0.0", status.value(), error, message, URI);
         return ResponseEntity.status(status).headers(headers).body(genericResponse);
     }
 
