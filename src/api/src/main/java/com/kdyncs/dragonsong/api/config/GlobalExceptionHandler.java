@@ -25,6 +25,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -58,10 +59,14 @@ public class GlobalExceptionHandler {
         return ex.getError();
     }
 
-    // TODO: Catch higher level exception
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public final ResponseEntity<?> handleNotReadableException(HttpMessageNotReadableException ex) {
+        return response.buildResponse(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "Malformed Request Body", http.getRequestURI());
+    }
+
     @ExceptionHandler(MissingRequestHeaderException.class)
     public final ResponseEntity<?> handleNotFoundException(MissingRequestHeaderException ex) {
-        return response.buildResponse(HttpStatus.BAD_REQUEST, "BAD_REQUEST", ex.getMessage(), http.getRequestURI());
+        return response.buildResponse(HttpStatus.BAD_REQUEST, "BAD_REQUEST", "Missing Request Headers", http.getRequestURI());
     }
     
     @ExceptionHandler(Exception.class)
