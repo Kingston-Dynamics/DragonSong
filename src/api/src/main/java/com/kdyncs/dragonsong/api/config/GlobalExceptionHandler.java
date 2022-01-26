@@ -19,7 +19,6 @@
 
 package com.kdyncs.dragonsong.api.config;
 
-import com.kdyncs.dragonsong.api.exception.ServiceException;
 import com.kdyncs.dragonsong.api.util.response.ResponseFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -52,11 +51,6 @@ public class GlobalExceptionHandler {
     public final ResponseEntity<?> NotFoundException(NoHandlerFoundException ex) {
         log.trace("Endpoint Not Defined", ex);
         return response.buildResponse(HttpStatus.NOT_FOUND, "NOT_FOUND", null, http.getRequestURI());
-    }
-
-    @ExceptionHandler(ServiceException.class)
-    public final ResponseEntity<?> handleServiceException(ServiceException ex) {
-        return ex.getError();
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
