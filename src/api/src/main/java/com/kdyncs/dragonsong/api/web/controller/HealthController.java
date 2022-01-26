@@ -20,6 +20,7 @@
 package com.kdyncs.dragonsong.api.web.controller;
 
 import com.kdyncs.dragonsong.api.util.response.ResponseFactory;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 
-
+@Tag(name = "Health")
 @RestController
 @RequestMapping("/health")
 public class HealthController {
