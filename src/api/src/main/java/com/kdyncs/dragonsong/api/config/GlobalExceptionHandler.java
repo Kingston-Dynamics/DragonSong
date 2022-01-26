@@ -28,6 +28,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -45,7 +46,13 @@ public class GlobalExceptionHandler {
         this.http = http;
         this.response = responseFactory;
     }
-    
+
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public final ResponseEntity<?> NotFoundException(NoHandlerFoundException ex) {
+        log.trace("Endpoint Not Defined", ex);
+        return response.buildResponse(HttpStatus.NOT_FOUND, "NOT_FOUND", null, http.getRequestURI());
+    }
+
     @ExceptionHandler(ServiceException.class)
     public final ResponseEntity<?> handleServiceException(ServiceException ex) {
         return ex.getError();

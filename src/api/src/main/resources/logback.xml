@@ -19,7 +19,7 @@
     <logger name="org.hibernate" level="OFF"/>
 
     <!-- Root Logging For Dragonsong -->
-    <logger name="com.kingstondynamics.dragonsong" level="INFO"/>
+    <logger name="com.kdyncs.dragonsong" level="INFO"/>
 
     <!-- Root Stuff -->
     <root level="INFO">
