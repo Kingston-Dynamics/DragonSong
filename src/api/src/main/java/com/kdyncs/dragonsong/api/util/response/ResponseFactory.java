@@ -20,7 +20,6 @@
 package com.kdyncs.dragonsong.api.util.response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.info.BuildProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ResponseFactory {
     
     // Spring Components
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
     
     @Autowired
     public ResponseFactory(HttpServletRequest request) {
