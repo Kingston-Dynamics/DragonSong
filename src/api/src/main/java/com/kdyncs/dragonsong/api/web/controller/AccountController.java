@@ -38,7 +38,11 @@ public class AccountController {
 
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody Registration registration) {
-        log.trace("Registering Account.");
+        log.trace("Creating Account.");
+
+        log.info("Username {}", registration.getUsername());
+
+
         return response.buildResponse(HttpStatus.OK, "Account Registered");
     }
 }
